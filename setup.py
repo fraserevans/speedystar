@@ -1,9 +1,8 @@
 from setuptools import setup
 setup(
 name='speedystar',
-version='0.1',
-description='Testing installation of Package',
-url='#',
+version='1.0',
+description='Initial Package',
 author='Fraser Evnas',
 author_email='fraserevans1@gmail.com',
 license='GNU GPLv3',
