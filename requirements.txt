@@ -1,0 +1,13 @@
+'setuptools', 
+'numpy',
+'scipy', 
+'scanninglaw', 
+'tqdm',
+'astropy',
+'galpy>=1.8.0',
+'pandas',
+'pygaia',
+'amuse-framework',
+'amuse-sse',
+'healpy',
+'h5py'
