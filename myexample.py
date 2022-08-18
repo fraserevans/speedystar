@@ -51,8 +51,9 @@ mysample.save('./cat_propagated.fits')
 mysample = starsample('./cat_propagated.fits')
 
 #Magnitudes are excincted by Milky Way dust along the line of sight. 
-#Loads MW dust map
-mysample.config_dust('/net/alm/data1/DustMaps/combined15/dust-map-3d.h5')
+#Before first use, dust maps must be downloaded, see docstring of
+#speedystar.fetch_dust()
+mysample.config_dust('/path/where/large/files/are/stored/chosen_dust_map.h5')
 mysample.photometry()
 
 #Save it
@@ -71,7 +72,8 @@ mysample.save('./cat_photometry.fits')
 
 #For cuts you make often, can hard-code a condition in mysample.subsample()
 #Gaia cuts can use the spectroscopic selection function and/or
-#astrometric spread function, see documentation
+#astrometric spread function, these also need to be downloaded before first use,
+#see speedystar.fetch_astrosf() and speedystar.fetch_rvssf() docstrings.
 mysample.subsample('Gaia_6D_DR4',use_ast_sf=False,use_rvs_sf=False)
 
 #Save it
