@@ -9,6 +9,8 @@ author_email='fraserevans1@gmail.com',
 license='GNU GPLv3',
 packages=['speedystar', 'speedystar/utils', 'speedystar/utils/imfmaster/imf','speedystar/utils/selectionfunctions'],
 package_data = {'/speedystar/utils/': ['/speedystar/utils/*.txt']},
+url = 'https://github.com/fraserevans/speedystar'
+download_url = 'https://github.com/fraserevans/speedystar/archive/refs/tags/v1.tar.gz'
 install_requires=[
 'setuptools', 
 'numpy',
