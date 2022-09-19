@@ -3,7 +3,7 @@ setup(
 name='speedystar',
 version='1.0',
 description='Initial Package',
-long_description='This package allows you to generate, propagate and observe mock populations of hypervelocity stars. Please see github.com/fraserevans/speedystar for a comphrehensive README and example executables.'
+long_description='This package allows you to generate, propagate and observe mock populations of hypervelocity stars. Please see github.com/fraserevans/speedystar for a comphrehensive README and example executables.',
 author='Fraser Evans',
 author_email='fraserevans1@gmail.com',
 license='GNU GPLv3',
