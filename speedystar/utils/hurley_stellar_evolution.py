@@ -1,18 +1,10 @@
-
-__ImportError__ = "One or more required external packages have not been installed. Please see requirements.txt"
-
-try:
-    import numpy as np
-    import astropy
-    import astropy.units as u
-    import astropy.constants as const
-    from tqdm import tqdm
-except ImportError:
-    raise ImportError(__ImportError__)
+import numpy as np
+import astropy
+import astropy.units as u
+import astropy.constants as const
+from tqdm import tqdm
 
 # This functions implement analytic formulae for stellar evolution presented in Hurley, Pols, and Tout 2000 (MNRAS 315, 543-569)
-
-
 def get_Z(xi):
         return 0.02 * 10.**xi
 
@@ -1886,24 +1878,10 @@ def get_t_BAGB(m,xi=0):
 
     out = np.empty(len(M))
 
-    #for i in range(len(m)):
-    for i in tqdm(range(len(m))):
+    for i in range(len(m)):
+    #for i in tqdm(range(len(m))):
         #print([i,len(m)])
         M_c = M_cHeI(M[i],xi[i])
         out[i] = t_HeI(M[i], xi[i]) + t_He(M[i],xi[i],M_c)
 
     return out*u.Myr
-
-'''
-path = '/net/vuntus/data2/marchetti/HVS_Gaia_Prediction/'
-mass, age, radius = np.loadtxt(path + 'M_tAge_R_grid_Mmin=0.1_allt.txt', unpack = True)
-mass, age, temperature = np.loadtxt(path + 'M_tAge_T_grid_Mmin=0.1_allt.txt', unpack = True)
-mass, age, mass_t = np.loadtxt(path + 'M_tAge_M_grid_Mmin=0.1_allt.txt', unpack = True)
-
-mytemp = np.empty(len(mass))
-myrad  = np.empty(len(mass))
-mymass = np.empty(len(mass))
-
-for i in range(0, len(mass)):
-        mytemp[i], myrad[i], mymass[i] = get_TRM(mass[i], 0., age[i])
-'''

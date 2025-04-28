@@ -7,7 +7,7 @@ from galpy.potential import SCFPotential
 from galpy.potential import scf_compute_coeffs_axi
 from galpy.potential import mwpot_helpers
 from galpy.potential import KeplerPotential
-from galpy.util import bovy_conversion
+from galpy.util import conversion
 from astropy import units as u
 
 # Suppress the numpy floating-point warnings that this code generates...
@@ -19,8 +19,8 @@ def Mac17(ro=8.21,vo=233.1,Sigma0_thin=896.,Rd_thin=2.5,Sigma0_thick=183.,Rd_thi
     #ro= 8.21
     #vo= 233.1
 
-    sigo= bovy_conversion.surfdens_in_msolpc2(vo=vo,ro=ro)
-    rhoo= bovy_conversion.dens_in_msolpc3(vo=vo,ro=ro)
+    sigo= conversion.surfdens_in_msolpc2(vo=vo,ro=ro)
+    rhoo= conversion.dens_in_msolpc3(vo=vo,ro=ro)
 
     #gas disk parameters (fixed in McMillan 2017...)
     Rd_HI= 7./ro

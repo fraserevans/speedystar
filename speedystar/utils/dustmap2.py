@@ -49,9 +49,11 @@ class DustMap:
                 float
                     EBV in SFD scale
         '''
-
         idx = None
-
+        #print(np.max(l))
+        #print(np.min(l))
+        #print(np.max(b))
+        #print(np.min(b))
         for nside in self.nsides:
             # Search for the pixel in this Nside level
             tpix = healpy.pixelfunc.ang2pix(nside,(90.-b)*_DEGTORAD, l*_DEGTORAD,nest=True)
