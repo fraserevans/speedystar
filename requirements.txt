@@ -5,4 +5,4 @@
 'astropy',
 'galpy>=1.8.0',
 'pandas',
-'pygaia'
+'xarray'
