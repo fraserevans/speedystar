@@ -836,7 +836,7 @@ class chisquare:
 
     def window_function(self, l, j):
         u = l*(l+1) / np.power(self.B,2.0*j)
-        N = self.normalisation[l.astype(np.int)] if type(l) == np.ndarray else self.normalisation[int(l)]
+        N = self.normalisation[l.astype(int)] if type(l) == np.ndarray else self.normalisation[int(l)]
 
         return N*np.power(u,self.p)*np.exp(-u)
 
