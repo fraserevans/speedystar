@@ -1,0 +1,109 @@
+Gaia Early Data Release 3 Photometric Passbands    (Riello+, 2020) 
+================================================================================
+     Gaia Early Data Release 3: Photometric content and validation
+     Riello, M., De Angeli, F., Evans, D. W., Montegriffo, P., Carrasco, J. M, 
+     Busso, G., Palaversa, L., Burgess, P., Diener, C., Davidson, M., Rowell, N.,
+     Fabricius, C., Jordi, C., Bellazzini, M., Pancino, E., Harrison, D. L., Cacciari, C.
+     van Leeuwen, F., Hambly, N. C., Hodgkin, S. T., Osborne, P. J., Altavilla, G.,
+     Barstow, M. A., Brown, A. G. A., Castellani, M., Cowell, S., De Luise, F.,
+     Gilmore, G., Giuffrida, G., Hidalgo, S.,  Holland, G., Marinoni, S., Pagani, C.,
+     Piersimoni, A. M., Pulone, L., Ragaini, S., Rainer, M., Richards, P. J., Sanna, N.,
+     Walton, N. A., Weiler, M., Yoldas, A.
+================================================================================
+ADC_Keywords: Photometry
+Keywords: Catalogues
+          Surveys
+          Instrumentation:photometers
+          Techniques:photometric
+          Galaxy:general
+
+Abstract:
+Gaia Early Data Release 3 (EDR3) contains astrometry and photometry results for about
+1.8 billion sources based on observations collected by the European Space Agency Gaia
+satellite during the first 34 months of its operational phase. In this paper, we focus
+on the photometric content, describing the input data, the algorithms, the processing
+and the validation of the results. Particular attention is given to the quality of the
+data and to a number of features that users may need to take into account to make the
+best use of the EDR3 catalogue. The processing broadly followed the same procedure as
+for DR2, but with significant improvements in several aspects of the BP/RP preprocessing
+and in the photometric calibration process. In particular the treatment of BP/RP background
+has been updated to include a better estimation of the local background and the detection
+of crowding effects has been used to exclude affected data from the calibrations. The
+photometric calibration models have also been updated to account for flux loss over the
+whole magnitude range. Significant improvements in the modelling and calibration of the
+Gaia point and line spread functions, as presented in Rowell et al. (2020), have also
+helped reducing a number of instrumental effects that were still present in DR2. EDR3
+contains 1,806 million sources with G photometry and 1,540 million sources with G_BP and
+G_RP photometry. The median uncertainty in the G photometry, as measured from the 
+standard deviation of the internally calibrated mean photometry for a given source,
+is 0.2 mmag at magnitude G=10 to 14, 0.8 mmag at G~17 and 2.6 mmag at G~19. The significant
+magnitude term found in the DR2 photometry is no longer visible and overall there are no 
+trends larger than 1 mmag/mag. Using one passband over the whole colour and magnitude range
+leaves no systematics above the 1% level in magnitude in all bands, a larger systematic is
+present for a very small sample of bright and blue sources. A detailed description of the 
+residual systematic effects is provided. Overall the quality of the calibrated mean 
+photometry in EDR3 is superior with respect to DR2, for all bands.
+
+Description:
+These tabular data describes the photometric system defined by the G, G_BP 
+and G_RP Gaia bands for Gaia Early Data Release 3.
+The tables provide the full passband and the corresponding zero point
+for each of the photometric bands. The zero points are available both in
+the VEGAMAG and AB systems.
+The passband calibration is based on the modelling of a set of corrections 
+applied to pre-launch knowledge of the instrument, to find the best match 
+between observed and synthetic photometry for a set of calibrators. For EDR3 a large set
+of calibrators covering a wide range of spectra types was used for the passband calibration.
+For these sources reconstructed SEDs were obtained from externally calibrated Gaia BP/RP 
+spectra.
+
+File Summary:
+--------------------------------------------------------------------------------
+FileName           Lrecl Records Explanations
+--------------------------------------------------------------------------------
+ReadMe                80    .    This file
+passbands.dat         103   3201 G, G_BP anf G_RP passbands used to generate 
+                                 the magnitudes and astrophysical parameters 
+                                 included in Gaia EDR3
+zeroPoints.dat        98    2    G, G_BP and G_RP zero points used to generate 
+                                 the magnitudes and astrophysical parameters 
+                                 included in Gaia EDR2
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file passbands.dat
+--------------------------------------------------------------------------------
+Bytes Format  Units Label     Explanations
+--------------------------------------------------------------------------------
+1     F7.2    nm    wl        Wavelength
+8     E15.8         gPb       ?=99.99 G transmissivity curve at the 
+                                      corresponding wavelength (1)
+24    E15.8         gPbError  ?=99.99 Uncertainty on the G transmissivity curve 
+                                      (1)
+40    E15.8         bpPb      ?=99.99 BP transmissivity curve at the 
+                                      corresponding wavelength (1)
+56    E15.8         bpPbError ?=99.99 Uncertainty on the BP transmissivity curve 
+                                      (1)
+72    E15.8         rpPb      ?=99.99 RP transmissivity curve at the 
+                                      corresponding wavelength (1)
+88    E15.8         rpPbError ?=99.99 Uncertainty on the RP transmissivity curve 
+                                      (1)
+--------------------------------------------------------------------------------
+ Notes: (1) In correspondence to wavelength values where the passband is not 
+            defined, both transmissivity and uncertainty are set to 99.99 
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file zeroPoints.dat 
+--------------------------------------------------------------------------------
+Bytes Format  Units Label     Explanations
+--------------------------------------------------------------------------------
+1     F14.10        gZp       G band zero point
+15    F14.10        gZpError  G band zero point uncertainty 
+30    F14.10        bpZp      G_BP band zero point 
+45    F14.10        bpZpError G_BP band zero point uncertainty 
+60    F14.10        rpZp      G_RP band zero point 
+75    F14.10        rpZpError G_RP band zero point uncertainty 
+90    A7            system    [VEGAMAG, AB] Photometric system 
+--------------------------------------------------------------------------------
+
+================================================================================
+(End)                            Francesca De Angeli [IoA, UK]     22-Oct-2020

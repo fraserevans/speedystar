@@ -1,9 +1,0 @@
-- Include Hills ejections from SMBH in LMC
-- Include binary massive black hole ejetion mechanism
-- Update scheme to allow external catalogues to be loaded in more easily
-- Include example code to sample over observational errors and propagate sample backwards in time
-- Include example code to show how code can be easily parallelized
-- Include example code to compute spread of disc crossing locations  
-- Include instructions for implementing custom photometric filters
-
-- Allow more flexibility in stellar metallicities
