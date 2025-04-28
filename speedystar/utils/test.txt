@@ -1,0 +1,4715 @@
+ 1/1: %pip install galpy
+ 2/1: pip install galpy
+ 5/1: import numpy
+ 6/1: from astropy import coordinates as coord
+ 6/2: coord.ICRSCoordinates()
+ 6/3: from astropy import units as u
+ 6/4: c = SkyCoord()
+ 6/5: from astropy.coordinates import SkyCoord
+ 6/6: SkyCoord('00h42.5m','+31d12m')
+ 6/7: SkyCoord('00h42.5m','+41d12m')
+ 6/8: c = SkyCoord('00h42.5m','+41d12m')
+ 6/9: c
+6/10: c[1]
+6/11: c.dec
+6/12: c.dec.value
+6/13: c = SkyCoord('09h07m44.9s','+41d12m')
+6/14: c.ra.value
+6/15: c = SkyCoord('09h07m44.9s','+02d45m06.89s')
+6/16: c.ra.value
+6/17: c.dec.value
+6/18: c.location
+6/19: c.galactic
+6/20: c.galactocentric
+6/21: c.galactic
+6/22: c.galactic.distance
+6/23: d = SkyCoord(l=227.33515129,b=31.3316684,distance=107)
+6/24: d = SkyCoord(l=227.33515129,b=31.3316684)
+6/25: d = SkyCoord('galactic',l=227.33515129,b=31.3316684)
+6/26: import astropy.units as u
+6/27: d = SkyCoord('galactic',l=227.33515129*u.deg,b=31.3316684*u.deg)
+6/28: d = SkyCoord('galactic',l=227.33515129*u.deg,b=31.3316684*u.deg,distance=110*u.kpc)
+6/29: d.icrs
+6/30: d.icrs.distance
+6/31: d = SkyCoord('galactic',l=227.33515129*u.deg,b=31.3316684*u.deg,galcen_distance=110*u.kpc)
+6/32: d.distance()
+6/33: d.distance
+6/34: d.icrs.distance
+6/35: d.icrs.galcen_distance
+6/36: d
+6/37: c
+6/38: c.transform_to(coord.Galactocentric)
+6/39: c
+6/40: d
+6/41: import numpy as np
+6/42: np.cos(90)
+6/43: np.cosd(90)
+6/44: d.;
+6/45: d.l.value
+6/46: (cos(d.b.value*np.pi/180.0)**2)*(cos(d.l.value*np.pi/180.0)**2)
+6/47: (np.cos(d.b.value*np.pi/180.0)**2)*(np.cos(d.l.value*np.pi/180.0)**2)
+6/48: p1 = (np.cos(d.b.value*np.pi/180.0)**2)*(np.cos(d.l.value*np.pi/180.0)**2)
+6/49: p1 = (np.cos(d.b.value*np.pi/180.0)**2)*(np.cos(d.l.value*np.pi/180.0)**2) + (np.cos(d.b.value*np.pi/180.0)**2)*(np.sin(d.l.value*np.pi/180.0)**2)
+6/50: p1
+6/51: p1 = (np.cos(d.b.value*np.pi/180.0)**2)*(np.cos(d.l.value*np.pi/180.0)**2) + (np.cos(d.b.value*np.pi/180.0)**2)*(np.sin(d.l.value*np.pi/180.0)**2) + np.sin(d.b.value*np.pi/180.0)**2
+6/52: p1
+6/53: p2 = -16*np.cos(d.b.value*np.pi/180.0)*np.cos(d.l.value*np.pi/180.0)
+6/54: p2
+6/55: p3 = 8**2 - 107**2
+6/56: np.roots([p1,p2,p3])
+6/57: np.argmax(np.roots([p1,p2,p3]))
+6/58: max(np.roots([p1,p2,p3]))
+6/59: b = d.b.value*np.pi/180
+6/60: l = d.l.value*np.pi/180
+6/61: np.sqrt((102*np.cos(b)*np.cos(l) - 8)**2 + (102**2)*(np.cos(b)**2)*(np.sin(l)**2)+(102**2)*(np.sin(b)**2))
+6/62: c = SkyCoord('09h07m44.9s','+41d12m')
+6/63: c.ra.value
+6/64: c.dec.value
+6/65: c = SkyCoord('09h07m44.9s','+02d45m06.89s')
+6/66: c.dec.value
+6/67: c.ra.value
+6/68: c = SkyCoord('09h13m01.01s','+30d51m19.83s')
+6/69: c.ra.value
+6/70: c.dec.value
+6/71: np.roots([p1,p2,p3])
+6/72: max(np.roots([p1,p2,p3]))
+6/73: help(np.roots)
+6/74: max(np.roots([[p1,p1],[p2,p2],[p3,p3]]))
+6/75: max(np.roots([p1,p1],[p2,p2],[p3,p3]))
+6/76: np.roots([p1,p2,p3])
+6/77: u.solMass
+6/78: 3.87.to('Msun').value
+6/79: 3.87*u.solMass.to('Msun').value
+6/80: test = 3.87*u.solMass
+6/81: test.to('Msun')
+6/82: test.to('Msun').value
+6/83: u.s
+6/84: u.second
+6/85: u.degree
+6/86: ls
+6/87: c.ra.value
+6/88: np.argmin([1,2,3,4,5])
+6/89: np.argmin([5,2,3,4,5])
+6/90: test = [True, True, False, False]
+6/91: is(test)
+6/92: test[is(test)]
+6/93: test[test]
+6/94: test[test]
+6/95: test[~test]
+6/96: test
+6/97: test==True
+6/98: test[1]==True
+6/99:
+test[~test
+]
+6/100: test = [False False False True True]
+6/101: test = [1,2,3,4,5,6,7,8]
+6/102: (test>=2) & (test<7)
+6/103: type(test)
+6/104: test = [1,2,3,4,5,6,7,8]*u.kpc
+6/105: type(test)
+6/106: (test>=2) & (test<7)
+6/107: type(test)
+6/108: (test>=2*u.kpc) & (test<7*u.kpc)
+6/109: test2 = (test>=2*u.kpc) & (test<7*u.kpc)
+6/110: test2[test2]
+6/111: len(test2[test2])
+ 7/1: import numpy as np
+ 7/2: import astropy.io.fits as fits
+ 7/3: hdu1 = fits.open('/data1/testcube1.fits')
+ 7/4: hdu1.info()
+ 7/5: hdu1.data
+ 7/6: hdu1[1].data
+ 7/7: hdu1[1]
+ 7/8: hdu1[0]
+ 7/9: hdu1[0].data
+7/10: type(hdu1[0].data)
+7/11: hdu2 = fits.open('/data1/testcube2.fits')
+7/12: hdu3 = fits.open('/data1/testcube3.fits')
+7/13: hdu4 = fits.open('/data1/testcube4.fits')
+7/14: np.dstack(hdu1[0].data,hdu2[0].data)
+7/15: np.dstack((hdu1[0].data,hdu2[0].data))
+7/16: shape(hdu1[0].data)
+7/17: np.dstack((hdu1[0].data,hdu2[0].data))
+7/18: hdu1[0].data.shape
+7/19: hdu2[0].data.shape
+7/20: np.hstack((hdu1[0].data,hdu2[0].data))
+7/21: np.vstack((hdu1[0].data,hdu2[0].data))
+7/22: np.vstack((hdu1[0].data,hdu2[0].data,hdu3[0].data,hdu4[0].data))
+7/23: hdufull = np.vstack((hdu1[0].data,hdu2[0].data,hdu3[0].data,hdu4[0].data))
+7/24: hdu = fits.PrimaryHDU(hdufull)
+7/25: hdulist = fits.HDUList([hdu])
+7/26: hdulist.writeto('/data1/testcubefull.fits',overwrite=True)
+ 8/1: from scipy.stats import mvn
+ 8/2: import numpy as np
+ 8/3: low = np.array([-10,10])
+ 8/4: upp = np.array([-0.1,-0.2])
+ 8/5: mu = np.array([-.3,.17])
+ 8/6: S = np.array([[1.2,.35],[.35,2.1]])
+ 8/7: p,i = mvn.mvnun(low,upp,mu,S)
+ 8/8: i
+ 8/9: p
+8/10: p
+8/11: p,i = mvn.mvnun(low,upp,mu,S)
+8/12: p
+8/13: upp = np.array([0.1,-0.2])
+8/14: p,i = mvn.mvnun(low,upp,mu,S)
+8/15: p
+8/16: i
+8/17: help(mvn.mvnun)
+8/18: low
+8/19: upp
+8/20: mu
+8/21: S
+ 9/1: import numpy as np
+ 9/2: help(np.linspace)
+ 9/3: help(np.arange)
+ 9/4: np.arange(-1,0.4,0.2)
+ 9/5: np.range(-1,0.4,0.2)
+ 9/6: range(-1,0.4,0.2)
+ 9/7: xrange(-1,0.4,0.2)
+ 9/8: np.arange(-1,0.4,0.2)
+ 9/9: np.arange(-1,0.4,0.6)
+9/10: np.arange(-1,0.6,0.2)
+9/11: 1.2*1e12
+9/12: np.inf
+10/1: from astropy.io import fits
+10/2: test = fits.util.get_testdata_filepath('/home/evans/work/HVS/hvs-master/HVS4halos.fits')
+10/3: test = fits.util.get_testdata_filepath('/home/evans/work/HVS/hvs-master/HVS4halos.fits')
+8/22: range(5)
+8/23: import os
+8/24: os.environ['Dust_Dir'] = '~/work/HVS/hvs-master/DustMaps'
+8/25: os.environ.get('Dust_Dir')
+8/26: os.environ.get('Dust_Dir')
+8/27: os.environ['DUST_DIR'] = '~/work/HVS/hvs-master/DustMaps'
+8/28: os.environ.get('Dust_Dir')
+8/29: os.environ.get('DUST_DIR')
+8/30: import pygaia
+8/31: np.array(1,2,3,4)
+8/32: np.array(3)
+8/33: np.array([3,4,1,2])
+8/34: np.load('/data1/iteration/I1v1.npy')
+8/35: np.load('/data1/iteration/I1v7.npy')
+8/36: from sample import HVS
+8/37: from ~/work/HVS/hvs-master/sample import HVS
+12/1: from sample import HVS
+12/2: from sample import HVSsample
+12/3: mysample = HVSsample(/data1/iteration/I1v1.fits)
+12/4: mysample = HVSsample(/data1/iteration/I1v1.fits)
+12/5: mysample = HVSsample('/data1/iteration/I1v1.fits')
+12/6: mysample.size()
+12/7: mysample.size
+12/8: mysample.ra
+12/9: mysample.dec
+12/10: mysample.m
+12/11: mysample.pmra
+12/12: mysample2 = HVSsample(/data1/iteration/I1v7.fits)
+12/13: mysample2 = HVSsample('/data1/iteration/I1v7.fits')
+12/14: mysample2.pmra
+12/15: mysample.pmra
+12/16: mysample2.pmra
+12/17: mysample.pmra
+12/18: mysample2 = HVSsample('/data1/iteration/I1v2.fits')
+12/19: mysample.pmra
+12/20: mysample2.pmra
+12/21: mysample3 = HVSsample('/data1/iteration/I1v7.fits')
+12/22: mysample3.pmdec
+12/23: import numpy as np
+12/24: np.load('/data1/iteration/I1v1.npy')
+12/25: np.load('/data1/iteration/I1v2.npy')
+12/26: np.load('/data1/iteration/I1v7.npy')
+12/27: mysample3.pmdec
+12/28: mysample.pmdec
+12/29: mysample3.pmdec
+12/30: ?np.quantile
+12/31: help(np.percentile)
+13/1: pip install --upgrade pyswarm
+15/1: from astropy.io import fits
+15/2: hdu = fits.open('/data1/MockHVS867_FuncExplore_Point_sigmar10_25x25x25_Rest.fits')
+15/3: hdu.info()
+15/4: hdu[0]
+15/5: hdu[1]
+15/6: hdu[0].data
+15/7: hdu[1].data
+15/8: type(hdu[1].data)
+15/9: type(hdu[0].data)
+15/10: hdu[1]
+15/11: hdu[1,1]
+15/12: hdu[1,2]
+15/13: hdu[1].data[1,1]
+15/14: hdu[1].data
+15/15: hdu.keys
+15/16: hdu.keys()
+15/17: hdu
+15/18: hdu.info()
+15/19: hdu[1].data
+15/20: hdu[1].data.field
+15/21: hdu[1].data.field(0)
+15/22: hdu[1].data.field(1)
+15/23: type(hdu[1].data.field(1))
+15/24: type(hdu[1].data.field(3))
+15/25: hdu[1].data.field(3)
+15/26: import numpy as np
+15/27: dat = hdu[1].data.field(3)
+15/28: dat
+15/29: dat = np.reshape(dat,(25,25,25))
+15/30: hduwrite = fits.PrimartyHDU(dat)
+15/31: hduwrite = fits.PrimaryHDU(dat)
+15/32: hdulist = fits.HDUList([hduwrite])
+15/33: hdulist.writeto('/data1/MockHVS867TestCubeminL_Point_25x25x25.fits')
+15/34: hdu[1].data.field()
+15/35: hdu[1].data
+15/36: dat = hdu[1].data.field(4)
+15/37: dat = np.reshape(dat,(25,25,25))
+15/38: hduwrite = fits.PrimartyHDU(dat)
+15/39: hduwrite = fits.PrimaryHDU(dat)
+15/40: hdulist = fits.HDUList([hduwrite])
+15/41: hdulist.writeto('/data1/MockHVS867TestCubelike_Point_25x25x25.fits')
+15/42: hdu[1].data.field(4)
+15/43: hdu[1].data.field(3)
+15/44: dat
+15/45: np.percentile(dat,95)
+15/46: dat = (1,2,3,4,5,6,7,8,9,10,11,12)
+15/47: dat = (1,2,3,4,5,6,7,8)
+15/48: np.reshape(dat,(2,2,2))
+16/1: hdu = fits.open('/data1/MockHVS867_FuncExplore_Point_sigmar10_19x19x19.fits')
+16/2: from astropy.io import fits
+16/3: hdu = fits.open('/data1/MockHVS867_FuncExplore_Point_sigmar10_19x19x19.fits')
+16/4: hdu = fits.open('/data1/MockHVS867_FuncExplore_Point_sigmar10_19x19x19_0.001Myr.fits')
+16/5: dat = hdu[1].data.field(4)
+16/6: dat = np.reshape(dat,(19,19,19))
+16/7: import numpy as np
+16/8: dat = np.reshape(dat,(19,19,19))
+16/9: hduwrite = fits.PrimaryHDU(dat)
+16/10: hdulist = fits.HDUList([hduwrite])
+16/11: hdulist.writeto('/data1/MockHVS867TestCubelike_Point_19x19x19_0.001Myr.fits')
+16/12: import sys
+16/13: sys.path
+16/14: sys.path
+17/1: import numpy as np
+17/2: np.geomspace(0,1,1000)
+17/3: np.geomspace(0.1,1,1000)
+17/4: 1 - np.geomspace(0.1,1,1000)
+17/5: 1 - np.geomspace(0.1,1,118000)
+17/6: (1 - np.geomspace(0.1,1,118000))*119
+17/7: ts = (1 - np.geomspace(0.1,1,118000))*119
+17/8: ts[0]
+17/9: ts[1]
+17/10: ts = (1 - np.geomspace(0.1,1,11800))*119
+17/11: ts[0]
+17/12: ts = (1 - np.geomspace(0.00001,1,11800))*119
+17/13: ts[0]
+17/14: ts[1]
+17/15: ts[len(ts)]
+17/16: ts[len(ts)-1]
+17/17: ts[len(ts)-2]
+17/18: ts
+17/19: ts.flip()
+17/20: ts[::-1]
+17/21: np.linspace(0,0.5,10)
+17/22: np.concatenate(np.linspace(0,0.5,10),np.linespace(0.5,1,20))
+17/23: np.concatenate(np.linspace(0,0.5,10),np.linspace(0.5,1,20))
+17/24: ?np.concatenate
+17/25: np.concatenate([np.linspace(0,0.5,10),np.linspace(0.5,1,20)])
+17/26: import astropy.coordinates as coord
+17/27: from astropy import units as u
+17/28: vSun = [-self.solarmotion[0], self.solarmotion[1], self.solarmotion[2]] * u.km / u.s
+17/29: solarmotion = [-14., 12.24, 7.25]
+17/30: vSun = [-self.solarmotion[0], self.solarmotion[1], self.solarmotion[2]] * u.km / u.s
+17/31: vSun = [-solarmotion[0], solarmotion[1], solarmotion[2]] * u.km / u.s
+17/32: vrot = [0., 220., 0.] * u.km / u.s
+17/33: RSun = 8. * u.kpc
+17/34: zSun = 0.025 * u.kpc
+17/35: zSun = 0.025 * u.kpc
+17/36: gc = coord.Galactocentric(galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/37: v_sun = coord.CartesianDifferential(vrot+vSun)
+17/38: gc = coord.Galactocentric(galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/39: gc = coord.Galactocentric(x=[1]*u.kpc,y=[1]*u.kpc,z=[1]*u.pc,vx=[1]*u.km/u.s,vy=[2]*u.km/u.s,vz=[-2]*u.kpc,galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/40: gc = coord.Galactocentric(x=[1]*u.kpc,y=[1]*u.kpc,z=[1]*u.pc,v_x=[1]*u.km/u.s,v_y=[2]*u.km/u.s,v_z=[-2]*u.kpc,galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/41: gc = coord.Galactocentric(x=[1]*u.kpc,y=[1]*u.kpc,z=[1]*u.kpc,v_x=[1]*u.km/u.s,v_y=[2]*u.km/u.s,v_z=[-2]*u.kpc,galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/42: gc = coord.Galactocentric(x=[1]*u.kpc,y=[1]*u.kpc,z=[1]*u.kpc,v_x=[1]*u.km/u.s,v_y=[2]*u.km/u.s,v_z=[-2]*u.kpc,galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/43: gc = coord.Galactocentric(x=[1]*u.kpc,y=[1]*u.kpc,z=[1]*u.kpc)
+17/44: gc = coord.Galactocentric(x=[1]*u.kpc,y=[1]*u.kpc,z=[1]*u.kpc,v_x=[1]*u.km/u.s,v_y=[2]*u.km/u.s,v_z=[-2]*u.km/u.s,galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/45: gc.transform_to(coord.ICRS)
+17/46: gc = coord.Galactocentric(x=[-70.342]*u.kpc,y=[-3.228]*u.kpc,z=[-17.358]*u.kpc,v_x=[520.135]*u.km/u.s,v_y=[23.869]*u.km/u.s,v_z=[122.336]*u.km/u.s,galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/47: gc.transform_to(coord.ICRS)
+17/48: gc = coord.Galactocentric(x=[-70.342]*u.kpc,y=[-3.228]*u.kpc,z=[-17.358]*u.kpc,v_x=[520.13513]*u.km/u.s,v_y=[23.86941]*u.km/u.s,v_z=[122.33591]*u.km/u.s,galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/49: gc.transform_to(coord.ICRS)
+17/50: gc = coord.Galactocentric(x=[-70.342]*u.kpc,y=[-3.228]*u.kpc,z=[-17.358]*u.kpc,v_x=[-520.13513]*u.km/u.s,v_y=[-23.86941]*u.km/u.s,v_z=[-122.33591]*u.km/u.s,galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/51: gc.transform_to(coord.ICRS)
+17/52: gc2 = SkyCoord(ra=[73.94262786]*u.deg,dec=[17.70824]*u.deg,distance=[64.8]*u.kpc,pm_ra_cosdec=[0.49374]*u.mas/u.yr, pm_dec=[-0.55934]*u.mas/u.yr, radial_velocity=[561.3896]*u.km/u.s)
+17/53: gc2 = coord.SkyCoord(ra=[73.94262786]*u.deg,dec=[17.70824]*u.deg,distance=[64.8]*u.kpc,pm_ra_cosdec=[0.49374]*u.mas/u.yr, pm_dec=[-0.55934]*u.mas/u.yr, radial_velocity=[561.3896]*u.km/u.s)
+17/54: gc2 = coord.ICRS(ra=[73.94262786]*u.deg,dec=[17.70824]*u.deg,distance=[64.8]*u.kpc,pm_ra_cosdec=[0.49374]*u.mas/u.yr, pm_dec=[-0.55934]*u.mas/u.yr, radial_velocity=[561.3896]*u.km/u.s)
+17/55: gcref = coord.Galactocentric(galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+17/56: gc2.transform_to(gcref)
+17/57: np.loadtxt('BestPmraPmdec.txt')
+17/58: test = np.loadtxt('BestPmraPmdec.txt')
+17/59: test
+17/60: test[1]
+17/61: test[1][1]
+17/62: test[1][0]
+17/63: test.flatten()
+17/64: test[][0]
+17/65: test[:][0]
+17/66: test[0,1]
+17/67: test[0]
+17/68: test[0,:]
+17/69: test[1,:]
+17/70: test[1,2]
+17/71: test[,2]
+17/72: test[1:5,0]
+17/73: test[1:,0]
+17/74: test[0:,0]
+17/75: test[0:,0]
+17/76: int(test[0:,0])
+17/77: int(test[0,0])
+17/78: anc = test[0:,0]
+17/79: anc
+17/80: int(anc)
+17/81: np.inf
+17/82: np.Inf
+17/83: np.Infd
+17/84: np.Inf * 5
+18/1: from astropy.io import fits
+18/2: hdul = fits.open('./MockHVS867SwarmHalos_IntRedo_sigmar100_sigmaL100_1e-2_L_FiducialControl.fits')
+18/3: hdul.info()
+18/4: hdul[0]
+18/5: hdul[0].data
+18/6: hdul[1].data
+18/7: type(hdul[1].data)
+18/8: test = hdul[1].data
+18/9: test
+18/10: test[0]
+18/11: test[0,1]
+18/12: test[0][1]
+18/13: type(test[0][1])
+18/14: test[0]
+18/15: test[1]
+18/16: import utils.mwpotentential
+18/17: from utils.mwpotential import MWPotential
+18/18: MWPotential()
+18/19: import galpy.potential
+18/20: MWPotential()
+18/21: MWPotential()
+18/22: import galpy.potential
+18/23: import utils.mwpotentential
+18/24: import utils.mwpotentential
+18/25: import utils.mwpotential
+18/26: MWPotential()
+18/27: MWPotential()
+18/28: import utils.mwpotential
+18/29: MWPotential()
+18/30: reload(utils.mwpotential)
+18/31: MWPotential()
+18/32: reload(utils.mwpotential)
+19/1: import utils.mwpotential
+19/2: MWPotential()
+19/3: MWPotential()
+19/4: import utils.mwpotential
+19/5: MWPotential()
+19/6: from utils.mwpotential import MWPotential
+19/7: MWPotential()
+19/8: import galpy.potentials
+19/9: import galpy.potential
+19/10: MWPotential()
+19/11: MWPotential()
+19/12: reload(utils.mwpotential)
+19/13: MWPotential()
+19/14: reload(utils.mwpotential)
+19/15: MWPotential()
+19/16: reload(utils.mwpotential)
+19/17: MWPotential()
+20/1: import galpy.potentials
+20/2: import galpy.potential
+20/3: from utils.mwpotential import MWPotential
+20/4: MWPotential()
+20/5: reload(utils.mwpotential)
+20/6: MWPotential()
+21/1: from utils.mwpotential import MWPotential
+21/2: import galpy.potential
+21/3: MWPotential()
+22/1: from utils.mwpotential import MWPotential
+22/2: import galpy.potential
+22/3: MWPotential()
+23/1: from utils.mwpotential import MWPotential
+23/2: import galpy.potential
+23/3: MWPotential()
+24/1: from utils.mwpotential import MWPotential
+24/2: import galpy.potential
+24/3: MWPotential()
+25/1: from utils.mwpotential import MWPotential
+25/2: import galpy.potential
+25/3: MWPotential()
+26/1: from utils.mwpotential import MWPotential
+26/2: import galpy.potential
+26/3: MWPotential()
+27/1: from utils.mwpotential import MWPotential
+27/2: import galpy.potential
+27/3: MWPotential()
+28/1: from utils.mwpotential import MWPotential
+28/2: import galpy.potential
+28/3: MWPotential()
+29/1: import galpy.potential
+29/2: from utils.mwpotential import MWPotential
+29/3: MWPotential()
+30/1: from utils.mwpotential import MWPotential
+30/2: import galpy.potential
+30/3: MWPotential()
+31/1:
+q(0
+)
+32/1: from utils.mwpotential import MWPotential
+32/2: pot = MWPotential()
+32/3: pot
+32/4: pot[0]
+32/5: dir(pot)
+32/6: pot.__getattribute__()
+33/1: from astropy.coordinates import SkyCoord
+33/2: SkyCoord('9h07m45.0s','2d45m07s')
+33/3: SkyCoord('9h13m01.0s','30d51m20s')
+33/4: import astropy.coordinates as coord
+34/1: import astropy.io.fits as fits
+34/2: hdu = fits.open('/run/media/evans/My_Passport/Clones/867/ClonesAll_DeflectTest/-0.5192_1.19445_DeflectTest.csv')
+34/3: hdu
+34/4: import csv
+34/5: hdu = open('/run/media/evans/My_Passport/Clones/867/ClonesAll_DeflectTest/-0.5192_1.19445_DeflectTest.csv')
+34/6: hdu
+34/7: csv.reader(hdu,delimiter=', ')
+34/8: csv.reader(hdu,delimiter=',')
+34/9: csvfile = csv.reader(hdu,delimiter=',')
+34/10: csvfile
+34/11:
+for row in csvfile:
+    print(', '.join(row))
+34/12:
+test = for row in csvfile:
+    print(', '.join(row))
+34/13: from numpy import genfromtxt
+34/14: dat = genfromtxt('/run/media/evans/My_Passport/Clones/867/ClonesAll_DeflectTest/-0.5192_1.19445_DeflectTest.csv', delimiter=',')
+34/15: dat
+34/16: dat[0]
+34/17: dat[1]
+34/18: dat[1,]
+34/19: dat[,0]
+34/20: dat[0][]
+34/21: dat[:,0]
+34/22: dat[4,0]
+34/23: dat[0]
+34/24: dat[1]
+34/25: dat[1,4]
+34/26: dat[:,4]
+34/27: dat[1:,4]
+34/28:
+len(dat[1:
+,4])
+34/29: len(dat[1:,4])
+34/30: len(np.unique(dat[1:,4]))
+34/31: import numpy as np
+34/32: len(np.unique(dat[1:,4]))
+34/33: np.unique(dat[1:,4])
+34/34: len(np.unique(dat[1:,3]))
+34/35: dat[1:,3]
+34/36: np.inf
+34/37: dat[1:,4]
+34/38: dat[1:,3]
+34/39: dat[1:,2]
+34/40: dat[1:,2][dat[1:,2]<np.inf]
+34/41: dat[1:,3][dat[1:,3]<np.inf]
+35/1: import numpy as np
+36/1: from astropy.table import Table
+36/2: blah = Table.read('catalog_GCs_All.fits')
+36/3: blah['ra']
+36/4: blah['ra'].value
+36/5: blah['ra'].units
+36/6: blah['ra'].quantity
+36/7: blah['ra'].unit
+36/8: blah['ra'].unit==None
+37/1: import galpy
+37/2: galpy.__version__
+37/3: galpy.potential.MovingObjectPotential()
+37/4: import galpy.potential
+38/1: import numpy
+39/1: scipy.__file__
+39/2: import scipy
+39/3: scipy.__file__
+39/4: import astropy.units as u
+39/5: u.kpc
+39/6: u.kpc/u.s/u.s
+40/1: import galpy
+40/2: galpy.__version__
+41/1: import galpy
+41/2: galpy.__file__
+41/3: :exit()
+45/1: 2.52*None
+46/1: import json
+46/2: jfile = open('/home/evans/Downloads/SDSSJ140306.54+145005.0.json')
+46/3: jstr = jfile_file.read()
+46/4: jstr = jfile.read()
+46/5: jfile
+46/6: jstr
+46/7: jdat = json.loads(jstr)
+46/8: jdat
+46/9: type(jdat)
+46/10: jdat.keys()
+46/11: jdat[0]
+46/12: jdat["u'SDSSJ140306.54.145005.0'"]
+46/13: jdat
+46/14: jdat[u'SDSSJ140306.54.145005.0']
+46/15: jdat.keys()
+46/16: jdat["u'SDSSJ140306.54+145005.0'"]
+46/17: jdat.keys()
+46/18: jdat['SDSSJ140306.54+145005.0']
+46/19: type(jdat['SDSSJ140306.54+145005.0'])
+46/20: jdat['SDSSJ140306.54+145005.0'].keys()
+46/21: jdat['SDSSJ140306.54+145005.0']['velocity']
+46/22: type(jdat['SDSSJ140306.54+145005.0']['velocity'])
+46/23: jdat['SDSSJ140306.54+145005.0']['velocity'][0]
+46/24: type(jdat['SDSSJ140306.54+145005.0']['velocity'][0])
+46/25: type(jdat['SDSSJ140306.54+145005.0']['velocity'][0]['u_value'])
+46/26: jdat['SDSSJ140306.54+145005.0']['velocity'][0]['u_value']
+46/27: jdat['SDSSJ140306.54+145005.0']['velocity'][0]['value']
+46/28: jdat['SDSSJ140306.54+145005.0']['velocity'][0]['value']
+46/29: type(jdat['SDSSJ140306.54+145005.0']['velocity'][0]['value'])
+46/30: float(jdat['SDSSJ140306.54+145005.0']['velocity'][0]['u_value'])
+46/31: float(jdat['SDSSJ140306.54+145005.0']['velocity'][0]['value'])
+46/32: type(jdat['SDSSJ140306.54+145005.0']['velocity'][0])
+46/33: jdat['SDSSJ140306.54+145005.0']['velocity'][0]).keys()
+46/34: jdat['SDSSJ140306.54+145005.0']['velocity'][0].keys()
+46/35: jfile2 = open('~/Downloads/Export.json')
+46/36: jfile2 = open('/home/evans/Downloads/Export.json')
+46/37: jstr2 = jfile2.read()
+46/38: jdat2 = json.loads(jstr2)
+46/39: jdat2.keys()
+46/40: type(jdat2)
+46/41: type(jdat2[0])
+46/42: jdat2[0].keys()
+46/43: jdat2[0]['z']
+46/44: jdat2[0]['Color']
+46/45: jdat2[0]['R.A.']
+46/46: jdat2[0]['vesc']
+46/47: jdat2[0]['Name']
+46/48: jdat2[0]['References']
+46/49: jdat2[0]['Spec']
+46/50: jdat2[0]['Spec.']
+46/51: jdat2[0]['Data']
+46/52: type(jdat2[0]['Data'])
+46/53: import csv
+46/54: csv.reader('/data1/Cats/OFSC_TypeBNames.csv')
+46/55: test = csv.reader('/data1/Cats/OFSC_TypeBNames.csv')
+46/56: test[0]
+46/57: type(test)
+46/58: test = csv.reader('/data1/Cats/OFSC_TypeBNames.csv',delimiter=',')
+46/59: test
+46/60: list(test)
+46/61:
+with open('/data1/Cats/OFSC_TypeBNames.csv','rb') as cvsfile:
+    data = list(cvs.reader(cvsfile))
+46/62:
+with open('/data1/Cats/OFSC_TypeBNames.csv','rb') as csvfile:
+    data = list(cvs.reader(csvfile))
+46/63:
+with open('/data1/Cats/OFSC_TypeBNames.csv','rb') as csvfile:
+    data = list(csv.reader(csvfile))
+46/64: data
+46/65: type(data)
+46/66: data[0]
+46/67: data[0]['Name']
+46/68: data[1]
+46/69: data[1][0]
+46/70: import numpy as np
+46/71: test = np.genfromtxt('/data1/Cats/OFSC_TypeBNames.csv',delimiter=',')
+46/72: test
+46/73: test = np.genfromtxt('/data1/Cats/OFSC_TypeBNames.csv')
+46/74: test
+46/75: test = np.genfromtxt('/data1/Cats/OFSC_TypeBNames.csv')
+46/76: test
+46/77: test = np.genfromtxt('/data1/Cats/OFSC_TypeBNames.csv',delimiter=',')
+46/78: test
+46/79: import pandas as pd
+46/80: test = pd.read_csv('/data1/Cats/OFSC_TypeBNames.csv',delimiter=',')
+46/81: test
+46/82: test[0]
+46/83: type(list)
+46/84: type(test)
+46/85: test.to_dict()
+46/86: test.to_dict().values
+46/87: test.to_dict().values()
+46/88: test.to_dict().values()['0']
+46/89: test.to_dict().values()[0]
+46/90: type(test.to_dict().values()[0])
+46/91: type(test.to_dict().values()[0]['0'])
+46/92: type(test.to_dict().values()[0][0])
+46/93: test.to_dict().values()[0][0]
+46/94: test = pd.read_csv('/data1/Cats/OFSC_TypeBNames.csv',delimiter=',')
+46/95: test[0]
+46/96: type(test)
+46/97: test.values
+46/98: test.values.tolist()
+46/99: test.values.tolist()[0]
+46/100: test.values.tolist()[0][]
+46/101: test.values.tolist()[0][0]
+46/102: test.values.tolist()[0][0]
+46/103: test.values.tolist()[0]
+46/104: test.values.tolist()
+46/105: length(test.values.tolist())
+46/106: length(test.values.tolist())[0]
+46/107: test.values.tolist()
+46/108: test.values.tolist()[0]
+46/109: test.values.tolist().flatten()
+46/110: flatten(test.values.tolist())
+46/111: mylist = [item for items in test.values.tolist() for item in items]
+46/112: mylist
+46/113: mylist['4']
+46/114: mylist[4]
+46/115: jdat2.keys()
+46/116: jdat.keys()
+46/117: jdat['SDSSJ140306.54+145005.0']
+46/118: jdat['SDSSJ140306.54+145005.0']['velocity'][0]['u_value']
+46/119: jdat['SDSSJ140306.54+145005.0']['velocity']
+46/120: jdat['SDSSJ140306.54+145005.0'].keys()
+46/121: jdat['SDSSJ140306.54+145005.0']['dec']
+46/122: jdat['SDSSJ140306.54+145005.0']['propermotionra']
+46/123: jdat['SDSSJ140306.54+145005.0']['propermotionra']['value']
+46/124: jdat['SDSSJ140306.54+145005.0']['propermotionra'][1]
+46/125: jdat['SDSSJ140306.54+145005.0']['propermotionra'][0]
+46/126: jdat['SDSSJ140306.54+145005.0']['propermotionra'][0]['value']
+46/127: float(jdat['SDSSJ140306.54+145005.0']['propermotionra'][0]['value'])
+46/128: jdat['SDSSJ140306.54+145005.0'].keys()
+46/129: float(jdat['SDSSJ140306.54+145005.0']['propermotionra'][0]['value'])
+46/130: float(jdat['SDSSJ140306.54+145005.0']['propermotiondec'][0]['value'])
+46/131: float(jdat['SDSSJ140306.54+145005.0']['ra'][0]['value'])
+46/132: float(jdat['SDSSJ140306.54+145005.0']['dec'][0]['value'])
+46/133: float(jdat['SDSSJ140306.54+145005.0']['lumdist'][0]['value'])
+46/134: jdat['SDSSJ140306.54+145005.0']['dec'][0]
+46/135: jdat['SDSSJ140306.54+145005.0']['dec'][0]['value']
+46/136: str(jdat['SDSSJ140306.54+145005.0']['dec'][0]['value'])
+46/137: jdat['SDSSJ140306.54+145005.0'].keys()
+46/138: jdat['SDSSJ140306.54+145005.0']['name']
+46/139: jdat['SDSSJ140306.54+145005.0']['name'][0]
+46/140: jdat['SDSSJ140306.54+145005.0']['name']
+46/141: test = pd.read_csv('/data1/Cats/OFSC_TypeBNames.csv',delimiter=',')
+46/142: test
+46/143: jdat['SDSSJ140306.54+145005.0']['source']
+46/144: jdat['SDSSJ140306.54+145005.0']['sources']
+46/145: jdat['SDSSJ140306.54+145005.0']['sources'][0]
+46/146: not False
+46/147: jdat['velocity']
+46/148: jdat.names
+46/149: jdat.names()
+46/150: jdat['propermotionra')
+46/151: jdat['propermotionra']
+46/152: jdat.names()
+46/153: jdat.keys()
+46/154: jdat['propermotionra']
+46/155: jdat[u'SDSSJ140306.54+145005.0']
+46/156: jdat[u'SDSSJ140306.54+145005.0']['propermotionra']
+46/157: jdat[u'SDSSJ140306.54+145005.0']['propermotionra'][u'correlations']
+46/158: jdat[u'SDSSJ140306.54+145005.0']['propermotionra'][0]
+46/159: jdat[u'SDSSJ140306.54+145005.0']['propermotionra'][0][u'correlations']
+46/160: jdat[u'SDSSJ140306.54+145005.0']['propermotionra'][0][u'correlations'][0]
+46/161: jdat[u'SDSSJ140306.54+145005.0']['propermotionra'][0][u'correlations'][0][u'value']
+46/162: jdat[u'SDSSJ140306.54+145005.0']['propermotionra'][0][u'correlations'][0][u'quantity']
+47/1: import astropy.coordinates as coord
+51/1: import numpy as np
+51/2: from astropy.table import Table
+51/3: dat = Table.read('/run/media/evans/My_Passport/Runaways/sigma_1000/sigma_1000_forTC_nonremfast.data')
+51/4: dat = Table.read('/run/media/evans/My_Passport/Runaways/sigma_1000/sigma_1000_nonremfast.data')
+51/5: dat = Table.read('/run/media/evans/My_Passport/Runaways/sigma_1000/sigma_1000_nonremfast.txt')
+51/6: dat = Table.read('/run/media/evans/My_Passport/Runaways/sigma_1000/sigma_1000_nonremfast.txt')
+51/7: dat = Table.read('/run/media/evans/My_Passport/Runaways/sigma_1000/sigma_1000_nonremfast.fits')
+51/8: dat['t_MS_comp']
+51/9: print(dat['t_MS_comp'])
+51/10: print(dat['t_MS_comp']+1)
+51/11: import utils.hurley_stellar_evolution
+51/12: Radius(1,1,1)
+51/13: import utils.hurley_stellar_evolution as hurl
+51/14: hurl.Radius(1,1,1)
+51/15: hurl.Radius(1,0,1)
+51/16: hurl.Radius(dat['M2postCC'],0,1)
+51/17: hurl.Radius(dat['M2postCC'],np.zeros*len(dat['M2postCC']),1)
+51/18: len(dat['M2postCC'])
+51/19: np.zeros*len(dat['M2postCC'])
+51/20: np.zeros(len(dat['M2postCC']))
+51/21: hurl.Radius(dat['M2postCC'],np.zeros(len(dat['M2postCC'])),1)
+51/22: hurl.Radius(dat['M2postCC'],np.zeros(len(dat['M2postCC'])),dat['t_explosion'])
+51/23: hurl.Radius(1,0,1)
+51/24: hurl.Radius([1,1],[0,-1],[0,1])
+51/25: for(i in len(dat['M2postCC'])):
+51/26:
+for i in len(dat['M2postCC'])
+    :print(hurl.Radius(dat['M2postCC'][i],0,dat['t_explosion'][i]))
+51/27:
+for i in len(dat['M2postCC']):
+    :print(hurl.Radius(dat['M2postCC'][i],0,dat['t_explosion'][i]))
+51/28:
+for i in len(dat['M2postCC']):
+    print(hurl.Radius(dat['M2postCC'][i],0,dat['t_explosion'][i]))
+51/29:
+for i in xrange(len(dat['M2postCC'])):
+    print(hurl.Radius(dat['M2postCC'][i],0,dat['t_explosion'][i]))
+51/30: datwheeler = np.genfromtxt('/run/media/evans/My_Passport/Runaways/sigma_1000/Wheeler.txt')
+51/31: datwheeler['phi']
+51/32: datwheeler[-]
+51/33: datwheeler[0]
+51/34: datwheeler[0,1]
+51/35: datwheeler[1,1]
+51/36: from scipy.interpolate import interp1d
+51/37: f = interp1d(datwheeler[,0],datwheeler[,1])
+51/38: f = interp1d(datwheeler[:,0],datwheeler[:,1])
+51/39: f = interp1d(datwheeler[:,0],datwheeler[:,1])
+51/40: f(0.1)
+51/41: Phi
+51/42: test = np.array([0,1,2,3,4,5,6])
+51/43: test
+51/44: test[(test>2)]
+51/45: test[(test>2)] = 2
+51/46: test
+52/1: import numpy as np
+52/2: mh = np.arange(-0.5192,0.2809,0.2)
+52/3: mh
+52/4: rs = np.arange(1.59445,1.19445,-0.1)
+52/5: rs[0]
+52/6: rs[where(mh==-0.5192)]
+52/7: rs[np.where(mh==-0.5192)]
+53/1: import numpy as np
+53/2: import astropy.coordinates as coord
+53/3: from sample import HVSsample
+53/4: from astropy.table import Table as tab
+53/5: dat = tab.read('/data1/Cats/golden_GRVS19.5.fits')
+53/6: dat['ra']
+53/7: from galpy.util.bovy_coords import radec_to_lb
+53/8: gal = radec_to_lb(tab['ra'],tab['dec'],degree=True)
+53/9: gal = radec_to_lb(tab['ra'].value,tab['dec'].value,degree=True)
+53/10: type(tab['ra'])
+53/11: tab['ra']
+53/12: gal = radec_to_lb(dat['ra'].value,dat['dec'].value,degree=True)
+53/13: gal = radec_to_lb(dat['ra'],dat['dec'],degree=True)
+53/14: type(dat['ra'])
+53/15: np.array(dat['ra'])
+53/16: gal = radec_to_lb(np.array(dat['ra']),np.array(dat['dec']),degree=True)
+53/17: gal = radec_to_lb(dat['ra'],dat['dec'],degree=True)
+53/18: gal = radec_to_lb(np.array(dat['ra']),np.array(dat['dec']),degree=True)
+53/19: gal
+53/20: ll, bb = dat[:, 0], dat[:,1]
+53/21: ll, bb = gal[:, 0], gal[:,1]
+53/22: ll
+53/23: datalist=[ll,bb]
+53/24: namelist=['l','b']
+53/25: data_table=tab(data=datalist,names=namelist)
+53/26: data_table.write('/data1/Cats/golden_GRVS19.5_lb.fits')
+53/27: import matplotlib as plt
+54/1: from astropy.io import ascii
+54/2: ascii.read('/run/media/evans/My_Passport/Runaways/HVS_optimized/HVS_optimized_clean.dat',data_start=58)
+55/1: print('hi')
+55/2: print 'hi'
+56/1: import numpy as np
+56/2: test = np.genfromtxt('/run/media/evans/My_Passport/Runaways/HVS_opt_solarZ.dat',skip_header=57)
+58/1: import numpy as np
+60/1: import File_reader as fr
+60/2: reader('HVS_opt_solarZ.dat',85,57)
+60/3: fr.reader('HVS_opt_solarZ.dat',85,57)
+61/1: import File_reader as fr
+61/2: fr.reader('HVS_opt_solarZ.dat',85,57)
+62/1: import File_reader as fr
+62/2: fr.reader('HVS_opt_solarZ.dat',85,57)
+63/1: import sys
+63/2: print sys.executable
+64/1: from galpy import MWPotential2014
+64/2: from galpy.potential import MWPotential2014
+64/3: import astropy.units as u
+64/4: import numpy as np
+64/5: evaluatePotentials(MWPotential2014,8,0)
+64/6: from galpy.potential import evaluatePotentials
+64/7: evaluatePotentials(MWPotential2014,8,0)
+64/8: evaluatePotentials(MWPotential2014,8*u.kpc,0)
+64/9: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)
+64/10: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)*220
+64/11: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)*220*u.km**2/u.s**2
+64/12: from galpy.potential import KeplerPotential
+64/13: evaluatePotentials(KeplerPotential(amp=4e6*u.Msun,normalize=False),8*u.kpc,0*u.kpc)
+64/14: evaluatePotentials(KeplerPotential(amp=4e6*u.Msun,normalize=False),8*u.kpc,0*u.kpc)
+64/15: from galpy.potential import vesc
+64/16: vesc(KeplerPotential(amp=4e6*u.Msun,normalize=False),8*u.kpc)
+64/17: vesc(MWPotential2014,8*u.kpc)
+64/18: vesc(MWPotential2014,1.)
+64/19: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)*220*u.km**2/u.s**2
+64/20: evaluatePotentials(MWPotential2014,1.,0)*220*u.km**2/u.s**2
+64/21: evaluatePotentials(MWPotential2014,1e7,0)*220*u.km**2/u.s**2
+64/22: evaluatePotentials(MWPotential2014,1e8,0)*220*u.km**2/u.s**2
+64/23: evaluatePotentials(MWPotential2014,1e10,0)*220*u.km**2/u.s**2
+64/24: evaluatePotentials(MWPotential2014,1e12,0)*220*u.km**2/u.s**2
+64/25: evaluatePotentials(MWPotential2014,1e50,0)*220*u.km**2/u.s**2
+64/26: evaluatePotentials(MWPotential2014,1e50,0)*u.km**2/u.s**2
+64/27: evaluatePotentials(MWPotential2014,1e60,0)*u.km**2/u.s**2
+64/28: evaluatePotentials(MWPotential2014,1e60,0)
+64/29: evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,1.,0)
+64/30: 2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,1.,0))
+64/31: sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,1.,0)))
+64/32: np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,1.,0)))
+64/33: 200*np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,1.,0)))
+64/34: 220*np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,1.,0)))
+64/35: 220*np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,8.*u.kpc,0)))
+64/36: 220*np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,7.9.*u.kpc,0)))
+64/37: 220*np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,7.9*u.kpc,0)))
+64/38: 220*np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,8.1*u.kpc,0)))
+64/39: 220*np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,8.178*u.kpc,0)))
+64/40: 220*np.sqrt(2*(evaluatePotentials(MWPotential2014,1e60,0) - evaluatePotentials(MWPotential2014,8.178*u.kpc,0)))
+64/41: from galpy.potential import vcirc
+64/42: vcirc(MWPotential2014,8*u.kpc,0.*u.kpc)
+64/43: vcirc(MWPotential2014,8.178*u.kpc,0.*u.kpc)
+64/44: 22*vcirc(MWPotential2014,8.178*u.kpc,0.*u.kpc)
+64/45: 220**vcirc(MWPotential2014,8.178*u.kpc,0.*u.kpc)
+67/1:
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import astropy.units as u
+import astropy.coordinates as coord
+from astropy.coordinates import SkyCoord
+from astropy.table import Table
+from astropy.constants import G
+from scipy.optimize import fsolve
+import random
+from joblib import Parallel, delayed
+import multiprocessing
+67/2:
+#import gala.potential as gp
+from galpy.potential import MWPotential2014, evaluatePotentials
+import emcee
+#from getdist import plots, MCSamples
+import sys
+import time
+67/3:
+potential = MWPotential2014
+
+#vSun = [14.0, 12.24, 7.25] * u.km / u.s # (U, V, W) Schonrich+12
+vSun = [11.1, 12.24, 7.25] * u.km / u.s # (U, V, W) Schonrich+10
+#vrot = [0., 238., 0.] * u.km / u.s # Circular rotation velocity at Sun Position, Bland-hawthorn & Gerhard 2016
+vrot = [0., 220., 0.] * u.km / u.s # Circular rotation velocity at Sun Position, Bland-hawthorn & Gerhard 2016
+#vrot = [0., 232.76, 0.] * u.km / u.s # Circular rotation velocity at Sun Position, McMillan 2017
+
+#RSun = 8.2 * u.kpc # Bland-hawthorn & Gerhard 2016
+RSun = 8. * u.kpc # Canonical
+#RSun = 8.178 * u.kpc # Gravity Collab 2016
+zSun = 25. * u.pc  # Bland-hawthorn & Gerhard 2016
+#zSun = 0. * u.pc  # Bland-hawthorn & Gerhard 2016
+
+v_sun = coord.CartesianDifferential(vSun + vrot)
+gc = coord.Galactocentric(galcen_distance=RSun, z_sun=zSun, galcen_v_sun=v_sun)
+67/4: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e60,0.) - evaluatePotentials(potential,0.*u.kpc,100*u.kpc))) * u.km/u.s
+67/5: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e60,0.) - evaluatePotentials(potential,100.*u.kpc,0*u.kpc))) * u.km/u.s
+67/6: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e70,0.) - evaluatePotentials(potential,0.*u.kpc,100*u.kpc))) * u.km/u.s
+67/7: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e70,0.) - evaluatePotentials(potential,8.*u.kpc,0*u.kpc))) * u.km/u.s
+67/8: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e70,0.) - evaluatePotentials(potential,1.,0.))) * u.km/u.s
+67/9: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e70,0.) - evaluatePotentials(potential,0.*u.kpc,50*u.kpc))) * u.km/u.s
+67/10: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e70,0.) - evaluatePotentials(potential,50.*u.kpc,0*u.kpc))) * u.km/u.s
+67/11: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e70,0.) - evaluatePotentials(potential,30.*u.kpc,0*u.kpc))) * u.km/u.s
+67/12: 220*np.sqrt( 2.*(evaluatePotentials(potential,6e70,0.) - evaluatePotentials(potential,0.*u.kpc,30*u.kpc))) * u.km/u.s
+68/1: import utils.hurley_stellar_evolution as hurl
+68/2: hurl.L_ZAMS(5,0)
+68/3: hurl.L_ZAMS(5,0.)
+68/4: hurl.L_ZAMS(5.,0.)
+68/5: import sys
+68/6: print(sys.path)
+68/7: import os
+68/8: os.environ['PYTHONPATH'].split(os.pathsep)
+69/1: import sys
+69/2: sys.path
+72/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('/data1/output_00080/info_00080.txt')
+73/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('/data1/output_00080/info_00080.txt')
+74/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/data1/output_00080/info_00080.txt')
+75/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+76/1: import yt
+76/2: test = yt.load('/home/evans/Gaia_School_BCN/output_00080/info_00080.txt')
+76/3: test = yt.load('/home/evans/Gaia_School_BCN/output_00080/info_00080.txt')
+76/4: yt.load('IsolatedGalaxy/galaxy0030/galaxy0030')
+76/5: yt.load('/data1/IsolatedGalaxy/galaxy0030/galaxy0030')
+76/6: yt.load('/data1/IsolatedGalaxy/galaxy0030/galaxy0030')
+77/1: import yt
+77/2: yt.load('test.txt')
+77/3: yt.load('/data1/IsolatedGalaxy/galaxy0030/galaxy0030')
+77/4: yt.load('test.txt')
+77/5: ds = yt.load('/data1/IsolatedGalaxy/galaxy0030/galaxy0030')
+77/6: ds = yt.load("/data1/IsolatedGalaxy/galaxy0030/galaxy0030")
+77/7: ds = yt.load("/data1/IsolatedGalaxy/galaxy0030/galaxy0030")
+77/8: import yt
+77/9: ds = yt.load("/data1/IsolatedGalaxy/galaxy0030/galaxy0030")
+77/10: yt.load('test.txt')
+77/11: yt.load('/home/evans/Gaia_School_BCN/test.txt')
+78/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+77/12: ds = yt.load("test")
+77/13: ds = yt.load("test.txt')
+77/14: ds = yt.load("test.txt")
+79/1:
+import yt
+import numpy as np
+import matplotlib as plt
+#ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+80/1:
+import yt
+import numpy as np
+import matplotlib as plt
+#ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+#ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+ds_RAMSES = yt.load('/data1/info_00080.txt')
+77/15: ds = yt.load("/data1/IsolatedGalaxy/galaxy0030/galaxy0030")
+81/1: import pip
+81/2: import yt
+81/3: yt.load('/data1/IsolatedGalaxy/galaxy0030/galaxy0030')
+82/1: import kring
+82/2: import keyring
+83/1:
+import yt
+import numpy as np
+import matplotlib as plt
+#ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+#ds_RAMSES = yt.load('/data1/info_00080.txt')
+83/2:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+
+s = pynbody.load('./testdata/g15784.lr.01024.gz')
+84/1:
+import yt
+import numpy as np
+import matplotlib as plt
+#ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+#ds_RAMSES = yt.load('/data1/info_00080.txt')
+84/2:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+
+s = pynbody.load('./testdata/g15784.lr.01024.gz')
+85/1:
+import yt
+import numpy as np
+import matplotlib as plt
+#ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+#ds_RAMSES = yt.load('/data1/info_00080.txt')
+85/2:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+
+s = pynbody.load('./testdata/g15784.lr.01024.gz')
+86/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+#ds_RAMSES = yt.load('/data1/info_00080.txt')
+86/2:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+
+s = pynbody.load('./testdata/g15784.lr.01024.gz')
+87/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+#ds_RAMSES = yt.load('/data1/info_00080.txt')
+87/2:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+
+s = pynbody.load('/data1/testdata/g15784.lr.01024.gz')
+88/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+#ds_RAMSES = yt.load('/data1/info_00080.txt')
+88/2:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+
+s = pynbody.load('/data1/testdata/g15784.lr.01024.gz')
+90/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+#ds_RAMSES = yt.load('/data1/info_00080.txt')
+90/2:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+
+s = pynbody.load('/data1/testdata/g15784.lr.01024.gz')
+94/1:
+import pynbody
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from astropy.io import ascii
+import matplotlib.colors        ###http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
+from numpy import *
+import math
+import numpy as np
+import pickle
+import glob
+import gc
+import pynbody.filt as f
+import os
+import scipy.optimize
+import functools
+from scipy.optimize import curve_fit
+from pylab import * ##in python mode
+import matplotlib as mpl            
+cmap = mpl.cm.brg
+
+#cd Gaia_School_BCN/ we will work in this directory
+#in which we have the directory 1008/ and  the file g15784.param
+
+s = pynbody.load('1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+94/2:
+import pynbody
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from astropy.io import ascii
+import matplotlib.colors        ###http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
+from numpy import *
+import math
+import numpy as np
+import pickle
+import glob
+import gc
+import pynbody.filt as f
+import os
+import scipy.optimize
+import functools
+from scipy.optimize import curve_fit
+from pylab import * ##in python mode
+import matplotlib as mpl            
+cmap = mpl.cm.brg
+
+#cd Gaia_School_BCN/ we will work in this directory
+#in which we have the directory 1008/ and  the file g15784.param
+
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+95/1:
+import pynbody
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from astropy.io import ascii
+import matplotlib.colors        ###http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
+from numpy import *
+import math
+import numpy as np
+import pickle
+import glob
+import gc
+import pynbody.filt as f
+import os
+import scipy.optimize
+import functools
+from scipy.optimize import curve_fit
+from pylab import * ##in python mode
+import matplotlib as mpl            
+cmap = mpl.cm.brg
+
+#cd Gaia_School_BCN/ we will work in this directory
+#in which we have the directory 1008/ and  the file g15784.param
+
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+96/1:
+import pynbody
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from astropy.io import ascii
+import matplotlib.colors        ###http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
+from numpy import *
+import math
+import numpy as np
+import pickle
+import glob
+import gc
+import pynbody.filt as f
+import os
+import scipy.optimize
+import functools
+from scipy.optimize import curve_fit
+from pylab import * ##in python mode
+import matplotlib as mpl            
+cmap = mpl.cm.brg
+
+#cd Gaia_School_BCN/ we will work in this directory
+#in which we have the directory 1008/ and  the file g15784.param
+
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+97/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+#ds_RAMSES = yt.load('/data1/info_00080.txt')
+98/1:
+import yt
+import numpy as np
+import matplotlib as plt
+ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+#ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+ds_RAMSES = yt.load('/data1/info_00080.txt')
+99/1:
+import yt
+import numpy as np
+import matplotlib as plt
+#ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_ART = yt.load('/data1/Barcelona/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+#ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+ds_RAMSES = yt.load('/data1/info_00080.txt')
+100/1:
+import yt
+import numpy as np
+import matplotlib as plt
+#ds_ART = yt.load('~/Gaia_School_BCN/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+ds_ART = yt.load('/data1/Barcelona/sizmbhloz-clref04SNth-rs9_a0.9011/sizmbhloz-clref04SNth-rs9_a0.9011.art')
+#ds_RAMSES = yt.load('~/Gaia_School_BCN/output_00080/info_00080.txt')
+ds_RAMSES = yt.load('/data1/Barcelona/output_00080/info_00080.txt')
+100/2:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+
+s = pynbody.load('/data1/testdata/g15784.lr.01024.gz')
+101/1:
+%matplotlib inline
+import pynbody
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from astropy.io import ascii
+import matplotlib.colors        ###http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
+from numpy import *
+import math
+import numpy as np
+import pickle
+import glob
+import gc
+import pynbody.filt as f
+import os
+import scipy.optimize
+import functools
+from scipy.optimize import curve_fit
+from pylab import * ##in python mode
+import matplotlib as mpl            
+cmap = mpl.cm.brg
+
+#cd Gaia_School_BCN/ we will work in this directory
+#in which we have the directory 1008/ and  the file g15784.param
+
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+102/1:
+%matplotlib inline
+import pynbody
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from astropy.io import ascii
+import matplotlib.colors        ###http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
+from numpy import *
+import math
+import numpy as np
+import pickle
+import glob
+import gc
+import pynbody.filt as f
+import os
+import scipy.optimize
+import functools
+from scipy.optimize import curve_fit
+from pylab import * ##in python mode
+import matplotlib as mpl            
+cmap = mpl.cm.brg
+
+#cd Gaia_School_BCN/ we will work in this directory
+#in which we have the directory 1008/ and  the file g15784.param
+102/2:
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+102/3:
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.s, width=100, cmap='Blues')
+plt.show()
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.s, width=100, cmap='Blues')
+plt.show()
+102/4:
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.d, width=100, cmap='Blues')
+plt.show()
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.d, width=100, cmap='Blues')
+plt.show()
+102/5:
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+103/1:
+%matplotlib inline
+import pynbody
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from astropy.io import ascii
+import matplotlib.colors        ###http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
+from numpy import *
+import math
+import numpy as np
+import pickle
+import glob
+import gc
+import pynbody.filt as f
+import os
+import scipy.optimize
+import functools
+from scipy.optimize import curve_fit
+from pylab import * ##in python mode
+import matplotlib as mpl            
+cmap = mpl.cm.brg
+
+#cd Gaia_School_BCN/ we will work in this directory
+#in which we have the directory 1008/ and  the file g15784.param
+103/2:
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+103/3:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h[1])
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h[1],min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h[1].g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h[1].s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h[1].d,min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+plt.plot(pg['rbins'],pg['v_circ'],label='gas')
+plt.plot(ps['rbins'],ps['v_circ'],label='stars')
+plt.plot(pd['rbins'],pd['v_circ'],label='dm')
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+103/4:
+comps = pynbody.analysis.decomp(h[1])
+# make the plot
+plt.plot(comps[1]['rbins'],comps[1]['v_circ'],label='total')
+103/5:
+comps = pynbody.analysis.decomp(h[1])
+p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+plt.plot(p]['rbins'],p['v_circ'],label='total')
+103/6:
+comps = pynbody.analysis.decomp(h[1])
+p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+103/7:
+comps = pynbody.analysis.decomp.decomp(h[1])
+p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+103/8:
+comps = pynbody.analysis.decomp(h[1])
+p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+103/9:
+comps = pynbody.analysis.decomp(h[1])
+comps[1]
+#p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+103/10:
+comps = pynbody.analysis.decomp(h[1])
+comps
+#p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+103/11:
+comps = pynbody.analysis.decomp(h[1])
+comps
+#p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+#plt.plot(p['rbins'],p['v_circ'],label='total')
+103/12:
+pynbody.analysis.decomp(h[1])
+comps['decomp',1]
+#p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+#plt.plot(p['rbins'],p['v_circ'],label='total')
+103/13:
+pynbody.analysis.decomp(h[1])
+h1.s[2]
+#p = pynbody.analysis.profile.Profile(comps[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+#plt.plot(p['rbins'],p['v_circ'],label='total')
+103/14:
+pynbody.analysis.decomp(h1)
+h1.s[1]
+p = pynbody.analysis.profile.Profile(h1.s[1],min=.01,max=250,type='log',ndim=3)
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+103/15:
+pynbody.analysis.decomp(h1)
+#h1.s[1]
+p1 = pynbody.analysis.profile.Profile(h1.s[1],min=.01,max=250,type='log',ndim=3)
+p2 = pynbody.analysis.profile.Profile(h1.s[2],min=.01,max=250,type='log',ndim=3)
+p3 = pynbody.analysis.profile.Profile(h1.s[3],min=.01,max=250,type='log',ndim=3)
+p4 = pynbody.analysis.profile.Profile(h1.s[4],min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p1['rbins'],p1['v_circ'],label='disk')
+plt.plot(p2['rbins'],p2['v_circ'],label='halo')
+plt.plot(p3['rbins'],p3['v_circ'],label='bulge')
+plt.plot(p4['rbins'],p4['v_circ'],label='thick')
+104/1:
+%matplotlib inline
+import pynbody
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from astropy.io import ascii
+import matplotlib.colors        ###http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
+from numpy import *
+import math
+import numpy as np
+import pickle
+import glob
+import gc
+import pynbody.filt as f
+import os
+import scipy.optimize
+import functools
+from scipy.optimize import curve_fit
+from pylab import * ##in python mode
+import matplotlib as mpl            
+cmap = mpl.cm.brg
+
+#cd Gaia_School_BCN/ we will work in this directory
+#in which we have the directory 1008/ and  the file g15784.param
+104/2:
+s = pynbody.load('/data1/Barcelona/1008/g15784.01008')
+s.physical_units()
+h = s.halos()
+h1 = h[1]
+pynbody.analysis.halo.center(h1,mode='hyb')
+
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+
+pynbody.analysis.angmom.sideon(h1, cen=(0,0,0))
+pynbody.plot.image(h1.g, width=100, cmap='Blues')
+plt.show()
+104/3:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h1)
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h[1],min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h[1].g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h[1].s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h[1].d,min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+plt.plot(pg['rbins'],pg['v_circ'],label='gas')
+plt.plot(ps['rbins'],ps['v_circ'],label='stars')
+plt.plot(pd['rbins'],pd['v_circ'],label='dm')
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+104/4:
+pynbody.analysis.decomp(h1)
+#h1.s[1]
+p1 = pynbody.analysis.profile.Profile(h1.s[1],min=.01,max=250,type='log',ndim=3)
+p2 = pynbody.analysis.profile.Profile(h1.s[2],min=.01,max=250,type='log',ndim=3)
+p3 = pynbody.analysis.profile.Profile(h1.s[3],min=.01,max=250,type='log',ndim=3)
+p4 = pynbody.analysis.profile.Profile(h1.s[4],min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p1['rbins'],p1['v_circ'],label='disk')
+plt.plot(p2['rbins'],p2['v_circ'],label='halo')
+plt.plot(p3['rbins'],p3['v_circ'],label='bulge')
+plt.plot(p4['rbins'],p4['v_circ'],label='thick')
+104/5:
+pynbody.analysis.decomp(h1)
+#h1.s[1]
+p1 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==1)],min=.01,max=250,type='log',ndim=3)
+#p2 = pynbody.analysis.profile.Profile(h1.s[2],min=.01,max=250,type='log',ndim=3)
+#p3 = pynbody.analysis.profile.Profile(h1.s[3],min=.01,max=250,type='log',ndim=3)
+#p4 = pynbody.analysis.profile.Profile(h1.s[4],min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p1['rbins'],p1['v_circ'],label='disk')
+#plt.plot(p2['rbins'],p2['v_circ'],label='halo')
+#plt.plot(p3['rbins'],p3['v_circ'],label='bulge')
+#plt.plot(p4['rbins'],p4['v_circ'],label='thick')
+104/6:
+pynbody.analysis.decomp(h1)
+#h1.s[1]
+p1 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==1)],min=.01,max=250,type='log',ndim=3)
+p2 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==2)],min=.01,max=250,type='log',ndim=3)
+p3 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==3)],min=.01,max=250,type='log',ndim=3)
+p4 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==4)],min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p1['rbins'],p1['v_circ'],label='disk')
+plt.plot(p2['rbins'],p2['v_circ'],label='halo')
+plt.plot(p3['rbins'],p3['v_circ'],label='bulge')
+plt.plot(p4['rbins'],p4['v_circ'],label='thick')
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+104/7:
+pynbody.analysis.decomp(h1)
+#h1.s[1]
+p1 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==1)],min=.01,max=250,type='log',ndim=3)
+p2 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==2)],min=.01,max=250,type='log',ndim=3)
+p3 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==3)],min=.01,max=250,type='log',ndim=3)
+p4 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==4)],min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p1['rbins'],p1['v_circ'],label='thin_disk')
+plt.plot(p2['rbins'],p2['v_circ'],label='halo')
+plt.plot(p3['rbins'],p3['v_circ'],label='bulge')
+plt.plot(p4['rbins'],p4['v_circ'],label='thick_disk')
+plt.plot(p['rbins'],p['v_circ'],label='total')
+plt.plot(pd['rbins'],pd['v_circ'],label='DM')
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+104/8:
+pynbody.analysis.decomp(h1)
+#h1.s[1]
+p1 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==1)],min=.01,max=250,type='log',ndim=3)
+p2 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==2)],min=.01,max=250,type='log',ndim=3)
+p3 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==3)],min=.01,max=250,type='log',ndim=3)
+p4 = pynbody.analysis.profile.Profile(h1.s[np.where(h1.s['decomp']==4)],min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p['rbins'],p['v_circ'],label='total')
+plt.plot(pd['rbins'],pd['v_circ'],label='dark_matter')
+plt.plot(p1['rbins'],p1['v_circ'],label='thin_disk')
+plt.plot(p2['rbins'],p2['v_circ'],label='halo')
+plt.plot(p3['rbins'],p3['v_circ'],label='bulge')
+plt.plot(p4['rbins'],p4['v_circ'],label='thick_disk')
+
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+104/9: pynbody.analysis.luminosity.half_light_r(h1,band='v',cylindrical=False)
+104/10: pynbody.analysis.luminosity.half_light_r(h1,band='v',cylindrical=True)
+104/11:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h1)
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h,min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h.g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h.s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h.d,min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p['rbins'],p['mass'],label='total')
+plt.plot(pg['rbins'],pg['mass'],label='gas')
+plt.plot(ps['rbins'],ps['mass'],label='stars')
+plt.plot(pd['rbins'],pd['mass'],label='dm')
+plt.plot(pd['rbins'],pg['mass']+ps['mass']+pd['mass'],label='total?')
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+104/12:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h1)
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h1,min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h1.g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h1.s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h1.d,min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p['rbins'],p['mass'],label='total')
+plt.plot(pg['rbins'],pg['mass'],label='gas')
+plt.plot(ps['rbins'],ps['mass'],label='stars')
+plt.plot(pd['rbins'],pd['mass'],label='dm')
+plt.plot(pd['rbins'],pg['mass']+ps['mass']+pd['mass'],label='total?')
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+104/13:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h1)
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h1,min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h1.g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h1.s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h1.d,min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p['v_circ'],p['mass'],label='total')
+#plt.plot(pg['rbins'],pg['mass'],label='gas')
+#plt.plot(ps['rbins'],ps['mass'],label='stars')
+#plt.plot(pd['rbins'],pd['mass'],label='dm')
+plt.plot(p['v_circ'],pg['mass']+ps['mass'],label='baryonic?')
+
+plt.ylabel('mass [Msun]')
+plt.xlabel(r'$v_c$ [km/s]')
+plt.legend()
+104/14:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h1)
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h1,min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h1.g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h1.s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h1.d,min=.01,max=250,type='log',ndim=3)
+
+# make the plot
+plt.plot(p['rbins'],p['mass'],label='total')
+#plt.plot(pg['rbins'],pg['mass'],label='gas')
+#plt.plot(ps['rbins'],ps['mass'],label='stars')
+#plt.plot(pd['rbins'],pd['mass'],label='dm')
+#plt.plot(p['v_circ'],pg['mass']+ps['mass'],label='baryonic?')
+
+plt.ylabel('mass [Msun]')
+plt.xlabel(r'$v_c$ [km/s]')
+plt.legend()
+104/15:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h1)
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h1,min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h1.g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h1.s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h1.d,min=.01,max=250,type='log',ndim=3)
+
+p['rbins']
+# make the plot
+#plt.plot(p['rbins'],p['mass'],label='total')
+#plt.plot(pg['rbins'],pg['mass'],label='gas')
+#plt.plot(ps['rbins'],ps['mass'],label='stars')
+#plt.plot(pd['rbins'],pd['mass'],label='dm')
+#plt.plot(p['v_circ'],pg['mass']+ps['mass'],label='baryonic?')
+
+##plt.ylabel('mass [Msun]')
+#plt.xlabel(r'$v_c$ [km/s]')
+#plt.legend()
+104/16: plt.plot(p['rbins'],p['density'],label='total')
+104/17: plt.plot(log10(p['rbins']),log10(p['density']),label='total')
+104/18: plt.plot((p['rbins']),log10(p['density']),label='total')
+104/19:
+plt.plot((p['rbins']),(p['density']),label='total')
+plt.semilogy()
+plt.set_xlabel('R [kpc]')
+plt.set_ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+#plt.legend()
+104/20:
+plt.plot((p['rbins']),(p['density']),label='total')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+#plt.legend()
+104/21:
+import scipy.optimize.curve_fit as curve_fit
+
+plt.plot((p['rbins']),(p['density']),label='total')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+
+def func(x, a, b):
+        x = x/a
+        return b / (x * (1 + x)**2)
+
+popt, pcov = curve_fit(func, p['rbins'], p['density'])
+
+plt.plot(p['rbins'], func(p['rbins'], *popt)
+104/22:
+import scipy.optimize.curve_fit as curve_fit
+
+def func(x, a, b):
+        x = x/a
+        return b / (x * (1 + x)**2)
+
+popt, pcov = curve_fit(func, p['rbins'], p['density'])
+
+plt.plot((p['rbins']),(p['density']),label='total')
+plt.plot(p['rbins'],func(p['rbins'], *popt)
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+104/23:
+import scipy.optimize.curve_fit as curve_fit
+
+def func(x, a, b):
+        x = x/a
+        return b / (x * (1 + x)**2)
+
+popt, pcov = curve_fit(func, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='total')
+plt.plot(p['rbins'],func(p['rbins'], *popt)
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+104/24:
+import scipy.optimize.curve_fit as curve_fit
+
+def func(x, a, b):
+        x = x/a
+        return b / (x * (1 + x)**2)
+
+popt, pcov = curve_fit(func, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='total')
+plt.plot(p['rbins'],func(p['rbins'], *popt))
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+104/25:
+from scipy import optimize.curve_fit as curve_fit
+
+def func(x, a, b):
+        x = x/a
+        return b / (x * (1 + x)**2)
+
+popt, pcov = curve_fit(func, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='total')
+plt.plot(p['rbins'],func(p['rbins'], *popt))
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+104/26:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * (1 + x)**2)
+
+popt, pcov = scipy.optimize.curve_fit(func, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='total')
+plt.plot(p['rbins'],func(p['rbins'], *popt))
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+104/27:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ((1 + x)**2)
+
+popt, pcov = scipy.optimize.curve_fit(func, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='total')
+plt.plot(p['rbins'],func(p['rbins'], *popt),label='NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+104/28:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ((1 + x)**2))
+
+popt, pcov = scipy.optimize.curve_fit(func, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='total')
+plt.plot(p['rbins'],func(p['rbins'], *popt),label='NF')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+104/29:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ((1 + x)**2))
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) *  ((1 + x)**alpha)**((beta-gamma)/alpha))
+    
+
+popt, pcov = scipy.optimize.curve_fit(func, p['rbins'], p['density'])
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='true')
+plt.plot(p['rbins'],func(p['rbins'], *popt),label='NFW')
+plt.plot(p['rbins'],funccont(p['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+104/30:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ((1 + x)**2))
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) *  ((1 + x)**alpha)**((beta-gamma)/alpha))
+    
+
+popt, pcov = scipy.optimize.curve_fit(func, p['rbins'], p['density'])
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='true')
+plt.plot(p['rbins'],func(p['rbins'], *popt),label='NFW')
+plt.plot(p['rbins'],funccont(p['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/31:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ((1 + x)**2))
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + x**alpha)**( (beta-gamma)/alpha ) ) )
+    
+
+popt, pcov = scipy.optimize.curve_fit(func, p['rbins'], p['density'])
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='true')
+plt.plot(p['rbins'],func(p['rbins'], *popt),label='NFW')
+plt.plot(p['rbins'],funccont(p['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/32:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + x**alpha)**( (beta-gamma)/alpha ) ) )
+    
+
+popt, pcov = scipy.optimize.curve_fit(func, p['rbins'], p['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, p['rbins'], p['density'])
+
+plt.plot(p['rbins'],p['density'],label='true')
+plt.plot(p['rbins'],func(p['rbins'], *popt),label='NFW')
+plt.plot(p['rbins'],funccont(p['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/33:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + x**alpha)**( (beta-gamma)/alpha ) ) )
+    
+
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/34:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + x**alpha)**( (beta-gamma)/alpha ) ) )
+    
+pd = pynbody.analysis.profile.Profile(h1.d,min=.1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/35:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + x**alpha)**( (beta-gamma)/alpha ) ) )
+    
+pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/36:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + x**alpha)**( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/37:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h1)
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h1,min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h1.g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h1.s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h1.d,min=.01,max=250,type='log',ndim=3)
+
+p['rbins']
+# make the plot
+#plt.plot(p['rbins'],p['mass'],label='total')
+#plt.plot(pg['rbins'],pg['mass'],label='gas')
+#plt.plot(ps['rbins'],ps['mass'],label='stars')
+#plt.plot(pd['rbins'],pd['mass'],label='dm')
+#plt.plot(p['v_circ'],pg['mass']+ps['mass'],label='baryonic?')
+
+##plt.ylabel('mass [Msun]')
+#plt.xlabel(r'$v_c$ [km/s]')
+#plt.legend()
+104/38:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + x**alpha)**( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/39:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/40:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/41:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/42:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+#plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/43:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+    
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/44:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+pd['density']
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/45:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/46:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+pd = pynbody.analysis.profile.Profile(h1.d,min=5,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/47:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+pd = pynbody.analysis.profile.Profile(h1.d,min=50,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/48:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+pd = pynbody.analysis.profile.Profile(h1.d,min=50,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/49:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/50:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+pd = pynbody.analysis.profile.Profile(h1.d,min=0.5,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/51:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/52:
+# center on the largest halo and align the disk
+pynbody.analysis.angmom.faceon(h1)
+
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(h1,min=.01,max=250,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(h1.g,min=.01,max=250,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(h1.s,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h1.d,min=.01,max=250,type='log',ndim=3)
+
+p['rbins']
+# make the plot
+#plt.plot(p['rbins'],p['mass'],label='total')
+#plt.plot(pg['rbins'],pg['mass'],label='gas')
+#plt.plot(ps['rbins'],ps['mass'],label='stars')
+#plt.plot(pd['rbins'],pd['mass'],label='dm')
+#plt.plot(p['v_circ'],pg['mass']+ps['mass'],label='baryonic?')
+
+##plt.ylabel('mass [Msun]')
+#plt.xlabel(r'$v_c$ [km/s]')
+#plt.legend()
+104/53:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/54:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+#plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/55:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/56:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/57:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+print(h1['mass'].sum())
+print(h1.d['mass'].sum())
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/58:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+print( (h1.g['mass']+h1.s['mass']).sum())
+print(h1.d['mass'].sum())
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/59:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+print( h1.g['mass'].sum() +h1.s['mass'].sum())
+print(h1.d['mass'].sum())
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/60:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+Mratio = log10((h1.g['mass'].sum() +h1.s['mass'].sum()) / h1.d['mass'])
+
+alpha = -2.97 - log10( (10**(Mratio+2.33))**-1.08 + (10**(Mratio+2.33))**2.29 )
+beta = 4.23 + 1.34*Mratio + 0.26*Mratio**2
+gamma = -0.06 + log10( (10**(Mratio+2.56))**-.68 + (10**(Mratio+2.56))**1 )
+
+print(Mratio)
+print(alpha)
+print(beta)
+print(gamma)
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/61:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+Mratio = log10((h1.g['mass'].sum() +h1.s['mass'].sum()) / (h1.d['mass'].sum()))
+
+alpha = -2.97 - log10( (10**(Mratio+2.33))**-1.08 + (10**(Mratio+2.33))**2.29 )
+beta = 4.23 + 1.34*Mratio + 0.26*Mratio**2
+gamma = -0.06 + log10( (10**(Mratio+2.56))**-.68 + (10**(Mratio+2.56))**1 )
+
+print(Mratio)
+print(alpha)
+print(beta)
+print(gamma)
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/62:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+def funccont2(x, rs, rho0):
+        alpha = -2.97 - log10( (10**(Mratio+2.33))**-1.08 + (10**(Mratio+2.33))**2.29 )
+        beta = 4.23 + 1.34*Mratio + 0.26*Mratio**2
+        gamma = -0.06 + log10( (10**(Mratio+2.56))**-.68 + (10**(Mratio+2.56))**1 )
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+    
+Mratio = log10((h1.g['mass'].sum() +h1.s['mass'].sum()) / (h1.d['mass'].sum()))
+
+
+
+#print(Mratio)
+#print(alpha)
+#print(beta)
+#print(gamma)
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont2, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont2(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/63:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+Mratio = log10((h1.g['mass'].sum() +h1.s['mass'].sum()) / (h1.d['mass'].sum()))
+alpha = -2.97 - log10( (10**(Mratio+2.33))**-1.08 + (10**(Mratio+2.33))**2.29 )
+beta = 4.23 + 1.34*Mratio + 0.26*Mratio**2
+gamma = -0.06 + log10( (10**(Mratio+2.56))**-.68 + (10**(Mratio+2.56))**1 )
+    
+def funccont2(x, rs, rho0):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+
+
+#print(Mratio)
+#print(alpha)
+#print(beta)
+#print(gamma)
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont2, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont2(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/64:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+Mratio = log10((h1.s['mass'].sum()) / (h1.d['mass'].sum()))
+alpha = 2.94 - log10( (10**(Mratio+2.33))**-1.08 + (10**(Mratio+2.33))**2.29 )
+beta = 4.23 + 1.34*Mratio + 0.26*Mratio**2
+gamma = -0.06 + log10( (10**(Mratio+2.56))**-.68 + (10**(Mratio+2.56))**1 )
+    
+def funccont2(x, rs, rho0):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+
+
+#print(Mratio)
+#print(alpha)
+#print(beta)
+#print(gamma)
+    
+#pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont2, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont2(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/65:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+Mratio = log10((h1.s['mass'].sum()) / (h1.d['mass'].sum()))
+alpha = 2.94 - log10( (10**(Mratio+2.33))**-1.08 + (10**(Mratio+2.33))**2.29 )
+beta = 4.23 + 1.34*Mratio + 0.26*Mratio**2
+gamma = -0.06 + log10( (10**(Mratio+2.56))**-.68 + (10**(Mratio+2.56))**1 )
+    
+def funccont2(x, rs, rho0):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+
+
+#print(Mratio)
+#print(alpha)
+#print(beta)
+#print(gamma)
+
+#pd = pynbody.analysis.profile.Profile(h1.d,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h1.d,min=0.05,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont2, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont2(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+104/66:
+#from scipy.optimize.curve_fit as curve_fit
+import scipy
+def func(x, a, b):
+        x = x/a
+        return b / (x * ( (1 + x)**2 ) )
+
+def funccont(x, rs, rho0, alpha, beta, gamma):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+Mratio = log10((h1.s['mass'].sum()) / (h1.d['mass'].sum()))
+alpha = 2.94 - log10( (10**(Mratio+2.33))**-1.08 + (10**(Mratio+2.33))**2.29 )
+beta = 4.23 + 1.34*Mratio + 0.26*Mratio**2
+gamma = -0.06 + log10( (10**(Mratio+2.56))**-.68 + (10**(Mratio+2.56))**1 )
+    
+def funccont2(x, rs, rho0):
+        x = x/rs
+        return rho0 / ( (x**gamma) * ( (1 + (x**alpha) ) **( (beta-gamma)/alpha ) ) )
+
+
+
+#print(Mratio)
+#print(alpha)
+#print(beta)
+#print(gamma)
+
+#pd = pynbody.analysis.profile.Profile(h1.d,min=.01,max=250,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(h1.d,min=1,max=250,type='log',ndim=3)
+#print(pd['density'])
+popt, pcov = scipy.optimize.curve_fit(func, pd['rbins'], pd['density'])
+print(popt)
+popt2, pcov2 = scipy.optimize.curve_fit(funccont2, pd['rbins'], pd['density'])
+print(popt2)
+
+plt.plot(pd['rbins'],pd['density'],label='true')
+plt.plot(pd['rbins'],func(pd['rbins'], *popt),label='NFW')
+plt.plot(pd['rbins'],funccont2(pd['rbins'], *popt2),label='Cont. NFW')
+plt.semilogy()
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$\rho_{DM}$ [M$_{\odot}$ kpc$^{-3}$]')
+plt.legend()
+106/1:
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+from scipy.interpolate import RectBivariateSpline
+import pandas as pd
+import matplotlib.colors as mcolors
+import os
+from scipy import stats
+from matplotlib.colors import LogNorm
+import matplotlib.colors as colors
+from os.path import expanduser
+home = expanduser("~")
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+import matplotlib.gridspec
+
+from matplotlib import rcParams
+rcParams['font.family'] = 'sans-serif'
+rcParams["font.size"] = 7
+rcParams["font.family"] = "Arial"
+rcParams['mathtext.fontset'] = 'custom'
+rcParams['mathtext.it'] = 'Arial:italic'
+rcParams['mathtext.rm'] = 'Arial'
+rcParams['pdf.fonttype']=42
+
+# build a rectangle in axes coords
+left = -0.1
+right = 1.1
+top = 1.02
+
+left = 0.1
+right = 0.95
+top = 0.95
+106/2:
+def cm2inch(*tupl):
+    inch = 2.54
+    if isinstance(tupl[0], tuple):
+        return tuple(i/inch for i in tupl[0])
+    else:
+        return tuple(i/inch for i in tupl)
+106/3:
+nbOfColours=257
+base = matplotlib.cm.get_cmap('plasma_r')
+mycolorlist = base(np.linspace(0, 1, nbOfColours))
+pixelstofade=25
+mycolorlist[0]=[1,1,1,1]
+incrementsR = 1.*(1 - mycolorlist[pixelstofade][0])/pixelstofade
+incrementsG = 1.*(1 - mycolorlist[pixelstofade][1])/pixelstofade
+incrementsB = 1.*(1 - mycolorlist[pixelstofade][2])/pixelstofade
+print incrementsR, incrementsG, incrementsB
+for p in range(pixelstofade):
+    n = pixelstofade-p
+    mycolorlist[p][0] = mycolorlist[pixelstofade][0] + n*incrementsR
+    mycolorlist[p][1] = mycolorlist[pixelstofade][1] + n*incrementsG
+    mycolorlist[p][2] = mycolorlist[pixelstofade][2] + n*incrementsB
+templatecmap = matplotlib.cm.get_cmap('hot')
+mycolormap = templatecmap.from_list('mycustomcolormap', mycolorlist, nbOfColours)
+106/4:
+nbOfColours=257
+base = matplotlib.cm.get_cmap('plasma_r')
+mycolorlist = base(np.linspace(0, 1, nbOfColours))
+pixelstofade=25
+mycolorlist[0]=[1,1,1,1]
+incrementsR = 1.*(1 - mycolorlist[pixelstofade][0])/pixelstofade
+incrementsG = 1.*(1 - mycolorlist[pixelstofade][1])/pixelstofade
+incrementsB = 1.*(1 - mycolorlist[pixelstofade][2])/pixelstofade
+print(incrementsR, incrementsG, incrementsB)
+for p in range(pixelstofade):
+    n = pixelstofade-p
+    mycolorlist[p][0] = mycolorlist[pixelstofade][0] + n*incrementsR
+    mycolorlist[p][1] = mycolorlist[pixelstofade][1] + n*incrementsG
+    mycolorlist[p][2] = mycolorlist[pixelstofade][2] + n*incrementsB
+templatecmap = matplotlib.cm.get_cmap('hot')
+mycolormap = templatecmap.from_list('mycustomcolormap', mycolorlist, nbOfColours)
+106/5:
+file=home+"/COSTNBodyschoolBCN/GaiaDR2_6d_cyl.h5"
+df= pd.read_hdf(file, "table")
+print(df.columns.values.tolist())
+106/6:
+file="./GaiaDR2_6d_cyl.h5"
+df= pd.read_hdf(file, "table")
+print(df.columns.values.tolist())
+106/7: df.to_csv(path_or_buf='GaiaDR2_6d_cyl.csv',index=False)
+106/8:
+#computing guiding radius
+Rsun=8.34
+Vrot=240.
+df['Rg']=df['Vphi']*Rsun/Vrot
+106/9:
+#computing guiding radius
+Rsun=8.34
+Vrot=240.
+df['Rg']=df['Vphi']*Rsun/Vrot
+106/10:
+#selecting sample at solar radius R=8.34 +- 0.2
+dfRs= df[(df['R']>8.24)&(df['R']<8.44)].copy()
+print(dfRs.columns.values.tolist())
+print('stars in RVS sample', len(df['R']))
+print('stars in RVS sample at solar radius',len(dfRs['R']))
+106/11:
+#compute binned statistic: median Vr and Vphi in bins in the Z-Vz plane
+rangex=[-1.,1.]
+rangey=[-60,60]
+binsx=100
+binsy=120
+
+deltax=(rangex[1]-rangex[0])/binsx
+deltay=(rangey[1]-rangey[0])/binsy
+print(deltax,deltay)
+stat=stats.binned_statistic_2d(dfRs['Z'], dfRs['VZ'], dfRs['Vphi'], statistic='median', bins=(binsx,binsy), range=[rangex,rangey])
+print(stat.statistic.shape)
+stat2=stats.binned_statistic_2d(dfRs['Z'], dfRs['VZ'], dfRs['Vr'], statistic='median', bins=(binsx,binsy), range=[rangex,rangey])
+print(stat2.statistic.shape)
+#print(stat.x_edge)
+107/1:
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+from scipy.interpolate import RectBivariateSpline
+import pandas as pd
+import matplotlib.colors as mcolors
+import os
+from scipy import stats
+from matplotlib.colors import LogNorm
+import matplotlib.colors as colors
+from os.path import expanduser
+home = expanduser("~")
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+import matplotlib.gridspec
+
+from matplotlib import rcParams
+rcParams['font.family'] = 'sans-serif'
+rcParams["font.size"] = 7
+rcParams["font.family"] = "Arial"
+rcParams['mathtext.fontset'] = 'custom'
+rcParams['mathtext.it'] = 'Arial:italic'
+rcParams['mathtext.rm'] = 'Arial'
+rcParams['pdf.fonttype']=42
+
+# build a rectangle in axes coords
+left = -0.1
+right = 1.1
+top = 1.02
+
+left = 0.1
+right = 0.95
+top = 0.95
+107/2:
+def cm2inch(*tupl):
+    inch = 2.54
+    if isinstance(tupl[0], tuple):
+        return tuple(i/inch for i in tupl[0])
+    else:
+        return tuple(i/inch for i in tupl)
+107/3:
+nbOfColours=257
+base = matplotlib.cm.get_cmap('plasma_r')
+mycolorlist = base(np.linspace(0, 1, nbOfColours))
+pixelstofade=25
+mycolorlist[0]=[1,1,1,1]
+incrementsR = 1.*(1 - mycolorlist[pixelstofade][0])/pixelstofade
+incrementsG = 1.*(1 - mycolorlist[pixelstofade][1])/pixelstofade
+incrementsB = 1.*(1 - mycolorlist[pixelstofade][2])/pixelstofade
+print(incrementsR, incrementsG, incrementsB)
+for p in range(pixelstofade):
+    n = pixelstofade-p
+    mycolorlist[p][0] = mycolorlist[pixelstofade][0] + n*incrementsR
+    mycolorlist[p][1] = mycolorlist[pixelstofade][1] + n*incrementsG
+    mycolorlist[p][2] = mycolorlist[pixelstofade][2] + n*incrementsB
+templatecmap = matplotlib.cm.get_cmap('hot')
+mycolormap = templatecmap.from_list('mycustomcolormap', mycolorlist, nbOfColours)
+107/4:
+file="./GaiaDR2_6d_cyl.h5"
+df= pd.read_hdf(file, "table")
+print(df.columns.values.tolist())
+107/5: df.to_csv(path_or_buf='GaiaDR2_6d_cyl.csv',index=False)
+107/6:
+#computing guiding radius
+Rsun=8.34
+Vrot=240.
+df['Rg']=df['Vphi']*Rsun/Vrot
+107/7:
+#selecting sample at solar radius R=8.34 +- 0.2
+dfRs= df[(df['R']>8.24)&(df['R']<8.44)].copy()
+print(dfRs.columns.values.tolist())
+print('stars in RVS sample', len(df['R']))
+print('stars in RVS sample at solar radius',len(dfRs['R']))
+107/8:
+#compute binned statistic: median Vr and Vphi in bins in the Z-Vz plane
+rangex=[-1.,1.]
+rangey=[-60,60]
+binsx=100
+binsy=120
+
+deltax=(rangex[1]-rangex[0])/binsx
+deltay=(rangey[1]-rangey[0])/binsy
+print(deltax,deltay)
+stat=stats.binned_statistic_2d(dfRs['Z'], dfRs['VZ'], dfRs['Vphi'], statistic='median', bins=(binsx,binsy), range=[rangex,rangey])
+print(stat.statistic.shape)
+stat2=stats.binned_statistic_2d(dfRs['Z'], dfRs['VZ'], dfRs['Vr'], statistic='median', bins=(binsx,binsy), range=[rangex,rangey])
+print(stat2.statistic.shape)
+#print(stat.x_edge)
+107/9:
+namef=home+'/COSTNBodyschoolBCN/fig1.png'
+
+fig=plt.figure(figsize=cm2inch(23*18.3/15, 5.5*18.3/15))
+
+
+ax0 = plt.axes([0.06, 0.2, 0.23, 0.75])  # standard axes
+ax1 = plt.axes([0.36, 0.2, 0.23, 0.75])
+ax2 = plt.axes([0.72, 0.2, 0.23, 0.75])
+
+nn=0.35
+
+rangex=[-1.2,1.2]
+rangey=[-80,80]
+binsx=80
+binsy=90
+rangex=[-1.,1.]
+rangey=[-60,60]
+binsx=80
+binsy=90
+
+
+aspect=(rangex[1]-rangex[0])/(rangey[1]-rangey[0])
+print(aspect)
+
+deltax=(rangex[1]-rangex[0])/(binsx*1.)
+deltay=(rangey[1]-rangey[0])/(binsy*1.)
+print(rangex[1]-rangex[0],rangey[1]-rangey[0])
+print(deltax,deltay)
+
+left=-0.33
+top=1.02
+
+z=ax0.hist2d(df['Z'], df['VZ'],bins=[binsx,binsy], norm=mcolors.PowerNorm(nn),range=[rangex,rangey], cmap=mycolormap)#, cmap='jet'
+ax0.text(left, top, 'a',horizontalalignment='right', verticalalignment='top', transform=ax0.transAxes
+         , fontweight='bold',bbox={'facecolor':'white', 'alpha':0.4, 'pad':4,'edgecolor':'none'},fontsize=8)
+ax0.set_aspect(aspect)
+ax0.set_xlabel('$Z$ (kpc)',fontname='Arial')
+ax0.set_ylabel('$V_Z$ (km$\,$s$^{-1}$)')
+ax0.set_xticks([-1,-0.5,0.,0.5,1.])
+
+im=np.flip(stat2.statistic.T*1.,0)
+im1=ax1.imshow(im,cmap='seismic', extent=[rangex[0],rangex[1],rangey[0],rangey[1]]
+               ,aspect=aspect,vmin=-10,vmax=10)
+fig.colorbar(im1,ax=ax1,label='$V_R$ (km$\,$s$^{-1}$)')
+
+ax1.set_xticks([-1,-0.5,0.,0.5,1.])
+ax1.set_xlabel('$Z$ (kpc)')
+ax1.set_ylabel('$V_Z$ (km$\,$s$^{-1}$)')
+ax1.text(left, top, 'b',horizontalalignment='right', verticalalignment='top', transform=ax1.transAxes
+         ,bbox={'facecolor':'white', 'alpha':0.6, 'pad':4,'edgecolor':'none'}, fontweight='bold',fontsize=8)
+
+im2=ax2.imshow(np.flip(stat.statistic.T,0),cmap='jet', extent=[rangex[0],rangex[1],rangey[0],rangey[1]]
+               ,aspect=aspect,vmin=180,vmax=250)
+fig.colorbar(im2,ax=ax2,label='$V_\phi$ (km$\,$s$^{-1}$)')
+ax2.set_xlabel('$Z$ (kpc)')
+ax2.set_ylabel('$V_Z$ (km$\,$s$^{-1}$)')
+ax2.text(left, top, 'c',horizontalalignment='right', verticalalignment='top', transform=ax2.transAxes
+         ,bbox={'facecolor':'white', 'alpha':0.6, 'pad':4,'edgecolor':'none'}, fontweight='bold',fontsize=8)
+ax2.set_xticks([-1,-0.5,0.,0.5,1.])
+
+
+plt.savefig(namef, format='png', dpi=300)
+plt.show()
+107/10:
+namef='./fig1.png'
+
+fig=plt.figure(figsize=cm2inch(23*18.3/15, 5.5*18.3/15))
+
+
+ax0 = plt.axes([0.06, 0.2, 0.23, 0.75])  # standard axes
+ax1 = plt.axes([0.36, 0.2, 0.23, 0.75])
+ax2 = plt.axes([0.72, 0.2, 0.23, 0.75])
+
+nn=0.35
+
+rangex=[-1.2,1.2]
+rangey=[-80,80]
+binsx=80
+binsy=90
+rangex=[-1.,1.]
+rangey=[-60,60]
+binsx=80
+binsy=90
+
+
+aspect=(rangex[1]-rangex[0])/(rangey[1]-rangey[0])
+print(aspect)
+
+deltax=(rangex[1]-rangex[0])/(binsx*1.)
+deltay=(rangey[1]-rangey[0])/(binsy*1.)
+print(rangex[1]-rangex[0],rangey[1]-rangey[0])
+print(deltax,deltay)
+
+left=-0.33
+top=1.02
+
+z=ax0.hist2d(df['Z'], df['VZ'],bins=[binsx,binsy], norm=mcolors.PowerNorm(nn),range=[rangex,rangey], cmap=mycolormap)#, cmap='jet'
+ax0.text(left, top, 'a',horizontalalignment='right', verticalalignment='top', transform=ax0.transAxes
+         , fontweight='bold',bbox={'facecolor':'white', 'alpha':0.4, 'pad':4,'edgecolor':'none'},fontsize=8)
+ax0.set_aspect(aspect)
+ax0.set_xlabel('$Z$ (kpc)',fontname='Arial')
+ax0.set_ylabel('$V_Z$ (km$\,$s$^{-1}$)')
+ax0.set_xticks([-1,-0.5,0.,0.5,1.])
+
+im=np.flip(stat2.statistic.T*1.,0)
+im1=ax1.imshow(im,cmap='seismic', extent=[rangex[0],rangex[1],rangey[0],rangey[1]]
+               ,aspect=aspect,vmin=-10,vmax=10)
+fig.colorbar(im1,ax=ax1,label='$V_R$ (km$\,$s$^{-1}$)')
+
+ax1.set_xticks([-1,-0.5,0.,0.5,1.])
+ax1.set_xlabel('$Z$ (kpc)')
+ax1.set_ylabel('$V_Z$ (km$\,$s$^{-1}$)')
+ax1.text(left, top, 'b',horizontalalignment='right', verticalalignment='top', transform=ax1.transAxes
+         ,bbox={'facecolor':'white', 'alpha':0.6, 'pad':4,'edgecolor':'none'}, fontweight='bold',fontsize=8)
+
+im2=ax2.imshow(np.flip(stat.statistic.T,0),cmap='jet', extent=[rangex[0],rangex[1],rangey[0],rangey[1]]
+               ,aspect=aspect,vmin=180,vmax=250)
+fig.colorbar(im2,ax=ax2,label='$V_\phi$ (km$\,$s$^{-1}$)')
+ax2.set_xlabel('$Z$ (kpc)')
+ax2.set_ylabel('$V_Z$ (km$\,$s$^{-1}$)')
+ax2.text(left, top, 'c',horizontalalignment='right', verticalalignment='top', transform=ax2.transAxes
+         ,bbox={'facecolor':'white', 'alpha':0.6, 'pad':4,'edgecolor':'none'}, fontweight='bold',fontsize=8)
+ax2.set_xticks([-1,-0.5,0.,0.5,1.])
+
+
+plt.savefig(namef, format='png', dpi=300)
+plt.show()
+107/11:
+namef='./fig2.png'
+
+nn=0.35
+
+plt.figure(figsize=cm2inch(8.9*1.2, 5*1.2))
+
+ax0 = plt.subplot2grid((1, 1), (0, 0))
+
+rangex=[-1.2,1.2]
+rangey=[-80,80]
+binsx=80
+binsy=90
+
+rangex=[4,13]
+rangey=[50,350]
+deltax=0.01
+deltay=1.
+binsx=(rangex[1]-rangex[0])/deltax
+binsy=(rangey[1]-rangey[0])/deltay
+print(deltax,deltay,binsx,binsy)
+z=ax0.hist2d(df['R'], df['Vphi'],bins=[binsx,binsy], norm=mcolors.PowerNorm(nn),range=[rangex,rangey], cmap=mycolormap)#, cmap='jet'
+ax0.set_xlabel('$R$ (kpc)')
+ax0.set_ylabel('$V_\phi$ (km$\,$s$^{-1}$)')
+ax0.set_aspect(0.015)
+
+plt.tight_layout()
+
+plt.savefig(namef,  format='png', dpi=300)
+plt.show()
+107/12:
+namef='./fig3.png'
+
+nn=0.5
+
+fig = plt.figure(figsize=(7.2*1.5,2.5*1.5))
+
+import matplotlib.gridspec
+gskw = dict(width_ratios = [1],height_ratios= [1])
+gs = matplotlib.gridspec.GridSpec(1,1, **gskw)
+ax0=fig.add_subplot(gs[0], aspect="equal",adjustable='box-forced')
+
+nn=0.45
+rangex=[-150,150]
+rangey=[50,350]
+rangez=[-150,150]
+binsx=300
+deltax=(rangex[1]-rangex[0])/binsx
+deltay=(rangey[1]-rangey[0])/binsx
+print(deltax,deltay)
+
+left=-0.24
+top=1.02
+
+VR=np.arange(-150,150,1)
+E=52000
+VPHI=np.sqrt((E/0.5)-VR*VR)
+
+counts, xedges, yedges,im0=ax0.hist2d(dfRs['Vr'], dfRs['Vphi'],bins=[binsx,binsx], 
+                label='',norm=mcolors.PowerNorm(nn),range=[rangex,rangey], cmap=mycolormap)#, cmap='jet'
+ax0.set_xlim(150,-150)
+ax0.plot(VR,VPHI,'k',linestyle='--')
+ax0.text(0.9, 0.95, 'arch of constant energy',horizontalalignment='right', verticalalignment='top', transform=ax0.transAxes,fontsize=7)
+ax0.set_xlabel('$V_R$ (km$\,$s$^{-1}$)')
+ax0.set_ylabel('$V_\phi$ (km$\,$s$^{-1}$)')
+ax0.set_aspect('equal')
+ax0.set_xticks([-150,-100.,-50,0,50,100,150])
+
+gs.tight_layout(fig, rect=[0,0., 1., 1.])
+
+
+plt.savefig(namef,format='png', dpi=300)
+
+plt.show()
+107/13:
+dfRs['Vtot']=np.sqrt(dfRs['Vr']*dfRs['Vr']+(dfRs['Vphi']-232.)*(dfRs['Vphi']-232.)+dfRs['VZ']*dfRs['VZ'])
+dfhalo=dfRs[abs(dfRs['Vtot'])>210.].copy()
+print(len(dfhalo))
+107/14:
+namef='./fig4.png'
+
+nn=0.5
+
+fig = plt.figure(figsize=(7.2*1.5,2.5*1.5))
+
+import matplotlib.gridspec
+gskw = dict(width_ratios = [1],height_ratios= [1])
+gs = matplotlib.gridspec.GridSpec(1,1, **gskw)
+ax0=fig.add_subplot(gs[0], aspect="equal",adjustable='box-forced')
+
+nn=0.45
+rangex=[-390,390]
+rangey=[-450,350]
+rangez=[-150,150]
+binsx=300
+deltax=(rangex[1]-rangex[0])/binsx
+deltay=(rangey[1]-rangey[0])/binsx
+print(deltax,deltay)
+
+left=-0.24
+top=1.02
+
+VR=np.arange(-150,150,1)
+E=52000
+VPHI=np.sqrt((E/0.5)-VR*VR)
+
+counts, xedges, yedges,im0=ax0.hist2d(dfRs['Vr'], dfRs['Vphi'],bins=[binsx,binsx], 
+                label='',norm=mcolors.PowerNorm(nn),range=[rangex,rangey], cmap=mycolormap)#, cmap='jet'
+ax0.plot(dfhalo['Vr'], dfhalo['Vphi'],'o',markersize=0.2,color='k')
+ax0.set_xlim(390,-390)
+ax0.set_xlabel('$V_R$ (km$\,$s$^{-1}$)')
+ax0.set_ylabel('$V_\phi$ (km$\,$s$^{-1}$)')
+ax0.set_aspect('equal')
+#ax0.set_xticks([-150,-100.,-50,0,50,100,150])
+
+gs.tight_layout(fig, rect=[0,0., 1., 1.])
+
+
+plt.savefig(namef,format='png', dpi=300)
+
+plt.show()
+107/15:
+namef='./fig5.png'
+
+nn=0.5
+
+fig = plt.figure(figsize=(7.2*1.5,2.5*1.5))
+
+import matplotlib.gridspec
+gskw = dict(width_ratios = [1],height_ratios= [1])
+gs = matplotlib.gridspec.GridSpec(1,1, **gskw)
+ax0=fig.add_subplot(gs[0], aspect="equal",adjustable='box-forced')
+
+nn=0.45
+rangex=[-450,300]
+rangey=[0,600]
+binsx=300
+deltax=(rangex[1]-rangex[0])/binsx
+deltay=(rangey[1]-rangey[0])/binsx
+print(deltax,deltay)
+
+left=-0.24
+top=1.02
+
+VR=np.arange(-150,150,1)
+E=52000
+VPHI=np.sqrt((E/0.5)-VR*VR)
+
+counts, xedges, yedges,im0=ax0.hist2d(dfRs['Vphi'], np.sqrt(dfRs['Vr']*dfRs['Vr']+dfRs['VZ']*dfRs['VZ']),bins=[binsx,binsx], 
+                label='',norm=mcolors.PowerNorm(nn),range=[rangex,rangey], cmap=mycolormap)#, cmap='jet'
+ax0.plot(dfhalo['Vphi'], np.sqrt(dfhalo['Vr']*dfhalo['Vr']+dfhalo['VZ']*dfhalo['VZ']),'o',markersize=0.2,color='k')
+ax0.set_xlabel('$V_R$ (km$\,$s$^{-1}$)')
+ax0.set_ylabel('$V_\phi$ (km$\,$s$^{-1}$)')
+ax0.set_aspect('equal')
+#ax0.set_xticks([-150,-100.,-50,0,50,100,150])
+
+gs.tight_layout(fig, rect=[0,0., 1., 1.])
+
+
+plt.savefig(namef,format='png', dpi=300)
+
+plt.show()
+109/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+109/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+109/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+109/4: g755.star.derivable_keys()
+109/5: g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+110/1: g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+111/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+111/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+111/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+111/4: g755.star.derivable_keys()
+111/5: g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+113/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+113/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+113/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+113/4: g755.star.derivable_keys()
+113/5: g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+116/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+116/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+116/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+116/4: g755.star.derivable_keys()
+116/5: g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+118/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+118/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+118/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+118/4: g755.star.derivable_keys()
+118/5: g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+120/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+120/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+120/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+120/4: g755.star.derivable_keys()
+120/5: g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+122/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+122/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+122/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+122/4: g755.star.derivable_keys()
+122/5: #g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+122/6: g755.star['age'].in_units('Gyr')
+124/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+124/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+124/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+124/4: g755.star.derivable_keys()
+124/5: #g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+124/6: g755.star['age'].in_units('Gyr')
+124/7: np.unique(g755.star['iord'])
+124/8: print('ngas = %e, ndark = %e, nstar = %e\n'%(len(g755.gas),len(g755.dark),len(g755.star)))
+124/9:
+mainhalo = g755.halos()[1]
+print('ngas = %e, ndark = %e, nstar = %e\n'%(len(mainhalo.gas),len(mainhalo.dark),len(mainhalo.star)))
+124/10:
+pynbody.analysis.angmom.faceon(mainhalo)
+mainhalo.physical_units()
+124/11:
+plt.figure()
+#create a simple slice of gas density
+sph.image(mainhalo.gas, qty="rho", units="g cm^-3", width="50 kpc", cmap="cubehelix_r", vmin=1e-30, vmax=1e-24)
+plt.savefig("./im/g755_gasdensity_xy.png")
+plt.show()
+124/12:
+plt.figure()
+#create a simple slice of gas density
+sph.image(mainhalo.gas, qty="rho", units="g cm^-3", width="50 kpc", cmap="cubehelix_r", vmin=1e-30, vmax=1e-24)
+plt.savefig("./im/g755_gasdensity_xy.png")
+plt.show()
+124/13:
+#create an image using the default bands (i, v, u)
+plt.figure()
+pynbody.plot.stars.render(mainhalo, width="30 kpc")
+#plt.scatter(mainhalo.stars['x'], mainhalo.stars['y'], marker='.', s=1, alpha=0.005)
+plt.savefig("./im/g755_starlight_xy.png")
+plt.show()
+124/14:
+plt.figure()
+sph.image(mainhalo.star, qty="rho", units="Msol kpc^-3", width="30 kpc", cmap="Greys", vmin=1e4, vmax=1e9)
+plt.text(-12, 12, "All stars")
+plt.savefig("./im/g755_stardensity_xy.png")
+124/15:
+stars = mainhalo.star
+# Assuming the Sun is at X=-8.0 kpc (default value for snapdragons), 
+# we can cut out a 3kpc sphere around the Sun:
+stars = stars[ ((stars['x'] + 8.)**2.+stars['y']**2.+stars['z']**2. < 3.**2.)  ]
+
+startable = Table( [stars['x'].in_units('kpc'), stars['y'].in_units('kpc'), stars['z'].in_units('kpc'),
+                    stars['vx'].in_units('km s^-1'), stars['vy'].in_units('km s^-1'), stars['vz'].in_units('km s^-1'),
+                    10.**(stars['feh'])*0.0152, stars['age'].in_units('Gyr'), 
+                    stars['mass'].in_units('Msol')], 
+                    names=('x', 'y', 'z', 'vx', 'vy', 'vz', 'feh', 'age', 'mass') )
+
+writefile = "./NIHAO_g7.55e11/snap_1024/nihao_stars_3kpc_sphere.dat"
+startable.write(writefile, format="ascii.fast_no_header", overwrite=True)
+125/1:
+stars = mainhalo.star
+# Assuming the Sun is at X=-8.0 kpc (default value for snapdragons), 
+# we can cut out a 3kpc sphere around the Sun:
+stars = stars[ ((stars['x'] + 8.)**2.+stars['y']**2.+stars['z']**2. < 3.**2.)  ]
+
+startable = Table( [stars['x'].in_units('kpc'), stars['y'].in_units('kpc'), stars['z'].in_units('kpc'),
+                    stars['vx'].in_units('km s^-1'), stars['vy'].in_units('km s^-1'), stars['vz'].in_units('km s^-1'),
+                    10.**(stars['feh'])*0.0152, stars['age'].in_units('Gyr'), 
+                    stars['mass'].in_units('Msol')], 
+                    names=('x', 'y', 'z', 'vx', 'vy', 'vz', 'feh', 'age', 'mass') )
+
+writefile = "./NIHAO_g7.55e11/snap_1024/nihao_stars_3kpc_sphere.dat"
+startable.write(writefile, format="ascii.fast_no_header", overwrite=True)
+126/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+126/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+126/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+126/4: g755.star.derivable_keys()
+126/5: #g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+126/6: g755.star['age'].in_units('Gyr')
+126/7: np.unique(g755.star['iord'])
+126/8: print('ngas = %e, ndark = %e, nstar = %e\n'%(len(g755.gas),len(g755.dark),len(g755.star)))
+126/9:
+mainhalo = g755.halos()[1]
+print('ngas = %e, ndark = %e, nstar = %e\n'%(len(mainhalo.gas),len(mainhalo.dark),len(mainhalo.star)))
+126/10:
+pynbody.analysis.angmom.faceon(mainhalo)
+mainhalo.physical_units()
+126/11:
+plt.figure()
+#create a simple slice of gas density
+sph.image(mainhalo.gas, qty="rho", units="g cm^-3", width="50 kpc", cmap="cubehelix_r", vmin=1e-30, vmax=1e-24)
+plt.savefig("./im/g755_gasdensity_xy.png")
+plt.show()
+126/12:
+#create an image using the default bands (i, v, u)
+plt.figure()
+pynbody.plot.stars.render(mainhalo, width="30 kpc")
+#plt.scatter(mainhalo.stars['x'], mainhalo.stars['y'], marker='.', s=1, alpha=0.005)
+plt.savefig("./im/g755_starlight_xy.png")
+plt.show()
+126/13:
+plt.figure()
+sph.image(mainhalo.star, qty="rho", units="Msol kpc^-3", width="30 kpc", cmap="Greys", vmin=1e4, vmax=1e9)
+plt.text(-12, 12, "All stars")
+plt.savefig("./im/g755_stardensity_xy.png")
+126/14:
+stars = mainhalo.star
+# Assuming the Sun is at X=-8.0 kpc (default value for snapdragons), 
+# we can cut out a 3kpc sphere around the Sun:
+stars = stars[ ((stars['x'] + 8.)**2.+stars['y']**2.+stars['z']**2. < 3.**2.)  ]
+
+startable = Table( [stars['x'].in_units('kpc'), stars['y'].in_units('kpc'), stars['z'].in_units('kpc'),
+                    stars['vx'].in_units('km s^-1'), stars['vy'].in_units('km s^-1'), stars['vz'].in_units('km s^-1'),
+                    10.**(stars['feh'])*0.0152, stars['age'].in_units('Gyr'), 
+                    stars['mass'].in_units('Msol')], 
+                    names=('x', 'y', 'z', 'vx', 'vy', 'vz', 'feh', 'age', 'mass') )
+
+writefile = "./NIHAO_g7.55e11/snap_1024/nihao_stars_3kpc_sphere.dat"
+startable.write(writefile, format="ascii.fast_no_header", overwrite=True)
+128/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+128/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+128/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+128/4: g755.star.derivable_keys()
+128/5: #g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+128/6: g755.star['age'].in_units('Gyr')
+128/7: np.unique(g755.star['iord'])
+128/8: print('ngas = %e, ndark = %e, nstar = %e\n'%(len(g755.gas),len(g755.dark),len(g755.star)))
+128/9:
+mainhalo = g755.halos()[1]
+print('ngas = %e, ndark = %e, nstar = %e\n'%(len(mainhalo.gas),len(mainhalo.dark),len(mainhalo.star)))
+128/10:
+pynbody.analysis.angmom.faceon(mainhalo)
+mainhalo.physical_units()
+128/11:
+plt.figure()
+#create a simple slice of gas density
+sph.image(mainhalo.gas, qty="rho", units="g cm^-3", width="50 kpc", cmap="cubehelix_r", vmin=1e-30, vmax=1e-24)
+plt.savefig("./im/g755_gasdensity_xy.png")
+plt.show()
+128/12:
+#create an image using the default bands (i, v, u)
+plt.figure()
+pynbody.plot.stars.render(mainhalo, width="30 kpc")
+#plt.scatter(mainhalo.stars['x'], mainhalo.stars['y'], marker='.', s=1, alpha=0.005)
+plt.savefig("./im/g755_starlight_xy.png")
+plt.show()
+128/13:
+plt.figure()
+sph.image(mainhalo.star, qty="rho", units="Msol kpc^-3", width="30 kpc", cmap="Greys", vmin=1e4, vmax=1e9)
+plt.text(-12, 12, "All stars")
+plt.savefig("./im/g755_stardensity_xy.png")
+128/14:
+stars = mainhalo.star
+# Assuming the Sun is at X=-8.0 kpc (default value for snapdragons), 
+# we can cut out a 3kpc sphere around the Sun:
+stars = stars[ ((stars['x'] + 8.)**2.+stars['y']**2.+stars['z']**2. < 3.**2.)  ]
+
+startable = Table( [stars['x'].in_units('kpc'), stars['y'].in_units('kpc'), stars['z'].in_units('kpc'),
+                    stars['vx'].in_units('km s^-1'), stars['vy'].in_units('km s^-1'), stars['vz'].in_units('km s^-1'),
+                    10.**(stars['feh'])*0.0152, stars['age'].in_units('Gyr'), 
+                    stars['mass'].in_units('Msol')], 
+                    names=('x', 'y', 'z', 'vx', 'vy', 'vz', 'feh', 'age', 'mass') )
+
+writefile = "./NIHAO_g7.55e11/snap_1024/nihao_stars_3kpc_sphere.dat"
+startable.write(writefile, format="ascii.fast_no_header", overwrite=True)
+130/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+130/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+130/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+130/4: g755.star.derivable_keys()
+130/5: #g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+130/6: g755.star['age'].in_units('Gyr')
+130/7: np.unique(g755.star['iord'])
+130/8: print('ngas = %e, ndark = %e, nstar = %e\n'%(len(g755.gas),len(g755.dark),len(g755.star)))
+130/9:
+mainhalo = g755.halos()[1]
+print('ngas = %e, ndark = %e, nstar = %e\n'%(len(mainhalo.gas),len(mainhalo.dark),len(mainhalo.star)))
+130/10:
+pynbody.analysis.angmom.faceon(mainhalo)
+mainhalo.physical_units()
+130/11:
+plt.figure()
+#create a simple slice of gas density
+sph.image(mainhalo.gas, qty="rho", units="g cm^-3", width="50 kpc", cmap="cubehelix_r", vmin=1e-30, vmax=1e-24)
+plt.savefig("./im/g755_gasdensity_xy.png")
+plt.show()
+130/12:
+#create an image using the default bands (i, v, u)
+plt.figure()
+pynbody.plot.stars.render(mainhalo, width="30 kpc")
+#plt.scatter(mainhalo.stars['x'], mainhalo.stars['y'], marker='.', s=1, alpha=0.005)
+plt.savefig("./im/g755_starlight_xy.png")
+plt.show()
+130/13:
+plt.figure()
+sph.image(mainhalo.star, qty="rho", units="Msol kpc^-3", width="30 kpc", cmap="Greys", vmin=1e4, vmax=1e9)
+plt.text(-12, 12, "All stars")
+plt.savefig("./im/g755_stardensity_xy.png")
+130/14:
+#stars = mainhalo.star
+
+# Assuming the Sun is at X=-8.0 kpc (default value for snapdragons), 
+# we can cut out a 3kpc sphere around the Sun:
+
+#stars = stars[ ((stars['x'] + 8.)**2.+stars['y']**2.+stars['z']**2. < 3.**2.)  ]
+
+#startable = Table( [stars['x'].in_units('kpc'), stars['y'].in_units('kpc'), stars['z'].in_units('kpc'),
+#                    stars['vx'].in_units('km s^-1'), stars['vy'].in_units('km s^-1'), stars['vz'].in_units('km s^-1'),
+#                    10.**(stars['feh'])*0.0152, stars['age'].in_units('Gyr'), 
+#                    stars['mass'].in_units('Msol')], 
+#                    names=('x', 'y', 'z', 'vx', 'vy', 'vz', 'feh', 'age', 'mass') )
+
+#writefile = "./NIHAO_g7.55e11/snap_1024/nihao_stars_3kpc_sphere.dat"
+#startable.write(writefile, format="ascii.fast_no_header", overwrite=True)
+130/15:
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(mainhalo,min=.01,max=300,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(mainhalo.g,min=.01,max=300,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(mainhalo.s,min=.01,max=300,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(mainhalo.d,min=.01,max=300,type='log',ndim=3)
+
+#print(p.keys())
+# make the plot
+plt.figure()
+plt.plot(p['rbins'],p['v_circ'],label='total')
+plt.plot(pg['rbins'],pg['v_circ'],label='gas')
+plt.plot(ps['rbins'],ps['v_circ'],label='stars')
+plt.plot(pd['rbins'],pd['v_circ'],label='dm')
+plt.axis([0,30,0,300])
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+plt.savefig("./im/g755_rotationcurve.png")
+plt.show()
+130/16:
+stars = mainhalo.star
+sn    = stars[(stars['x']**2.+stars['y']**2.<81.) & (stars['x']**2.+stars['y']**2.>49.) & (stars['z']**2.<9.)]
+130/17:
+# Use KDE to prettify the picture
+data = np.vstack([sn['feh'], sn['ofe']])
+kde = gaussian_kde(data)
+
+xrange=(-1.5,0.5)
+yrange=(-0.1,0.5)
+grid=200
+# evaluate on a regular grid
+xgrid = np.linspace(xrange[0], xrange[1], grid)
+ygrid = np.linspace(yrange[0], yrange[1], grid)
+Xgrid, Ygrid = np.meshgrid(xgrid, ygrid)
+Z = kde.evaluate(np.vstack([Xgrid.ravel(), Ygrid.ravel()]))
+130/18:
+# Plot the result as an image
+f  = plt.figure()
+ax = f.add_subplot(111)
+plt.imshow(Z.reshape(Xgrid.shape),
+           origin='lower', aspect='auto',
+           extent=[xrange[0], xrange[1],yrange[0], yrange[1]],
+           cmap='cubehelix_r',norm=colors.PowerNorm(gamma=1. / 2.) )#LogNorm(vmin=0.02, vmax=50))
+cb = plt.colorbar()
+cb.set_label("density")
+ax.set_xlabel(r"[Fe/H]")
+ax.set_ylabel(r"[O/Fe]")
+#plt.scatter(sn['feh'], sn['ofe'], marker='.', s=1, alpha=0.05)
+plt.axis([xrange[0], xrange[1],yrange[0], yrange[1]])
+plt.savefig("./im/g755_ofe_sn.png")
+plt.show()
+130/19:
+disk    = stars[(stars['x']**2.+stars['y']**2.< 225.) & (stars['z']**2.<9.)]
+data    = np.vstack([np.sqrt(disk['x']**2. + disk['y']**2.), disk['feh']])
+kde     = gaussian_kde(data)
+
+xrange= (0,15)
+yrange= (-1.,0.5)
+grid  = 100
+# evaluate on a regular grid
+xgrid = np.linspace(xrange[0], xrange[1], grid)
+ygrid = np.linspace(yrange[0], yrange[1], grid)
+Xgrid, Ygrid = np.meshgrid(xgrid, ygrid)
+# Save the KDE evaluation of this profile to disk - since this can take a while, we save the results as a numpy array
+profilepath = 'NIHAO_g7.55e11/g755_feh_r_profile.npy'
+if os.path.exists(profilepath):
+    Z1 = np.load(profilepath)
+else:
+    Z1 = kde.evaluate(np.vstack([Xgrid.ravel(), Ygrid.ravel()]))
+    np.save(profilepath, Z1)
+131/1:
+import pynbody
+import pynbody.plot.sph as sph
+from pynbody.analysis import profile
+
+import numpy as np
+from scipy.stats import gaussian_kde
+import os.path
+
+%matplotlib notebook
+import matplotlib.pylab as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.colors as colors
+import matplotlib.colors as colors
+
+from astropy.table import Table
+131/2: g755 = pynbody.load("./NIHAO_g7.55e11/snap_1024/output/7.55e11.01024")
+131/3:
+print(len(g755), "particles in total...")
+print("Particle flavours: ", g755.families())
+print("Cosmological parameters used:", g755.properties)
+
+print("Properties of all particles:", g755.loadable_keys())
+print("Properties of star particles:", g755.star.loadable_keys())
+131/4: g755.star.derivable_keys()
+131/5: #g755.star['FeMassFrac'].units, g755.star['metals'].units, g755.star['tform'].units
+131/6: #g755.star['age'].in_units('Gyr')
+131/7: #np.unique(g755.star['iord'])
+131/8: #print('ngas = %e, ndark = %e, nstar = %e\n'%(len(g755.gas),len(g755.dark),len(g755.star)))
+131/9:
+mainhalo = g755.halos()[1]
+#print('ngas = %e, ndark = %e, nstar = %e\n'%(len(mainhalo.gas),len(mainhalo.dark),len(mainhalo.star)))
+131/10:
+pynbody.analysis.angmom.faceon(mainhalo)
+mainhalo.physical_units()
+131/11:
+#plt.figure()
+#create a simple slice of gas density
+#sph.image(mainhalo.gas, qty="rho", units="g cm^-3", width="50 kpc", cmap="cubehelix_r", vmin=1e-30, vmax=1e-24)
+#plt.savefig("./im/g755_gasdensity_xy.png")
+#plt.show()
+131/12:
+#create an image using the default bands (i, v, u)
+#plt.figure()
+#pynbody.plot.stars.render(mainhalo, width="30 kpc")
+#plt.scatter(mainhalo.stars['x'], mainhalo.stars['y'], marker='.', s=1, alpha=0.005)
+#plt.savefig("./im/g755_starlight_xy.png")
+#plt.show()
+131/13:
+#plt.figure()
+#sph.image(mainhalo.star, qty="rho", units="Msol kpc^-3", width="30 kpc", cmap="Greys", vmin=1e4, vmax=1e9)
+#plt.text(-12, 12, "All stars")
+#plt.savefig("./im/g755_stardensity_xy.png")
+131/14:
+#stars = mainhalo.star
+
+# Assuming the Sun is at X=-8.0 kpc (default value for snapdragons), 
+# we can cut out a 3kpc sphere around the Sun:
+
+#stars = stars[ ((stars['x'] + 8.)**2.+stars['y']**2.+stars['z']**2. < 3.**2.)  ]
+
+#startable = Table( [stars['x'].in_units('kpc'), stars['y'].in_units('kpc'), stars['z'].in_units('kpc'),
+#                    stars['vx'].in_units('km s^-1'), stars['vy'].in_units('km s^-1'), stars['vz'].in_units('km s^-1'),
+#                    10.**(stars['feh'])*0.0152, stars['age'].in_units('Gyr'), 
+#                    stars['mass'].in_units('Msol')], 
+#                    names=('x', 'y', 'z', 'vx', 'vy', 'vz', 'feh', 'age', 'mass') )
+
+#writefile = "./NIHAO_g7.55e11/snap_1024/nihao_stars_3kpc_sphere.dat"
+#startable.write(writefile, format="ascii.fast_no_header", overwrite=True)
+131/15:
+# create a profile object for the stars
+p = pynbody.analysis.profile.Profile(mainhalo,min=.01,max=300,type='log',ndim=3)
+pg = pynbody.analysis.profile.Profile(mainhalo.g,min=.01,max=300,type='log',ndim=3)
+ps = pynbody.analysis.profile.Profile(mainhalo.s,min=.01,max=300,type='log',ndim=3)
+pd = pynbody.analysis.profile.Profile(mainhalo.d,min=.01,max=300,type='log',ndim=3)
+
+#print(p.keys())
+# make the plot
+plt.figure()
+plt.plot(p['rbins'],p['v_circ'],label='total')
+plt.plot(pg['rbins'],pg['v_circ'],label='gas')
+plt.plot(ps['rbins'],ps['v_circ'],label='stars')
+plt.plot(pd['rbins'],pd['v_circ'],label='dm')
+plt.axis([0,30,0,300])
+
+plt.xlabel('R [kpc]')
+plt.ylabel(r'$v_c$ [km/s]')
+plt.legend()
+plt.savefig("./im/g755_rotationcurve.png")
+plt.show()
+131/16:
+stars = mainhalo.star
+sn    = stars[(stars['x']**2.+stars['y']**2.<81.) & (stars['x']**2.+stars['y']**2.>49.) & (stars['z']**2.<9.)]
+131/17:
+# Use KDE to prettify the picture
+data = np.vstack([sn['feh'], sn['ofe']])
+kde = gaussian_kde(data)
+
+xrange=(-1.5,0.5)
+yrange=(-0.1,0.5)
+grid=200
+# evaluate on a regular grid
+xgrid = np.linspace(xrange[0], xrange[1], grid)
+ygrid = np.linspace(yrange[0], yrange[1], grid)
+Xgrid, Ygrid = np.meshgrid(xgrid, ygrid)
+Z = kde.evaluate(np.vstack([Xgrid.ravel(), Ygrid.ravel()]))
+131/18:
+# Plot the result as an image
+f  = plt.figure()
+ax = f.add_subplot(111)
+plt.imshow(Z.reshape(Xgrid.shape),
+           origin='lower', aspect='auto',
+           extent=[xrange[0], xrange[1],yrange[0], yrange[1]],
+           cmap='cubehelix_r',norm=colors.PowerNorm(gamma=1. / 2.) )#LogNorm(vmin=0.02, vmax=50))
+cb = plt.colorbar()
+cb.set_label("density")
+ax.set_xlabel(r"[Fe/H]")
+ax.set_ylabel(r"[O/Fe]")
+#plt.scatter(sn['feh'], sn['ofe'], marker='.', s=1, alpha=0.05)
+plt.axis([xrange[0], xrange[1],yrange[0], yrange[1]])
+plt.savefig("./im/g755_ofe_sn.png")
+plt.show()
+131/19:
+disk    = stars[(stars['x']**2.+stars['y']**2.< 225.) & (stars['z']**2.<9.)]
+data    = np.vstack([np.sqrt(disk['x']**2. + disk['y']**2.), disk['feh']])
+kde     = gaussian_kde(data)
+
+xrange= (0,15)
+yrange= (-1.,0.5)
+grid  = 100
+# evaluate on a regular grid
+xgrid = np.linspace(xrange[0], xrange[1], grid)
+ygrid = np.linspace(yrange[0], yrange[1], grid)
+Xgrid, Ygrid = np.meshgrid(xgrid, ygrid)
+# Save the KDE evaluation of this profile to disk - since this can take a while, we save the results as a numpy array
+profilepath = 'NIHAO_g7.55e11/g755_feh_r_profile.npy'
+if os.path.exists(profilepath):
+    Z1 = np.load(profilepath)
+else:
+    Z1 = kde.evaluate(np.vstack([Xgrid.ravel(), Ygrid.ravel()]))
+    np.save(profilepath, Z1)
+134/1:
+import pycompss.interactive as ipycompss
+ipycompss.start(graph=True, monitor=1000)
+135/1:
+import pycompss.interactive as ipycompss
+ipycompss.start(graph=True, monitor=1000)
+136/1:
+import pycompss.interactive as ipycompss
+ipycompss.start(graph=True, monitor=1000)
+137/1:
+import pycompss.interactive as ipycompss
+ipycompss.start(graph=True, monitor=1000)
+138/1: import utils.hurley_stellar_evolution as hurl
+138/2: import numpy as np
+138/3: masses = np.array([4.8,2.6,3.3,8.3,7.3,3.9,2.8,2.15,1.85,2.3,1.59,2.3,2.9,2.45,4.4,11])
+138/4: masses
+138/5: for i masses:
+138/6:
+for i in masses:
+    print(hurl.t_MS(i,0.02))
+138/7:
+114.82898407801783
+559.5889199440849
+294.9054712018428
+34.424299266007154
+44.69314849827061
+191.69717385048963
+457.10973292567917
+952.9610464086302
+1473.5900136750006
+787.0528007409764
+2309.961578568882
+787.0528007409764
+415.77245740503025
+659.5095657026864
+141.87130646475563
+20.42903901256303
+139/1: from galpy.potential import MWPotential2014
+139/2: MWPotential2014.vcirc(8.)
+139/3: MWPotential2014[1].vcirc(8.)
+139/4: MWPotential2014[1].vcirc(8.) + MWPotential2014[2].vcirc(8.)
+139/5: MWPotential2014[1].vcirc(8.) + MWPotential2014[2].vcirc(8.) + MWPotential2014[3].vcirc(8.)
+139/6: MWPotential2014[0].vcirc(8.) + MWPotential2014[1].vcirc(8.) + MWPotential2014[2].vcirc(8.)
+139/7: MWPotential2014[0].vcirc(1.) + MWPotential2014[1].vcirc(1.) + MWPotential2014[2].vcirc(1.)
+139/8: import numpy as np
+139/9: np.sqrt(MWPotential2014[0].vcirc(1.)**2 + MWPotential2014[1].vcirc(1.)**2 + MWPotential2014[2].vcirc(1.)**2)
+139/10: MWPotential2014.turn_physical_on()
+139/11: MWPotential2014[0].turn_physical_on()
+139/12: MWPotential2014[1].turn_physical_on()
+139/13: MWPotential2014[2].turn_physical_on()
+139/14: np.sqrt(MWPotential2014[0].vcirc(1.)**2 + MWPotential2014[1].vcirc(1.)**2 + MWPotential2014[2].vcirc(1.)**2)
+139/15: from astropy import units as u
+139/16: np.sqrt(MWPotential2014[0].vcirc(8.*u.kpc)**2 + MWPotential2014[1].vcirc(8.*u.kpc)**2 + MWPotential2014[2].vcirc(8*u.kpc)**2)
+139/17: np.sqrt(MWPotential2014[0].vcirc(8.*u.kpc)**2 + MWPotential2014[1].vcirc(8.*u.kpc)**2 + MWPotential2014[2].vcirc(8*u.kpc)**2)*u.km/u.s
+139/18: from galpy.potential import MWPotential2014
+139/19: np.sqrt(MWPotential2014[0].vcirc(8.*u.kpc)**2 + MWPotential2014[1].vcirc(8.*u.kpc)**2 + MWPotential2014[2].vcirc(8*u.kpc)**2)*u.km/u.s
+139/20: np.sqrt(MWPotential2014[0].vcirc(8.*u.kpc)**2 + MWPotential2014[1].vcirc(8.*u.kpc)**2 + MWPotential2014[2].vcirc(8*u.kpc)**2)
+140/1: from utils.mwpotential import MWPotential2014
+140/2: from galpy.potential import MWPotential2014
+140/3: from galpy.potential import evaluatePotentials
+140/4: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)
+140/5: from astropy import units as u
+140/6: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)
+140/7: evaluatePotentials(MWPotential2014,8,0)
+140/8: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)
+140/9: evaluatePotentials(MWPotential2014,1,0)
+140/10: evaluatePotentials(MWPotential2014,8,0)
+140/11: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)
+140/12: MWPotential2014.turn_physical_on()
+140/13: pot = MWPotential2014
+140/14: pot.turn_physical_on()
+140/15: from galpy.potential import evaluatePotentials
+140/16: from galpy.potential import MWPotential2014
+140/17: evaluatePotentials(MWPotential2014,8*u.kpc,0*u.kpc)
+140/18: map(turn_physical_on(),MWPotential2014)
+140/19: mp= MiyamotoNagaiPotential(a=0.5,b=0.0375,amp=1.,normalize=1.)
+140/20: from galpy.potential import MWPotential2014, MiyamotoNagaiPotential
+140/21: mp= MiyamotoNagaiPotential(a=0.5,b=0.0375,amp=1.,normalize=1.)
+140/22: mp.turn_physical_on()
+140/23: evaluatePotentials(mp,8*u.kpc,0*u.kpc)
+140/24: pot[0].turn_physical_on()
+140/25: pot[1].turn_physical_on()
+140/26: pot[2].turn_physical_on()
+140/27: pot[3].turn_physical_on()
+140/28: evaluatePotentials(pot,8*u.kpc,0*u.kpc)
+140/29: import numpy as np
+140/30: np.sqrt(-2.*evaluatePotentials(pot,8*u.kpc,0*u.kpc))
+141/1: escape = np.array([True, True, True, False])
+141/2: import numpy as np
+141/3: escape = np.array([True, True, True, False])
+141/4: escape
+141/5: escape[escape]
+141/6: np.argwhere(escape)
+141/7: escape = np.array([True, True, False, True, False])
+141/8: np.argwhere(escape)
+141/9: escape = [True, True, False, True, False]
+141/10: np.argwhere(escape)
+141/11: vesc = np.array([1,2,3,4,5,6])
+141/12: vej = np.array([0,4,1,6,1,8])
+141/13: np.argwhere(vesc>vej)
+141/14: escape[escape]
+141/15: np.argwhere(escape==True)
+141/16: np.argwhere(escape)
+142/1: import galpy
+143/1: import utils.mwpotential
+143/2: import galpy
+143/3: pot = HernquistPotential(amp=2*1.5*1e11*u.Msun,a=17.14*u.kpc,normalize=False)
+143/4: from galpy.potential import HernquistPotential
+143/5: from astropy import units as u
+143/6: pot = HernquistPotential(amp=2*1.5*1e11*u.Msun,a=17.14*u.kpc,normalize=False)
+143/7: from galpy.potential import evaluatePotentials
+143/8: evaluatePotentials(pot,8*u.kpc,0*u.kpc)
+143/9: evaluatePotentials(pot,8,0)
+143/10: evaluatePotentials(pot,1,0)
+143/11: evaluatePotentials(pot,40*u.kpc,0*u.kpc)
+143/12: :q
+143/13: import utils.mwpotentialJS
+143/14: pot = MWLMCPotential2()
+143/15: from utils.mwpotentialJS import MWLMCPotential2
+143/16: pot = MWLMCPotential2()
+143/17: from utils.mwpotentialJS import MWLMCPotential2
+143/18: pot = MWLMCPotential2()
+143/19: reload(utils.mwpotentialJS)
+144/1: from utils.mwpotentialJS import MWLMCPotential2
+144/2: pot = MWLMCPotential2()
+145/1: from utils.mwpotentialJS import MWLMCPotential2
+145/2: pot = MWLMCPotential2()
+145/3: pot = MWLMCPotential2()
+146/1: from utils.mwpotentialJS import MWLMCPotential2
+146/2: pot = MWLMCPotential2()
+147/1: import astropy.units as u
+147/2: import utils/converttoplane.py
+148/1: from utils.converttoplane import SkytoPlane
+148/2: import astropy.units as u
+148/3: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,49.59*u.kpc)
+148/4: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc)
+148/5: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc),i=35*u.deg,theta=(140+90)*u.deg)
+148/6: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc),i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/7: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/8: SkytoPlane(78.76*u.deg,69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/9: SkytoPlane((180+78.76)*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/10: SkytoPlane((180+78.76)*u.deg,69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/11: SkytoPlane(146.66*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/12: SkytoPlane(146.66*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=0*u.deg,theta=0*u.deg+0*u.deg)
+148/13: SkytoPlane(146.66*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/14: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc),i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/15: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/16: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=0*u.deg,theta=140*u.deg+90*u.deg)
+148/17: SkytoPlane(78.76*u.deg,-69.19*u.deg,-49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=0*u.deg,theta=140*u.deg+90*u.deg)
+148/18: SkytoPlane(78.76*u.deg,-69.19*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,44.59*u.kpc,i=0*u.deg,theta=140*u.deg+90*u.deg)
+148/19: SkytoPlane(78.76*u.deg,-69.19*u.deg,44.59*u.kpc,78.76*u.deg, -69.19*u.deg,49.59*u.kpc,i=0*u.deg,theta=140*u.deg+90*u.deg)
+148/20: SkytoPlane(78.76*u.deg,(-69.19+180)*u.deg,44.59*u.kpc,78.76*u.deg, -69.19*u.deg,49.59*u.kpc,i=0*u.deg,theta=140*u.deg+90*u.deg)
+148/21: SkytoPlane(78.76*u.deg,(-69.19+180)*u.deg,49.59*u.kpc,78.76*u.deg, -69.19*u.deg,49.59*u.kpc,i=0*u.deg,theta=140*u.deg+90*u.deg)
+148/22: SkytoPlane(293.36*u.deg,19.76*u.deg,3088*u.kpc,78.76*u.deg, -69.19*u.deg,49.59*u.kpc,i=0*u.deg,theta=140*u.deg+90*u.deg)
+148/23: SkytoPlane(293.36*u.deg,19.76*u.deg,3088*u.kpc,78.76*u.deg, -69.19*u.deg,49.59*u.kpc,i=35*u.deg,theta=140*u.deg+90*u.deg)
+148/24: SkytoPlane(293.36*u.deg,19.76*u.deg,3088*u.kpc,78.76*u.deg, -69.19*u.deg,49.59*u.kpc,i=0*u.deg,theta=0*u.deg)
+149/1: from gaia import get_GRVS
+149/2: import hurley_stellar_evolution as hse
+150/1: from utils.gaia import Get_GRVS
+150/2: from utils.gaia import Get_GRVS
+150/3: from utils.gaia import Get_GRVS
+150/4: from utils.gaia import Get_GRVS
+150/5: from .utils.gaia import Get_GRVS
+150/6: from utils.gaia import Get_GRVS
+150/7: import utils.gaia as test
+150/8: from utils.gaia import get_GRVS
+151/1: import numpy as np
+151/2: x = np.array([1,2,3,nan,100])
+151/3: x = np.array([1,2,3,np.nan,100])
+151/4: np.isnan(x)
+151/5: np.where(np.isnan(x))
+151/6: len(np.where(np.isnan(x)))
+151/7: idx = np.isnan(x)
+151/8: idx
+151/9: idx[idx]
+151/10: x[idx]
+152/1: import numpy as np
+152/2: x = numpy.array([1,2,3,4,5,6])
+152/3: x = np.array([1,2,3,4,5,6])
+152/4: np.min(x)
+152/5: np.min(0.5,x)
+152/6: np.min([0.5,x])
+152/7: np.min(0.5,x)
+152/8: np.min(np.array[0.5,x])
+152/9: np.min(1,2)
+152/10: np.min([1,2])
+153/1: from astropy.table import Table, hstack
+153/2: t1 = Table.read('/data1/Cats/testHVSLMC/Propagated/cat_propagatedM_halo_0.76_1.fits',format='fits')
+153/3: t1
+153/4: t2 = Table.read('/data1/Cats/testHVSLMC/Propagated/cat_propagatedM_halo_0.76_2.fits',format='fits')
+153/5: from astroy.table import hstack
+153/6: from astropy.table import hstack
+153/7: newt = hstack([t1,t2])
+153/8: newt.write('compt.fits')
+153/9: newt.write('/data1/Cats/testHVSLMC/Propagated/compt.fits')
+153/10: t1
+153/11: t2
+153/12: newt
+153/13: newt = vstack([t1,t2])
+153/14: from astropy.table import vstack
+153/15: newt = vstack([t1,t2])
+153/16: newt
+153/17: newt.write('/data1/Cats/testHVSLMC/Propagated/compt.fits')
+153/18: newt.write('/data1/Cats/testHVSLMC/Propagated/compt.fits')
+153/19: t3 = Table.read('/data1/Cats/testHVSLMC/Propagated/cat_propagatedM_halo_0.76_3.fits',format='fits')
+153/20: newt = vstack([t1,t2,t3])
+153/21: newt.write('/data1/Cats/testHVSLMC/Propagated/compt.fits')
+155/1: from utils.catstack import catstack
+155/2: from utils.catstack import catstack
+155/3: import glob
+155/4: files = glob.glob('/data1/Cats/testHVSLMC/Propagated/cat_propagatedM_halo_0.76_*.fits')
+155/5: files
+155/6: catstack(files,'/data1/Cats/testHVSLMC/Propagated/test.fits')
+155/7: files = glob.glob('/data1/Cats/testHVSLMC/Propagated/cat_propagatedM_halo_0.38_*.fits')
+155/8: catstack(files,'/data1/Cats/testHVSLMC/Propagated/test0.38.fits')
+155/9: files = glob.glob('/data1/Cats/testHVSLMC/Propagated/cat_propagatedM_halo_1.52_*.fits')
+155/10: catstack(files,'/data1/Cats/testHVSLMC/Propagated/test1.52.fits')
+155/11: files = glob.glob('/data1/Cats/testHVSLMC/Propagated/cat_propagatedM_halo_2.28_*.fits')
+155/12: catstack(files,'/data1/Cats/testHVSLMC/Propagated/test2.28.fits')
+155/13: files = glob.glob('/data1/Cats/testHVSLMC/Propagated/cat_propagatedM_halo_3.04_*.fits')
+155/14: catstack(files,'/data1/Cats/testHVSLMC/Propagated/test3.04.fits')
+   1: import numpy as np
+   2: from galpy.potential import  HernquistPotential, MiyamotoNagaiPotential, KeplerPotential, evaluatePotentials, turn_physical_on, evaluaterforces,evaluatezforces,evaluateRforces, ChandrasekharDynamicalFrictionForce
+   3:
+rs = 24.8
+#Ms = 0.76
+c=1
+T=True
+
+# U, V, W in km/s in galactocentric coordinates. Galpy notation requires U to have a minus sign.
+solarmotion = [-14., 12.24, 7.25] #Schonrich 2012
+
+# NFW profile
+rs = rs*u.kpc
+
+#Disk
+Md, ad, bd = 1e11 * u.Msun, 6.5 * u.kpc, 260. * u.pc
+
+#Bulge
+Mb, Rb = 3.4*1e10*u.Msun, 0.7*u.kpc
+
+#BH mass MW
+Mbh = 4e6*u.Msun
+
+diskp = MiyamotoNagaiPotential(amp=Md, a=ad, b=bd, normalize=False)#.turn_physical_on()
+bulgep = HernquistPotential(amp=2*Mb, a=Rb, normalize=False) #Factor 2 because of the galpy definition
+bh = KeplerPotential(amp=Mbh, normalize=False)
+   4: import astropy.units as u
+   5:
+rs = 24.8
+#Ms = 0.76
+c=1
+T=True
+
+# U, V, W in km/s in galactocentric coordinates. Galpy notation requires U to have a minus sign.
+solarmotion = [-14., 12.24, 7.25] #Schonrich 2012
+
+# NFW profile
+rs = rs*u.kpc
+
+#Disk
+Md, ad, bd = 1e11 * u.Msun, 6.5 * u.kpc, 260. * u.pc
+
+#Bulge
+Mb, Rb = 3.4*1e10*u.Msun, 0.7*u.kpc
+
+#BH mass MW
+Mbh = 4e6*u.Msun
+
+diskp = MiyamotoNagaiPotential(amp=Md, a=ad, b=bd, normalize=False)#.turn_physical_on()
+bulgep = HernquistPotential(amp=2*Mb, a=Rb, normalize=False) #Factor 2 because of the galpy definition
+bh = KeplerPotential(amp=Mbh, normalize=False)
+   6: bh
+   7: from galpy.potential import Potential
+   8: Potential.mass(8.*u.kpc,z=0*u.kpc)
+   9: Potential.mass(8.*u.kpc,z=0.*u.kpc)
+  10: bh
+  11: bh.mass(8.*u.kpc,0.*u.kpc)
+  12: bh.mass(8.*u.kpc,0.*u.kpc)
+  13: [bh].mass(8.*u.kpc,0.*u.kpc)
+  14: pot = [bh,diskp]
+  15: pot.mass(8.*u.kpc,0*u.kpc)
+  16: bh.mass(8.*u.pc,0.*u.kpc)
+  17: bh.mass(8.*u.pc,0.*u.kpc) + diskp.mass(8.*u.pc,0*u.kpc)
+  18: diskp.mass(8.*u.pc,0.*u.kpc)
+  19: diskp.mass(8.*u.kpc,0.*u.kpc)
+  20: diskp.mass(8.*u.kpc,0.2*u.kpc)
+  21: diskp.mass(8.*u.kpc)
+  22: diskp.mass(8.*u.pc)
+  23: bh.mass(3*u.pc)+diskp.mass(3.*u.pc)
+  24: bh.mass(3*u.pc)+diskp.mass(3.*u.pc)+bulgep.mass(3*u.pc)
+  25: bh.mass(3*u.pc)+diskp.mass(3.*u.pc)+bulgep.mass(3*u.pc)+halop.mass(3*u.pc)
+  26:         halop = TriaxialNFWPotential(amp=Ms, a=rs, c=c, normalize=False)
+  27:
+        halop = TriaxialNFWPotential(amp=Ms, a=rs, c=c, normalize=False)
+from galpy.potential import NFWPotential, TriaxialNFWPotential#, PlummerSoftening#, MovingObjectPotential
+  28: from galpy.potential import NFWPotential, TriaxialNFWPotential#, PlummerSoftening#, MovingObjectPotential
+  29: halop = TriaxialNFWPotential(amp=Ms, a=rs, c=c, normalize=False)
+  30: Ms = 0.76*1e12*u.solMass
+  31: halop = TriaxialNFWPotential(amp=Ms, a=rs, c=c, normalize=False)
+  32: bh.mass(3*u.pc)+diskp.mass(3.*u.pc)+bulgep.mass(3*u.pc)+halop.mass(3*u.pc)
+  33: bh.mass(3*u.pc)+diskp.mass(3.*u.pc)+bulgep.mass(3*u.pc)
+  34: r = 3*u.pc
+  35: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  36: r = 5*u.pc
+  37: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  38: r = 6*u.pc
+  39: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  40: r = 10*u.pc
+  41: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  42: r = 12*u.pc
+  43: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  44: r = 8*u.pc
+  45: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  46: r = 7.5*u.pc
+  47: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  48: r = 7.6*u.pc
+  49: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  50: r = 7.62*u.pc
+  51: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  52: r = 7.63*u.pc
+  53: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  54: r = 7.64*u.pc
+  55: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  56: r = 7.635*u.pc
+  57: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  58: r = 7.639*u.pc
+  59: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  60: r = 7.6395*u.pc
+  61: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  62: r = 7.6394*u.pc
+  63: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  64: r = 7.63945*u.pc
+  65: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  66: r = 7.63946*u.pc
+  67: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  68: r = 7.63947*u.pc
+  69: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  70: r = 8000*u.pc
+  71: bh.vcirc(r)+diskp.vcirc(r)+bulgep.vcirc(r)+halop.vcirc(r)
+  72: from galpy.potential import MWPotential2014
+  73: MWPotential2014.vcirc
+  74: MWPotential2014.vcirc(8.*u.kpc)
+  75: pot = MWPotential2014
+  76: pot.vcirc(0)
+  77: vcirc(MWPotential2014)
+  78: from galpy.potential import vcirc, mass
+  79: from galpy.potential import vcirc
+  80: vcirc(MWPotential2014,1)
+  81: vcirc(MWPotential2014,8.*u.kpc)
+  82: vcirc(MWPotential2014,8.178*u.kpc)
+  83: vcirc(MWPotential2014,8.178*u.kpc,use_physical=True)
+  84: from galpy.potential import mass
+  85: menc
+  86: Rlmc = 17.14*u.kpc#Rlmc_range[index]#
+  87: Mlmc = 15*1e10*u.solMass
+  88: MBH_LMC = 1e5*u.Msun
+  89: lmcpot = HernquistPotential(amp=2*Mlmc, a=Rlmc, normalize=False)
+  90: lmcbhpot = KeplerPotential(MBH_LMC, normalize=False)
+  91: bh.vcirc(r)+diskp.vcirc(r)+bulgep.vcirc(r)+halop.vcirc(r)
+  92: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+  93: r = 3.*u.pc
+  94: lmcpot.mass(r)
+  95: lmcbhpot.mass(r)
+  96: lmcbhpot.mass(r) + lmcpot.mass(r)
+  97: r = 15.*u.pc
+  98: lmcbhpot.mass(r) + lmcpot.mass(r)
+  99: r = 10.*u.pc
+ 100: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 101: r = 14.*u.pc
+ 102: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 103: r = 14.1*u.pc
+ 104: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 105: r = 14.01*u.pc
+ 106: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 107: r = 14.001*u.pc
+ 108: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 109: r = 14.005*u.pc
+ 110: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 111: r = 14.006*u.pc
+ 112: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 113: MBH_LMC = 10**7.1*u.Msun
+ 114: MBH_LMC
+ 115: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 116: lmcbhpot = KeplerPotential(MBH_LMC, normalize=False)
+ 117: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 118: r = 140.006*u.pc
+ 119: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 120: r = 150.006*u.pc
+ 121: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 122: r = 170.006*u.pc
+ 123: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 124: r = 160.006*u.pc
+ 125: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 126: r = 158.006*u.pc
+ 127: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 128: MBH_LMC = 10**5*u.Msun
+ 129: Mlmc = 2*1e10*u.solMass
+ 130: lmcpot = HernquistPotential(amp=2*Mlmc, a=Rlmc, normalize=False)
+ 131: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 132: r = 1.006*u.pc
+ 133: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 134: lmcbhpot.mass(r)
+ 135: lmcbhpot = KeplerPotential(MBH_LMC, normalize=False)
+ 136: lmcbhpot.mass(r)
+ 137: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 138: r = 100.*u.pc
+ 139: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 140: r = 20.*u.pc
+ 141: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 142: r = 40.*u.pc
+ 143: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 144: r = 39.*u.pc
+ 145: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 146: r = 38.*u.pc
+ 147: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 148: r = 38.5*u.pc
+ 149: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 150: r = 38.4*u.pc
+ 151: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 152: r = 38.45*u.pc
+ 153: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 154: r = 38.42*u.pc
+ 155: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 156: MBH_LMC = 10**7.1*u.Msun
+ 157: lmcbhpot = KeplerPotential(MBH_LMC, normalize=False)
+ 158: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 159: lmcbhpot.mass(r)
+ 160: r = 300.*u.pc
+ 161: lmcbhpot.mass(r)
+ 162: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 163: r = 400.*u.pc
+ 164: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 165: r = 450.*u.pc
+ 166: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 167: r = 440.*u.pc
+ 168: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 169: r = 441.*u.pc
+ 170: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 171: r = 442.*u.pc
+ 172: lmcbhpot.mass(r) + lmcpot.mass(r)
+ 173: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+ 174: r = 13.*u.pc
+ 175: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+ 176: r = 14.*u.pc
+ 177: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+ 178: bh.mass(r)
+ 179: r = 7.5*u.pc
+ 180: bh.mass(r)+diskp.mass(r)+bulgep.mass(r)+halop.mass(r)
+ 181: bh.mass(R=40.6*u.kpc,z=28*u.kpc)+diskp.mass(R=40.6*u.kpc,z=28*u.kpc)+bulgep.mass(R=40.6*u.kpc,z=28*u.kpc)+halop.mass(R=40.6*u.kpc,z=28*u.kpc)
+ 182: halop.mass(R=40.6*u.kpc,z=28*u.kpc)
+ 183: halop.mass(R=40.6*u.kpc)
+ 184: halop.mass(40.6*u.kpc)
+ 185: halop.mass(40.6*u.kpc,z=28*u.kpc)
+ 186: bh.mass(40.6*u.kpc,z=28*u.kpc)+diskp.mass(40.6*u.kpc,z=28*u.kpc)+bulgep.mass(40.6*u.kpc,z=28*u.kpc)+halop.mass(40.6*u.kpc,z=28*u.kpc)
+ 187: bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc)
+ 188: zdiff = 14*u.pc
+ 189:
+bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc) bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(
+ 
+
+    ...: 40.6*u.kpc,z=29*u.kpc)
+ 190: bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc)  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 191: bh.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+diskp.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+bulgep.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+halop.mass(40.6*u.kpc,z=29*u.kpc+zdiff)  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 192: zdiff = 0*u.pc
+ 193: bh.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+diskp.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+bulgep.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+halop.mass(40.6*u.kpc,z=29*u.kpc+zdiff)  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 194: zdiff = 1*u.pc
+ 195: bh.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+diskp.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+bulgep.mass(40.6*u.kpc,z=29*u.kpc+zdiff)+halop.mass(40.6*u.kpc,z=29*u.kpc+zdiff)  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 196: bh.mass(40.6*u.kpc+zdiff,z=29*u.kpc)+diskp.mass(40.6*u.kpc+zdiff,z=29*u.kpc)+bulgep.mass(40.6*u.kpc+zdiff,z=29*u.kpc+zdiff)+halop.mass(40.6*u.kpc+zdiff,z=29*u.kpc+zdiff)  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 197: lmcbhpot.mass(zdiff) + lmcpot.mass(zdiff)
+ 198: lmcbhpot.mass(zdiff)
+ 199: MBH_LMC = 10**5*u.Msun
+ 200: lmcbhpot = KeplerPotential(MBH_LMC, normalize=False)
+ 201: MBH_LMC = 10**5*u.Msun
+ 202: lmcbhpot.mass(zdiff)
+ 203: r = 1*u.pc
+ 204: lmcbhpot.mass(zdiff) + lmcpot.mass(zdiff) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 205: r = 0.1*u.pc
+ 206: lmcbhpot.mass(zdiff) + lmcpot.mass(zdiff) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 207: r = 0.05*u.pc
+ 208: lmcbhpot.mass(zdiff) + lmcpot.mass(zdiff) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 209: r = 0.01*u.pc
+ 210: lmcbhpot.mass(zdiff) + lmcpot.mass(zdiff) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 211: r = 0.015*u.pc
+ 212: lmcbhpot.mass(zdiff) + lmcpot.mass(zdiff) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 213: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=29*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=29*u.kpc)+diskp.mass(40.6*u.kpc,z=29*u.kpc)+bulgep.mass(40.6*u.kpc,z=29*u.kpc)+halop.mass(40.6*u.kpc,z=29*u.kpc))
+ 214: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 215: r = 0.016*u.pc
+ 216: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 217: r = 0.016*u.kpc
+ 218: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 219: MBH_LMC = 10**7.1*u.Msun
+ 220: lmcbhpot = KeplerPotential(MBH_LMC, normalize=False)
+ 221: mlmc
+ 222: Mlmc
+ 223: lmcpot = HernquistPotential(amp=2*Mlmc, a=Rlmc, normalize=False)
+ 224: Mlmc = 1.5e11*u.solMass
+ 225: lmcpot = HernquistPotential(amp=2*Mlmc, a=Rlmc, normalize=False)
+ 226: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 227: r = 0.016*u.pc
+ 228: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 229: r = 0.013*u.pc
+ 230: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 231: MBH_LMC = 10**5*u.Msun
+ 232: lmcbhpot = KeplerPotential(MBH_LMC, normalize=False)
+ 233: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 234: r = 0.014*u.pc
+ 235: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 236: r = 0.016*u.pc
+ 237: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 238: MBH_LMC = 10**7.1*u.Msun
+ 239: lmcbhpot = KeplerPotential(MBH_LMC, normalize=False)
+ 240: r = 1.6*u.pc
+ 241: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 242: r = 1.7*u.pc
+ 243: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 244: r = 1.65*u.pc
+ 245: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 246: r = 1.8*u.pc
+ 247: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 248: r = 2.1*u.pc
+ 249: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 250: r = 2.05*u.pc
+ 251: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 252: r = 2.04*u.pc
+ 253: lmcbhpot.mass(r) + lmcpot.mass(r) + bh.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+diskp.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+bulgep.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))+halop.mass(40.6*u.kpc+r*np.cos(0.596),z=27.54*u.kpc+r*np.sin(0.596))  - (bh.mass(40.6*u.kpc,z=27.54*u.kpc)+diskp.mass(40.6*u.kpc,z=27.54*u.kpc)+bulgep.mass(40.6*u.kpc,z=27.54*u.kpc)+halop.mass(40.6*u.kpc,z=27.54*u.kpc))
+ 254: import utils.catstack as catstack
+ 255: pwd()
+ 256: import catstack
+ 257: import glob
+ 258: files = glob.glob('/data1/Cats/testLMC/propagated/*)
+ 259: files = glob.glob('/data1/Cats/testLMC/propagated/*')
+ 260: files
+ 261: files = glob.glob('/data1/Cats/testHVSLMC/propagated/*')
+ 262: files
+ 263: files = glob.glob('/data1/Cats/testHVSLMC/Propagated/*')
+ 264: files
+ 265: files = glob.glob('/data1/Cats/testHVSLMC/Photometried/*')
+ 266: files = glob.glob('/data1/Cats/testHVSLMC/Gaia_6D/*_M_halo_*_-0.5*')
+ 267: files
+ 268: files = glob.glob('/data1/Cats/testHVSLMC/Gaia_6D/*_M_halo_0.76*_-0.5*')
+ 269: files
+ 270: len(files)
+ 271: catstack(files,'/data1/Cats/testHVSLMC/test.fits')
+ 272: catstack.catstack(files,'/data1/Cats/testHVSLMC/test.fits')
+ 273: files = glob.glob('/data1/Cats/testHVSLMC/Gaia_6D/*_M_halo_2.28*_-0.5*')
+ 274: len(files)
+ 275: catstack.catstack(files,'/data1/Cats/testHVSLMC/test2.fits')
+ 276: %history -g -f test.txt

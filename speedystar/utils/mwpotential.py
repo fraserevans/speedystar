@@ -1,4 +1,4 @@
-from galpy.potential import  HernquistPotential, MiyamotoNagaiPotential, KeplerPotential, evaluatePotentials, turn_physical_on, evaluaterforces,evaluatezforces,evaluateRforces, ChandrasekharDynamicalFrictionForce
+from galpy.potential import  HernquistPotential, MiyamotoNagaiPotential, KeplerPotential, PlummerPotential, evaluatePotentials, turn_physical_on, evaluaterforces,evaluatezforces,evaluateRforces, ChandrasekharDynamicalFrictionForce
 from galpy.potential import NFWPotential, TriaxialNFWPotential#, PlummerSoftening#, MovingObjectPotential
 from astropy import units as u
 from astropy.constants import G
@@ -6,7 +6,7 @@ import numpy as np
 #from . softeningtest2 import LMCSoftening
 #from . MovingObjectPotential2 import MovingObjectPotential
 
-def MWPotential(Ms=0.76, rs=24.8, c=1., T=True):
+def MWPotential(Ms=0.76, rs=24.8, qy=1., qz=1., T=True):
     '''
         Milky Way potential from Marchetti 2017b -- see galpy for the definitions of the potential components
 
@@ -16,8 +16,10 @@ def MWPotential(Ms=0.76, rs=24.8, c=1., T=True):
                 NFW profile scale mass in units of e12 Msun
             rs : float
                 Radial profile in units of kpc
-            c : float
-                Axis ratio
+            qy: float
+                y-to-x axis ratio
+            qz : float
+                z-to-x axis ratio
             T : bool
                 If True, use triaxialNFWPotential
     '''
@@ -40,12 +42,13 @@ def MWPotential(Ms=0.76, rs=24.8, c=1., T=True):
     #BH mass in 1e6 Msun
     Mbh = 4e6*u.Msun
     if(T):
-        halop = TriaxialNFWPotential(amp=Ms, a=rs, c=c, normalize=False)
+        halop = TriaxialNFWPotential(amp=Ms, a=rs, b=qy, c=qz, normalize=False)
     else:
         halop = NFWPotential(amp=Ms, a=rs, normalize=False)
     diskp = MiyamotoNagaiPotential(amp=Md, a=ad, b=bd, normalize=False)
     bulgep = HernquistPotential(amp=2*Mb, a=Rb, normalize=False) #Factor 2 because of the galpy definition
-    bh = KeplerPotential(amp=Mbh, normalize=False)
+    #bh = KeplerPotential(amp=Mbh, normalize=False)
+    bh = PlummerPotential(amp=Mbh, b=0.01*u.pc, normalize=False)
 
     #totpot = evaluatePotentials(diskp,0,Rb) + evaluatePotentials(halop,0,Rb) + evaluatePotentials(bulgep,0,Rb) + evaluatePotentials(bh,0,Rb)
 
