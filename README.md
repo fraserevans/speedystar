@@ -15,7 +15,9 @@ Package requires ~12 MB of space but installation may take a while depending on 
 Alternatively, if you do not wish to install globally (e.g. if you want to more easily edit the `speedystar` source code), simply ensure `speedystar/` is in the working directory and make sure required packages are installed:
 ```
 pip install -r requirements.txt
-``` 
+```
+
+Finally, `speedystar' is up on PyPI but it is an outdated release. So direct pip installation of `speedystar' is possible but not recommended.
 
 ## Documentation  
 You can access every method's docstring by using the help() function in python.  
