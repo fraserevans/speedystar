@@ -17,7 +17,7 @@ Alternatively, if you do not wish to install globally (e.g. if you want to more 
 pip install -r requirements.txt
 ```
 
-Finally, `speedystar` is up on PyPI but it is an outdated release. So direct pip installation of `speedystar' is possible but not recommended.
+Finally, `speedystar` is up on PyPI but it is an outdated release. So direct pip installation of `speedystar` is possible but not recommended.
 
 ## Documentation  
 You can access every method's docstring by using the help() function in python.  
