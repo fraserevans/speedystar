@@ -236,7 +236,29 @@ def set_Gaia_release(self,Gaia_release):
  
     self.gaia_release = Gaia_release
 
-def query_yes_no(question, default="yes"):
+def config_brutus(self, path='./'):
+    '''
+    Fetch the brutus files used for the brutus photometric calibration
+
+    Arguments
+    ---------
+    path: string
+        Path where the brutus files will be downloaded
+    '''
+
+    #from brutusmaster.brutusmaster.brutus import utils as butils
+    from brutus import utils as butils
+    butils.fetch_tracks(target_dir=path,track='MIST_1.2_vvcrit0.0')
+
+    #self.brutus_tracks_path = os.path.join(path, 'MIST_1.2_EEPtrk.h5')
+    os.putenv('BRUTUS_TRACKS',os.path.join(path,'MIST_1.2_EEPtrk.h5'))
+    os.environ['BRUTUS_TRACKS'] = os.path.join(path,'MIST_1.2_EEPtrk.h5')
+    butils.fetch_nns(target_dir=path,model='c3k')
+    os.putenv('BRUTUS_NNS',os.path.join(path,'nn_c3k.h5'))
+    os.environ['BRUTUS_NNS'] = os.path.join(path,'nn_c3k.h5')
+    #self.brutus_nns_path = os.path.join(path, 'nn_c3k.h5')
+
+def query_yes_no(self, question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer.
 
     "question" is a string that is presented to the user.

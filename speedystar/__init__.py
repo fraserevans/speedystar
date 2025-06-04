@@ -125,11 +125,12 @@ class starsample:
     from .dynamics import likelihood, get_betas, get_betas_Boubert
     from .observation import photometry, zero_point, get_Punbound 
     from .observation import get_P_velocity_greater, evolve, get_Gaia_errors
-    from .observation import get_e_beta, photometry_brutus, get_Gaia_errors_old
+    from .observation import get_e_beta
     from .observation import _check_rovozoso, _sample_errors
     from .saveload import save, _load, _loadExt
     from .subsample import subsample
     from .config import fetch_dust, config_dust, config_astrosf
+    from .config import config_brutus, query_yes_no
     from .config import config_rvssf, set_ast_sf, set_Gaia_release
 
     dt   = 0.01*u.Myr

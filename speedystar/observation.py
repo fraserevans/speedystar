@@ -504,6 +504,7 @@ def photometry(self, bands=['Bessell_V', 'Bessell_I', \
     from galpy.util.coords import radec_to_lb
     from .utils.MIST_photometry import get_Mags
     import mwdust
+    import sys
 
     if not hasattr(self,'dust'):
         print('Warning: A dust map is not provided. Attempting to default '\
@@ -538,9 +539,6 @@ def photometry(self, bands=['Bessell_V', 'Bessell_I', \
     if not all(hasattr(self,attr) 
             for attr in ['dist', 'm', 'met', 'T_eff', 'Rad', 'Lum']):
         raise ValueError('All of the following attributes are required as astropy quantities to compute mock photometry for the sample: distance "dist", mass "m", metallicity "met", effective temperate "T_eff", stellar radius "Rad", luminosity "Lum". Please ensure all these attributes exist.')
-
-    if any(self.met>0.3) or any(self.met<-0.3):
-        print('WARNING: speedystar mock magnitudes are unreliable for stars with metallicities outside the range [-0.3, +0.3]. Some stars outside this range are present in the sample. Proceed with caution.')
 
     if(self.size==0):
         self.Av, self.e_par, self.e_pmra, self.e_pmdec, self.e_vlos \
@@ -562,7 +560,7 @@ def photometry(self, bands=['Bessell_V', 'Bessell_I', \
 
         elif method == 'MIST':
             # Calculates visual extinction, apparent magnitudes in 
-            # appropriate bands, and errors 
+            # appropriate bands
             self.Av, Mags = get_Mags(self.Av, self.dist.to('kpc').value, l,
                                        b, self.m.to('Msun').value, self.met,
                                        self.T_eff.value, self.Rad.value, 
@@ -573,13 +571,11 @@ def photometry(self, bands=['Bessell_V', 'Bessell_I', \
                 setattr(self, band, Mags[band]*u.dimensionless_unscaled)
 
         elif method.upper() == 'BRUTUS':
-            raise NotImplementedError('Brutus method not yet implemented in    the public release. Please use MIST method for now.')
-            # Calculates visual extinction, apparent magnitudes in 
-            # appropriate bands, and errors 
+            #Calculates extinction and apparent magnitudes using Brutus. See Examples/my_example_Brutus.ipynb notebook on the github for more information/.
 
-            from brutus2.brutus.seds import SEDmaker
-            from brutus2.brutus import filters
-            
+            from brutus import filters
+            from brutus.seds import SEDmaker
+       
             global brutussed
 
             filts = np.array(filters.FILTERS)
@@ -588,14 +584,21 @@ def photometry(self, bands=['Bessell_V', 'Bessell_I', \
             filts[2] = 'Gaia_RP'        
         
             if 'brutussed' not in globals():
-                brutussed = SEDmaker(mistfile=os.path.join(os.path.dirname(__file__),'utils/MIST_1.2_EEPtrk.h5'),nnfile=os.path.join(os.path.dirname(__file__),'utils/nn_c3k.h5'))
+
+                if os.getenv('BRUTUS_TRACKS') is None or os.getenv('BRUTUS_NNS') is None:
+                    sys.stdout.write('Environment variables BRUTUS_TRACKS and BRUTUS_NNS must be set to the paths of the Brutus tracks and NNs files. Please set them by calling speedystar.config_brutus(path_to_files_directory) or type the relative or absolute path here:')
+
+                    self.config_brutus(path=input())
+
+                brutussed = SEDmaker(mistfile=os.getenv('BRUTUS_TRACKS'),
+                                    nnfile=os.getenv('BRUTUS_NNS'))
 
             self.Av = self.dust(l, b, self.dist.to(u.kpc).value) * 2.682
 
             mags = np.zeros( (self.size, len(filters.FILTERS)) )
 
             self.eep = -99.*np.ones(self.size)
-            for i in tqdm(range(self.size)):
+            for i in tqdm(range(self.size), desc='Calculating magnitudes'):
     
                 eep = brutussed.get_eep(loga = np.log10(self.tage[i].to('yr').value), eep = 300., mini = self.m[i].value, feh = self.met[i])
                 
@@ -610,137 +613,6 @@ def photometry(self, bands=['Bessell_V', 'Bessell_I', \
                 setattr(self, band, mag*u.dimensionless_unscaled)
         else:
             raise ValueError('Method must be either "MIST" or "Brutus". See speedystar.observation.photometry for more information.')
-
-#@photometry
-def photometry_brutus(self, bands=['Bessell_V', 'Bessell_I', 
-                   'Gaia_GRVS', 'Gaia_G', 'Gaia_BP', 'Gaia_RP'],
-                   errors = ['e_par', 'e_pmra', 'e_pmdec', 'e_vlos'], data_release='DR4'):
-
-    '''
-    DEPRECIATED. Computes mock apparent magnitudes in the Gaia bands (and also others). Also calculates mock DR4 astrometric errors using pygaia. 
-    These may or may not be overwritten later (see subsample()).
-
-    Parameters
-    ----------
-    dustmap : DustMap
-        Dustmap object to be used
-    bands: List of strings
-        The photometric bands in which apparent magnitudes are calculated. 
-        Names are more or less self-explanatory. Options for now include:
-        - Bessell_U, Bessell_B, Bessell_V, Bessell_R, Bessell_I 
-          Johnson-Cousins UBVRI filters (Bessell 1990)
-        - Gaia_G, Gaia_BP, Gaia_RP, Gaia_GRVS bands
-            - NOTE: Only EDR3 bands are currently implemented in MIST. DR3 
-              bands are available from Gaia and this code will be updated 
-              when DR3 bands are implemented in MIST.
-            - NOTE as well: This subroutine calculates G_RVS magnitudes not 
-              using the G_RVS transmission curve directly but by a power-law 
-              fit using the Bessell_V, Bessell_I and Gaia_G filters 
-              (Jordi et al. 2010). Transmission curve was not available prior 
-              to Gaia DR3 and is not yet implemented in MIST.
-        - VISTA Z, Y, J, H, K_s filters 
-        - DECam u, g, r, i, z, Y filters 
-        - LSST u, g, r, i, z, y filters
-    errors: List of strings
-        The Gaia errors to calculate. 
-        Fairly inexpensive if you are already calculating Bessell_I, 
-        Bessell_V, Gaia_G.
-        - Options include:
-            - e_par -- DR4 predicted parallax error (mas)
-            - e_pmra, e_pmdec -- DR4 predicted proper motion in the 
-                    ra (cosdec corrected) and dec directions (mas/yr)
-            - e_vlos -- DR4 predicted radial velocity error (km/s)
-            - NOTE: errors are computed agnostic of whether or not Gaia 
-                could actually detect a given source. Recall that the 
-                faint-end magnitude limit of the Gaia astrometric catalogue 
-                is G ~ 21 and G_RVS ~ 16.2 for the radial velocity catalogue.
-            - NOTE: These error calculations are computationally inexpensive 
-                but not the most accurate, particularly for bright sources. 
-                Get_Gaia_errors() is slow but more robustly simulates the 
-                Gaia astrometric performance 
-
-    '''
-
-    from galpy.util.coords import radec_to_lb
-    from brutus2.brutus.seds import SEDmaker
-    from brutus2.brutus import filters
-    from .utils.MIST_photometry import get_Mags
-    import mwdust
-
-    if not hasattr(self,'dust'):
-        print('Warning: A dust map is not provided. Attempting to default '\
-                'to Combined15')
-        try:
-            self.dust = mwdust.Combined15()
-        except ValueError:
-            raise ValueError('Default dust map could not be loaded. See'\
-                    'myexample.py ' \
-                    'or https://github.com/jobovy/mwdust for more information.' \
-                    ' Call speedystar.config.fetch_dust() to download dust ' \
-                    'map(s) and set DUST_DIR environment variable.')
-
-    if (not hasattr(self,'propagated') or not self.propagated):
-        print('Warning: sample appears not to have been propagated. Proceeding with mock photometry regardless')
-
-    #Needs galactic lat/lon to get G_RVS 
-    # converts to it if only equatorial are available
-    if(hasattr(self,'ll')):
-            l = self.ll
-            b = self.bb
-    elif(hasattr(self,'ra')):
-        data = radec_to_lb(self.ra.to('deg').value, 
-                                self.dec.to('deg').value, degree=True)
-        l, b = data[:, 0], data[:, 1]
-    else:
-        raise ValueError('RA/Dec or Galactic lat/lon are required to perform'\
-                                'mock photometry. Please check your sample.')           
-    if not hasattr(self,'Av'):
-        self.Av = None
-
-    if not all(hasattr(self,attr) 
-            for attr in ['dist', 'm', 'met', 'T_eff', 'Rad', 'Lum']):
-        raise ValueError('All of the following attributes are required as astropy quantities to compute mock photometry for the sample: distance "dist", mass "m", metallicity "met", effective temperate "T_eff", stellar radius "Rad", luminosity "Lum". Please ensure all these attributes exist.')
-
-    if any(self.met>0.3) or any(self.met<-0.3):
-        print('WARNING: speedystar mock magnitudes are unreliable for stars with metallicities outside the range [-0.3, +0.3]. Some stars outside this range are present in the sample. Proceed with caution.')
-
-    if(self.size==0):
-        self.Av, self.e_par, self.e_pmra, self.e_pmdec, self.e_vlos \
-            = ([] for i in range(5))
-        for band in bands:
-            setattr(self,band,[])
-    else:
-
-        # Calculates visual extinction, apparent magnitudes in 
-        # appropriate bands, and errors 
-
-        filts = np.array(filters.FILTERS)
-        filts[0] = 'Gaia_G'
-        filts[1] = 'Gaia_BP'
-        filts[2] = 'Gaia_RP'
-        #print(os.path.join(os.path.dirname(__file__)))
-        brutussed = SEDmaker(mistfile=os.path.join(os.path.dirname(__file__),
-                                    'utils/MIST_1.2_EEPtrk.h5'), 
-        nnfile=os.path.join(os.path.dirname(__file__),'utils/nn_c3k.h5'))
-
-        self.Av = self.dust(l, b, self.dist.to(u.kpc).value) * 2.682
-
-        mags = np.zeros( (self.size, len(filters.FILTERS)) )
-
-        self.eep = -99.*np.ones(self.size)
-        for i in tqdm(range(self.size)):
-        #for i in tqdm(range(40)):
-    
-            eep = brutussed.get_eep(loga = np.log10(self.tage[i].to('yr').value), eep = 300., mini = self.m[i].value, feh = self.met[i])
-            mags[i,] = brutussed.get_sed(mini = self.m[i].value, eep=eep, feh=self.met[i], afe=0., av=self.Av[i], dist=self.dist[i].to('pc').value)[0]
-
-            self.eep[i] = eep
-
-        #Sets attributes
-        for band in bands:
-            mag = mags[:,np.where(filts==band)[0]]
-            mag = mag.flatten()
-            setattr(self, band, mag*u.dimensionless_unscaled)
 
 def zero_point(self):
 
