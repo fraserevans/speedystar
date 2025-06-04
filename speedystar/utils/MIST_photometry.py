@@ -706,7 +706,7 @@ def get_Mag(T, logg, av, met, band):
             interpolate.LinearNDInterpolator( list(zip(T_eff, Logg, Av)), p025dict[band])
 
     BC = np.empty(len(T))
-    idx = np.where((met>=-0.25) & (met<-0.125))[0]
+    idx = np.where((met<-0.125))[0]
     BC[idx] = bandInterps['interp_'+band+'_m025'](T[idx], logg[idx], av[idx])
     idx = np.where((met>=-0.125) & (met<0.125))[0]
     BC[idx] = bandInterps['interp_'+band+'_p00'](T[idx], logg[idx], av[idx])
