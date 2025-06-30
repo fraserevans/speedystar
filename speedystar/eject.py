@@ -3,6 +3,7 @@ from tqdm import tqdm
 import astropy.constants as const
 from astropy import units as u
 from astropy.table import Table
+import astropy
 import speedystar
 
 from .utils.mainsequence import t_MS
@@ -11,6 +12,8 @@ import importlib
 import sys
 import time
 import os
+
+from galpy.potential import MWPotential2014
 
 from scipy.integrate import quad
 from scipy.interpolate import interp1d
@@ -55,6 +58,8 @@ class EjectionModel:
         stellar_evolution.stop()
 
         return star
+
+        
 
     def set_imf(self):
         '''
@@ -231,6 +236,30 @@ class EjectionModel:
             met[np.where(idx)[0]] = np.log10(0.03 / self.zsun)            
 
         return met
+
+    def _sample_age(self, n):
+        '''
+            Assigns an age to each mock ejected star.
+        '''        
+
+        if isinstance(self.Age, astropy.units.quantity.Quantity):
+            self.Age = self.Age.to('Myr').value
+
+        #If self.Age is a float, all stars have the same age
+        if isinstance(self.Age,float):
+            age = np.full(n, self.Age)
+        elif isinstance(self.Age,int):
+            age = np.full(n, float(self.Age))
+        elif callable(self.Age):
+            age = self.Age(size=n, *self.ageargs)
+
+        else:
+            raise ValueError('Error: invalid input for age argument')
+
+        if any(age > 13800):
+            print('Warning: Some stars have been assigned ages older than the estimated age of the Universe')
+
+        return age*u.Myr
 
     def _shift_loc(self,LaunchLoc, n, r0, theta0, phi0, v, thetav0, 
                         phiv0, tflight):
@@ -902,7 +931,8 @@ class Hills(EjectionModel):
 
         amuseflag : Boolean
             If True, stellar evolution and maximum lifetimes are handled
-            using the AMUSE python package. Allows more detailed stellar evolution past the main sequence, but installation is a headache. 
+            using the AMUSE python package. Allows more detailed stellar 
+            evolution past the main sequence, but installation is a headache. 
             See here https://amuse.readthedocs.io/en/latest/install/howto-install-AMUSE.html
 
             If False, stellar evolution is handled through in-house functions.
@@ -1284,7 +1314,14 @@ class Hills(EjectionModel):
             theta02 = theta0
             thetav02 = thetav0
 
-        returns = {'r0':r0, 'phi0':phi02, 'theta0':theta02, 'v0':v, 'phiv0':phiv02, 'thetav0':thetav02, 'm':m, 'tage':tage, 'tflight':tflight, 'sep':sep, 'P':P, 'q':q, 'mem':mem, 'met':met, 'stage':stage, 'stagebefore':stagebefore, 'Rad':R, 'T_eff':T_eff, 'Lum':Lum, 'size':len(r0), 'alpha': self.alpha, 'gamma': self.gamma, 'kappa': self.kappa, 'm_bh': self.m_bh, 'tflightmax': self.tflightmax, 'rate': self.rate, 'v_range': self.v_range, 'm_range': self.m_range, 'zsun': self.zsun, 'cut_factor': self.cut_factor}
+        returns = {'r0':r0, 'phi0':phi02, 'theta0':theta02, 'v0':v, 
+        'phiv0':phiv02, 'thetav0':thetav02, 'm':m, 'tage':tage, 
+        'tflight':tflight, 'sep':sep, 'P':P, 'q':q, 'mem':mem, 'met':met, 
+        'stage':stage, 'stagebefore':stagebefore, 'Rad':R, 'T_eff':T_eff, 
+        'Lum':Lum, 'size':len(r0), 'alpha': self.alpha, 'gamma': self.gamma, 
+        'kappa': self.kappa, 'm_bh': self.m_bh, 'tflightmax': self.tflightmax, 
+        'rate': self.rate, 'v_range': self.v_range, 'm_range': self.m_range, 
+        'zsun': self.zsun, 'cut_factor': self.cut_factor}
 
         return returns
                     
@@ -1394,7 +1431,8 @@ class BMBH(EjectionModel):
 
         amuseflag : Boolean
             If True, stellar evolution and maximum lifetimes are handled
-            using the AMUSE python package. Allows more detailed stellar evolution past the main sequence, but installation is a headache.
+            using the AMUSE python package. Allows more detailed stellar 
+            evolution past the main sequence, but installation is a headache.
             See here https://amuse.readthedocs.io/en/latest/install/howto-install-AMUSE.html
             
             If False, stellar evolution is handled through in-house functions.
@@ -1808,8 +1846,6 @@ class BMBH(EjectionModel):
         global vCDF, x_rangeCDF, time_range_glob, dMejs_glob, a_glob
         global Mctmp, MBHtmp, a0tmp, rhotmp, sigmatmp
 
-        tzero = time.time()
-
         PI = np.pi
 
         #Hardening radius
@@ -2069,17 +2105,18 @@ class BMBH(EjectionModel):
         phi0 = np.random.uniform(0, 2 * PI, n) * u.rad
         theta0 = np.arccos(np.random.uniform(-1, 1, n)) * u.rad
 
-        phase = np.abs(np.pi*u.rad - phi0)
+        #phase = np.abs(np.pi*u.rad - phi0)
 
-        idx1 = (m > 0.64*u.Msun) & (v>750*u.km/u.s)
-        idx2 = (m > 0.85*u.Msun) | (phase > 2.85*u.rad)
-        idx3 = (m > 1.3*u.Msun) | (phase > 1.35*u.rad)
-        idx4 = v.value*tflight.value/m.value < 2.2e4*np.sqrt(m.value)
-        idx = idx1*idx2*idx3*idx4
+        #idx1 = (m > 0.64*u.Msun) & (v>750*u.km/u.s)
+        #idx2 = (m > 0.85*u.Msun) | (phase > 2.85*u.rad)
+        #idx3 = (m > 1.3*u.Msun) | (phase > 1.35*u.rad)
+        #idx4 = v.value*tflight.value/m.value < 2.2e4*np.sqrt(m.value)
+        #idx = idx1*idx2*idx3*idx4
 
         #idx = (m.value > 0)
 
-        r0, phi0, theta0, v, m, tage, tflight, vc = r0[idx], phi0[idx], theta0[idx], v[idx], m[idx], tage[idx], tflight[idx], vc[idx]
+        r0, phi0, theta0, v, m, tage, tflight, vc = r0[idx], phi0[idx], \
+                theta0[idx], v[idx], m[idx], tage[idx], tflight[idx], vc[idx]
         tbefore, met = tbefore[idx], met[idx]
         seps = seps[idx]
         n = m.size
@@ -2093,7 +2130,8 @@ class BMBH(EjectionModel):
         if self.LaunchLoc is not None:
 
             r0, theta02, phi02, v, thetav02, phiv02 = \
-                self._shift_loc(self.LaunchLoc, n, r0, theta0, phi0, v,thetav0, phiv0, tflight)
+                self._shift_loc(self.LaunchLoc, n, r0, theta0, phi0, \
+                    v, thetav0, phiv0, tflight)
 
         else:
             phi02 = phi0
@@ -2137,7 +2175,6 @@ class BMBH(EjectionModel):
                 stagebefore[i] = 1
                 stage[i] = 1
 
-
         R = R*u.Rsun
         Lum = Lum*u.Lsun
         T_eff = T_eff*u.K
@@ -2156,4 +2193,430 @@ class BMBH(EjectionModel):
                     'saveorbit': self.saveorbit, 
                     'orbitpath': self.orbitpath, 'vmin': self.vmin }
 
-        return returns                
+        return returns
+
+class cluster_three_body(EjectionModel):
+    '''
+    Ejection model for three-body interactions in a dense stellar cluster.
+    Uses corespray (see https://ui.adsabs.harvard.edu/abs/2023MNRAS.518.4249G/abstract)
+    '''
+
+    T_MW = 13.8*u.Gyr # MW maximum lifetime from Planck2015
+
+    def __init__(self, name_modifier = None, zsun = 0.0142, gcname='M3',       
+                mwpot=MWPotential2014, mgc = 4.06e5, rgc = 0.15903, W0=None, 
+                ro=8., vo=220., verbose=False, timing=False, 
+                show_progress=False, tdisrupt=1000., rate=1., nstar=None, 
+                mu0 = 0., sig0 = 7.6, vesc0 = 30.0, rho0 = 3.67, 
+                mmin = 0.1, mmax = 1.4, alpha = -1.35, seps=None, masses=None,
+                m1=None, m2a=None, m2b=None, emin=None, emax=None, K1=None, 
+                K2a=None, K2b=None, Met=-1.5, metargs=None, Age=12.0*u.Gyr,
+                ageargs=None, balpha=-1, q=-3, npeak=5, nrandom=1000, dt=0.01, 
+                rsample=False, nrsep=2, initialize=True, method='dopr54_c',  
+                offset=1e-9, save_cluster_kinematics=False, amuseflag=False):
+
+        '''
+        Ejection model for three-body interactions in a dense stellar cluster.
+        Parameters
+        -----------
+        name_modifier: str
+            A string to append to the name of the model
+        zsun: float
+            Solar metallicity, used to calculate stellar lifetimes and 
+            stellar radii. Default is 0.0142, the solar metallicity from 
+            Asplund et al. 2021.
+        gcname: str or galpy orbit object
+            The initialized galpy orbit of the ejecting cluster. If a string,
+            the orbit is loaded from the galpy database.
+        mwpot: galpy potential object
+            The galpy potential in which the cluster is embedded. If None, 
+            the potential is loaded from the galpy database.
+        mgc: float
+            Mass of the globular cluster in solar masses. Default is 4.06e5,
+            the mass of M3.
+        rgc: float
+            Radius of the globular cluster in kpc, either the half-mass radius 
+            (if cluster is a Plummer potential) or tidal radius (if cluster is 
+            a King potential).
+        W0: float
+            The W0 parameter of the King potential, if the cluster is a King 
+            potential. If None, the cluster is assumed to be a Plummer pot.
+        ro: float
+            Distance from the Galactic center to the Sun in kpc. Default is 
+            8 kpc. Does not matter if initialize is True.
+        vo: float
+            Circular velocity of the Milky Way at the solar position in km/s. 
+            Default is 220 km/s. Does not matter if initialize is True.
+        verbose: bool
+            If True, print additional information about the model.
+        timing: bool
+            If True, print timing information about the model.
+        show_progress: bool
+            If True, show a progress bar for the model.
+        tdisrupt: float
+            Disruption time of the cluster in Myr (default 1000)
+        rate : float
+            ejection rate (default 1 per Myr)
+        nstar : float
+            if set, nstar stars will be ejected randomly from tdisrupt to 0 
+            Myr. Rate is recalculated. (default : None)
+        mu0: float
+            Average 1D velocity of stars in the cluster in km/s (default 0)
+        sig0: float
+            Velocity dispersion of stars in the cluster in km/s (default 7.6)
+        vesc0: float
+            Escape velocity of stars in the cluster in km/s (default 30.0)
+        rho0: float
+            Central density of stars in the cluster in M_sun/pc^3 
+            (default 3.67)
+        mmin: float
+            Minimum stellar mass in solar masses (default 0.1)
+        mmax: float
+            Maximum stellar mass in solar masses (default 1.4)
+        alpha: float
+            Power-law index of the initial mass function 
+            (default -1.35, Salpeter IMF)
+        masses : None or array of floats (Msun)
+            array of masses to be used instead of drawing for a power-law mass 
+            function (default: None)
+            Note : mmin, mmax, and alpha will be overridden
+        m1 : None or float or array of floats (Msun)
+            fixed mass or array of masses for drawing single kickedstar.
+            Overrides masses (for the star picking) if provided (default: None)
+            Note : (mmin, mmax, alpha) or (masses) must still be provided to 
+            determine the mean mass in the core
+        m2a, m2b : None or floats or arrays of floats
+            Binary star A mass and star B mass (Msun)  (default: None)
+                - If None, sampled from masses or power-law distribution
+                - If floats, will be the fixed masses for the binary stars
+                - If arrays, binary masses are sampled from the arrays  
+                (arrays must be same length)
+            Note : (mmin, mmax, alpha) or (masses) must still be provided to 
+            determine the mean mass in the core
+        seps : None or float or array of floats
+            semi-major axis of the binary at time of ejection (default: None)
+                - If None, will be sampled from the hard-soft boundary to the 
+                contact boundary
+                - If float, is the fixed semi-major axis for the binary stars
+                - If array, is randomly sampled from the array (array must be 
+                same length as m2a and m2b) 
+            Note : if seps is not None, then emin, emax, a_min, and a_max do 
+            not matter
+        emin : float
+            minimum binary energy in Joules (default: None)
+        emax : float
+            maximum binary energy in Joules (default: None)
+        balpha : float
+            power-law slope of initial binary binding energy distribution 
+            (default: -1)
+        q : float
+            exponenet for calculating probability of stellar escape from 
+            three-body system (Equation 7.23) (default: -3)
+        npeak : float
+            when sampling kick velocity distribution function, sampling range 
+            will be from 0 to npeak*vpeak, where vpeak is the peak in the 
+            distribution function (default: 5)
+        nrandom : int
+            Nunber of random numbers to sample in a given batch
+        dt : float
+            Fixed time step for orbit integration (default: 0.1 Myr)
+        rsample : bool
+            Sample separation between single star and binary within core 
+            (default: False)
+        nrsep : int
+            Number of mean separations to sample out to when sampling 
+            separation between single and binary stars (default : 2)
+        npeak : float/int
+            when sampling kick velocity distribution function, sampling range 
+            will be from 0 to npeak*vpeak, where vpeak is the peak in the 
+            distribution function (default: 5)
+        nrandom : int
+            Number of random numbers to sample in a given batch (default: 1000)
+        offset : float
+            Small offset (in pc) to add to the initial positions of the stars 
+            to prevent them from being initialized at r=0 in the cluster 
+            (default: 1e-9)
+        initialize : bool
+            initialize orbits only, do not integrate (default:False)
+            Note if initialize == True then the initial, un-integrated orbits, 
+            will be returned
+        method : str
+            Method to use for orbit integration (default: None, which uses 
+            galpy's default method)
+        K1, K2a, K2b : arrays of integers
+            Hurley integer stellar types 
+            (https://ui.adsabs.harvard.edu/abs/2000MNRAS.315..543H/abstract) 
+            associated with the m1, m2a, and m2b arrays, respectively. Helps 
+            track the kinds of stars involved in the interaction.
+            If provided, must be the same length as the corresponding mass 
+            array.
+            If not provided, will be calculated based on the mass of the star 
+            assuming it's main sequence.
+        Met: Float or callable function
+            If float, all ejected stars have total metallicity 
+            xi = log10(Z/zsun) = Met.
+            If callable, mtallicities are assigned by calling the function.
+            Default is uniform distribution.
+            Arguments to this callable can be provided in order as metargs.
+            E.g. if you want metallicites to be a Gaussian distribution centred
+            on 0.0 with a standard deviation of 1.0, call ejection model with 
+            (Met = np.random.normal, metargs=[0.0, 1.0])
+        metargs: listlike 
+            Arguments, in order, to the supplied metallicity distribution, 
+            see above.
+        Age: float or callable function
+            See 'Met' above, but for age. Default is 12 Gyr.
+        ageargs: listlike
+            Arguments in order, to age distribution, see metargs above.
+        save_cluster_kinematics: bool
+            If True, save the present-day cluster kinematics. Can be useful 
+            for visualization and sanity checking, but bloats the file size of 
+            saved samples. Default is False.
+        amuseflag: bool
+            If True, use AMUSE to evolve the stars and calculate their 
+            properties.
+            If False, use Hurley+2000 relations to calculate stellar 
+            properties. Default is False.  
+        '''
+
+        args = locals()
+        args.pop('self')
+
+        #Set all the arguments to attributes of the same name
+        for key, value in args.items():
+            setattr(self, key, value)
+
+    def sampler(self):
+
+        from speedystar import starsample
+        from corespray import corespraydf
+        import numpy as np
+        from .utils.hurley_stellar_evolution import get_TempRadL
+        from .utils.hurley_stellar_evolution import get_t_BAGB, get_t_MS
+
+        cspray = corespraydf(self.gcname, pot=self.mwpot, mgc=self.mgc, 
+                            rgc=self.rgc, W0=self.W0, ro=self.ro, vo=self.vo,
+                            verbose=self.verbose, timing=self.timing,
+                            show_progress=self.show_progress)
+
+        os = cspray.sample_three_body(tdisrupt=self.tdisrupt, rate=self.rate,
+                nstar=self.nstar, mu0=self.mu0, sig0=self.sig0, 
+                vesc0=self.vesc0, rho0=self.rho0, mmin=self.mmin, 
+                mmax=self.mmax, alpha=self.alpha, seps=self.seps,
+                masses=self.masses, m2a=self.m2a, m2b=self.m2b, 
+                Kstar=self.K1, K2a=self.K2a, K2b=self.K2b, emin=self.emin, 
+                emax=self.emax, balpha=self.balpha, q=self.q, 
+                npeak=self.npeak, nrandom=self.nrandom, dt=self.dt, 
+                rsample=self.rsample, nrsep=self.nrsep, escape_only=True, 
+                offset=self.offset, binaries=False, timing=self.timing, 
+                verbose=self.verbose, show_progress=self.show_progress,
+                method=self.method, initialize=self.initialize)
+
+        #Get ages of stars
+        tage = self._sample_age(len(cspray.mstar))
+
+        #masses and metallicities
+        m = cspray.mstar*u.Msun
+        met = self._sample_met(len(cspray.mstar))
+
+        if self.amuseflag:
+            #Maximum age for an ejected star is the minimum between 
+            #its lifetime to the tip of the AGB branch and the age of the MW
+
+            t_max = np.minimum(get_t_AGB(m, met + np.log10(self.zsun/0.02)), 
+                            self.T_MW)
+        else:
+            #Maximum age for an ejected star is the minimum between 
+            #its lifetime to the end of the MS and the age of the MW
+            t_max = np.minimum(get_t_MS(m, met + np.log10(self.zsun/0.02)), 
+                            self.T_MW)
+
+        #Ensure that all ejected stars would actually be alive at their present age
+        tage[tage>=t_max] = np.nan
+        idx = (~np.isnan(tage))
+
+        size = idx.sum()
+        returns = {}
+
+        returns['v0_clust']    = cspray.vesc[idx]*u.km/u.s
+        returns['m']           = cspray.mstar[idx]*u.Msun
+        returns['mb1']         = cspray.mb1[idx]*u.Msun
+        returns['mb2']         = cspray.mb2[idx]*u.Msun
+        returns['stage']       = cspray.Kstar[idx]
+        returns['stageb1']     = cspray.Kb1[idx]
+        returns['stageb2']     = cspray.Kb2[idx]
+        returns['sep']         = cspray.semi[idx]*u.pc
+        returns['sepf']        = cspray.semif[idx]*u.pc
+        returns['eb']          = cspray.eb[idx]*u.Msun*(u.km/u.s)**2
+        returns['ebf']         = cspray.ebf[idx]*u.Msun*(u.km/u.s)**2
+        returns['e0']          = cspray.e0[idx]*u.Msun*(u.km/u.s)**2
+        returns['tflight']     = -1.0*cspray.tesc[idx]*u.Myr
+        returns['dr']          = cspray.dr[idx]*u.pc
+        returns['met']         = met[idx]
+        returns['tage']        = tage[idx]
+        
+        returns['size']        = size
+        returns['clustername'] = np.repeat(self.gcname, size)
+
+        #Initialize radius, luminosity, effective temperature 
+        #and evolutionary stage (today at at ejection) of the HVSs
+        R, Lum, stage, T_eff = (np.empty(size) for i in range(4))
+
+        if self.amuseflag:
+
+            #For each unique metallicity
+            for z in tqdm(np.unique(returns['met']),desc='Evolving HVSs'):   
+
+                #indices with ith metallicity, subset
+                idx = np.where(met==z)[0]
+
+                #Get star stage at time of observation
+                star = self._evo_star(returns['m'][idx].value, 
+                                        returns['tage'][idx],met=z)
+
+                #Extract HVS effective temperature, radius, 
+                #luminosity, evolutionary stage
+                T_eff[idx] = star.temperature.as_astropy_quantity().to('K').value
+                R[idx] = star.radius.as_astropy_quantity().to('Rsun').value 
+                Lum[idx] = star.luminosity.as_astropy_quantity().to('Lsun').value 
+                stage[idx] = star.stellar_type.as_astropy_quantity()        
+
+        else:
+            for i in tqdm(range(size), desc='Evolving HVSs'):   
+
+                #Get HVS effective temperature, radius, luminosity
+                T_eff[i], R[i], Lum[i] = get_TempRadL(returns['m'][i].value,
+                                                    returns['met'][i], 
+                                                    returns['tage'][i].value)
+                stage[i] = 1
+
+        returns['T_eff'] = T_eff * u.K
+        returns['Rad'] = R * u.Rsun
+        returns['Lum'] = Lum * u.Lsun
+        returns['stage'] = stage
+
+        if self.initialize:
+            returns['r0']      = os.r(quantity=True).to('kpc')
+            returns['phi0']    = os.phi(quantity=True).to('rad')
+            returns['theta0']  = os.theta(quantity=True).to('rad')
+
+            returns['phiv0']   = np.arctan2(
+                                        os.vy(quantity=True).to('km s-1'),
+                                        os.vx(quantity=True).to('km s-1'))
+            
+            returns['thetav0'] = np.arctan2(np.sqrt(
+                                        os.vx(quantity=True).to('km s-1')**2 + 
+                                        os.vy(quantity=True).to('km s-1')**2),
+                                        os.vz(quantity=True).to('km s-1'))
+            
+            returns['v0']      = np.sqrt(
+                                        os.vx(quantity=True).to('km s-1')**2 +
+                                        os.vy(quantity=True).to('km s-1')**2 +
+                                        os.vz(quantity=True).to('km s-1')**2)
+
+        else:
+            returns['ra']     = os.ra(quantity=True).to('deg')
+            returns['dec']    = os.dec(quantity=True).to('deg')
+            returns['pmra']   = os.pmra(quantity=True).to('mas yr-1')
+            returns['pmdec']  = os.pmdec(quantity=True).to('mas yr-1')
+            returns['dist']   = os.dist(quantity=True).to('kpc')
+            returns['par']    = u.mas/returns['dist'].to('kpc').value
+            returns['vlos']   = os.vlos(quantity=True).to('km s-1')
+
+            returns['x']      = os.x(quantity=True).to('kpc')
+            returns['y']      = os.y(quantity=True).to('kpc')
+            returns['z']      = os.z(quantity=True).to('kpc')
+            returns['vx']     = os.vx(quantity=True).to('km s-1')
+            returns['vy']     = os.vy(quantity=True).to('km s-1')
+            returns['vz']     = os.vz(quantity=True).to('km s-1')
+
+            returns['l']      = os.ll(quantity=True).to('deg')
+            returns['b']      = os.bb(quantity=True).to('deg')
+            returns['pml']    = os.pmll(quantity=True).to('mas yr-1')
+            returns['pmb']    = os.pmbb(quantity=True).to('mas yr-1')
+            
+            returns['Lz']     = os.Lz(quantity=True).to('kpc km s-1')
+            
+            returns['GCdist'] = os.r(quantity=True).to('kpc')
+            returns['R']      = os.R(quantity=True).to('kpc')
+
+            returns['vr']     = os.vr(quantity=True).to('km s-1')
+            returns['vR']     = os.vR(quantity=True).to('km s-1')
+            returns['vT']     = os.vT(quantity=True).to('km s-1')
+            returns['vtheta'] = os.vtheta(quantity=True).to('km s-1')
+
+            returns['GCv']    = np.sqrt(returns['vx']**2 
+                                        + returns['vy']**2 + returns['vz']**2)
+
+            returns['thetaf'] = np.arccos(returns['z']/returns['GCdist'])
+            returns['phif']   = np.arctan2(returns['y'], returns['x'])
+
+            returns['propagated'] = True
+
+        if self.save_cluster_kinematics:
+
+            returns['ra_clust']     = np.ones(size) * \
+                                        cspray.o.ra(quantity=True).to('deg')
+            returns['dec_clust']    = np.ones(size) * \
+                                        cspray.o.dec(quantity=True).to('deg')
+            returns['pmra_clust']   = np.ones(size) * \
+                                        cspray.o.pmra(quantity=True).to('mas yr-1')
+            returns['pmdec_clust']  = np.ones(size) * \
+                                        cspray.o.pmdec(quantity=True).to('mas yr-1')
+            returns['dist_clust']   = np.ones(size) * \
+                                        cspray.o.dist(quantity=True).to('kpc')
+            returns['par_clust']    = np.ones(size) * \
+                                        u.mas/returns['dist_clust'].to('kpc').value
+            returns['vlos_clust']   = np.ones(size) * \
+                                        cspray.o.vlos(quantity=True).to('km s-1')
+
+            returns['x_clust']      = np.ones(size) * \
+                                        cspray.o.x(quantity=True).to('kpc')
+            returns['y_clust']      = np.ones(size) * \
+                                        cspray.o.y(quantity=True).to('kpc')
+            returns['z_clust']      = np.ones(size) * \
+                                        cspray.o.z(quantity=True).to('kpc')
+            returns['vx_clust']     = np.ones(size) * \
+                                        cspray.o.vx(quantity=True).to('km s-1')
+            returns['vy_clust']     = np.ones(size) * \
+                                        cspray.o.vy(quantity=True).to('km s-1')
+            returns['vz_clust']     = np.ones(size) * \
+                                        cspray.o.vz(quantity=True).to('km s-1')
+
+            returns['l_clust']      = np.ones(size) * \
+                                        cspray.o.ll(quantity=True).to('deg')
+            returns['b_clust']      = np.ones(size) * \
+                                        cspray.o.bb(quantity=True).to('deg')
+            returns['pml_clust']    = np.ones(size) * \
+                                        cspray.o.pmll(quantity=True).to('mas yr-1')
+            returns['pmb_clust']    = np.ones(size) * \
+                                        cspray.o.pmbb(quantity=True).to('mas yr-1')
+
+            returns['GCdist_clust'] = np.ones(size) * \
+                                        cspray.o.r(quantity=True).to('kpc')
+            returns['R_clust']      = np.ones(size) * \
+                                        cspray.o.R(quantity=True).to('kpc')
+
+            returns['vr_clust']     = np.ones(size) * \
+                                        cspray.o.vr(quantity=True).to('km s-1')
+            returns['vR_clust']     = np.ones(size) * \
+                                        cspray.o.vR(quantity=True).to('km s-1')
+            returns['vT_clust']     = np.ones(size) * \
+                                        cspray.o.vT(quantity=True).to('km s-1')
+            returns['vtheta_clust'] = np.ones(size) * \
+                                        cspray.o.vtheta(quantity=True).to('km s-1')
+
+            returns['GCv_clust']    = np.ones(size) * \
+                                            np.sqrt(returns['vx_clust']**2 + \
+                                            returns['vy_clust']**2 + \
+                                            returns['vz_clust']**2)
+
+            returns['theta_clust']  = np.ones(size) * \
+                                            np.arccos(returns['z_clust'] / \
+                                            returns['GCdist_clust'])
+
+            returns['phi_clust']    = np.ones(size) * \
+                                            np.arctan2(returns['y_clust'], \
+                                            returns['x_clust'])
+        
+        return returns
