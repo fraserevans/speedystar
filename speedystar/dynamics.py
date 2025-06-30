@@ -79,6 +79,7 @@ def propagate(self, potential, dt=0.1*u.Myr,
     phi   = self.phi0
     phiv0 = self.phiv0
 
+    #print([self.z[:5], self.r0[:5]])
     #... and velocity
     vx = self.v0 * np.sin(self.thetav0) * np.cos(phiv0)
     vy = self.v0 * np.sin(self.thetav0) * np.sin(phiv0)
@@ -88,38 +89,40 @@ def propagate(self, potential, dt=0.1*u.Myr,
     vT = vx*np.cos(phi+0.5 *np.pi*u.rad) + vy*np.cos(phi)
 
     #Initialize a lot of stuff
-    self.vx, self.vy, self.vz = (np.zeros(self.size)*u.km/u.s
-                                            for i in range(3))
-    self.x, self.y, self.z    = (np.zeros(self.size)*u.kpc 
-                                            for i in range(3))
-    self.ra, self.dec         = (np.zeros(self.size)*u.deg 
-                                            for i in range(2))
-    self.dist                 = np.zeros(self.size)*u.kpc          
-    self.par                             = np.zeros(self.size)*u.mas
-    self.pmra, self.pmdec     = (np.zeros(self.size)*u.mas/u.yr 
-                                            for i in range(2))
-    self.vlos                 = np.zeros(self.size)*u.km/u.s
+    #self.vx, self.vy, self.vz = (np.zeros(self.size)*u.km/u.s
+    #                                        for i in range(3))
+    #self.x, self.y, self.z    = (np.zeros(self.size)*u.kpc 
+    #                                        for i in range(3))
+    #self.ra, self.dec         = (np.zeros(self.size)*u.deg 
+    #                                        for i in range(2))
+    #self.dist                 = np.zeros(self.size)*u.kpc          
+    #self.par                             = np.zeros(self.size)*u.mas
+    #self.pmra, self.pmdec     = (np.zeros(self.size)*u.mas/u.yr 
+    #                                        for i in range(2))
+    #self.vlos                 = np.zeros(self.size)*u.km/u.s
 
-    self.Lz                   = np.zeros(self.size)*u.kpc*u.km/u.s
+    #self.Lz                   = np.zeros(self.size)*u.kpc*u.km/u.s
 
     self.orbits               = [None] * self.size
 
-    self.b, self.l            = (np.zeros(self.size)*u.deg 
-                                            for i in range(2))
+    #self.b, self.l            = (np.zeros(self.size)*u.deg 
+    #                                        for i in range(2))
 
-    self.pmb, self.pml        = (np.zeros(self.size)*u.mas/u.yr 
-                                            for i in range(2))
+    #self.pmb, self.pml        = (np.zeros(self.size)*u.mas/u.yr 
+    #                                        for i in range(2))
 
   
-    self.vr = np.zeros(self.size)*u.km/u.s
-    self.vR = np.zeros(self.size)*u.km/u.s
-    self.vT = np.zeros(self.size)*u.km/u.s
+    #self.vr = np.zeros(self.size)*u.km/u.s
+    #self.vR = np.zeros(self.size)*u.km/u.s
+    #self.vT = np.zeros(self.size)*u.km/u.s
    
-    self.vtheta = np.zeros(self.size)*u.km/u.s
+    #self.vtheta = np.zeros(self.size)*u.km/u.s
+
+    vxvv = []
 
     #Integration loop for the self.size orbits
     for i in tqdm(range(self.size),desc='Propagating...'):
-
+        loopstart = time.time()
         # Galpy will hang on propagating an orbit on rare occasion. 
         # Is only a problem if the flight time is long and/or the star 
         # makes multiple close pericentres to the SMBH. 
@@ -142,8 +145,11 @@ def propagate(self, potential, dt=0.1*u.Myr,
             self.orbits[i].integrate(ts, potential, method=intmethod)
 
             # Export the final position
+            '''
             self.ra[i] = self.orbits[i].ra(ts, quantity=True)[-1]
             self.dec[i] = self.orbits[i].dec(ts, quantity=True)[-1]
+            #self.ra[i] = self.orbits[i].ra(0.*u.Myr,quantity=True)
+            #self.dec[i] = self.orbits[i].dec(0.*u.Myr, quantity=True)
             self.pmra[i] = self.orbits[i].pmra(ts, quantity=True)[-1]
             self.pmdec[i] = self.orbits[i].pmdec(ts, quantity=True)[-1]
             self.dist[i] = self.orbits[i].dist(ts, quantity=True)[-1]
@@ -167,11 +173,18 @@ def propagate(self, potential, dt=0.1*u.Myr,
             self.vy[i] = self.orbits[i].vy(ts, quantity=True)[-1]
             self.vz[i] = self.orbits[i].vz(ts, quantity=True)[-1]
             self.Lz[i] = self.orbits[i].Lz(ts, quantity=True)[-1]
+            '''
 
-            #self.deltaE[i] = (self.orbits[i].E(ts, quantity=True)[-1]  - self.orbits[i].E(ts, quantity=True)[0]) / self.orbits[i].E(ts, quantity=True)[0]
+            vxvv.append([self.orbits[i].R(0.*u.Myr, quantity=True),
+                        self.orbits[i].vR(0.*u.Myr, quantity=True),
+                        self.orbits[i].vT(0.*u.Myr, quantity=True),
+                        self.orbits[i].z(0.*u.Myr, quantity=True),
+                        self.orbits[i].vz(0.*u.Myr, quantity=True),
+                        self.orbits[i].phi(0.*u.Myr, quantity=True)])
 
             #Save the orbits of each HVS, if orbit_path is supplied
             if orbit_path is not None:
+
                 #Only saves the orbits of the first 5e5 HVSs to prevent bloat
 
                 if not os.path.exists(orbit_path):
@@ -185,53 +198,65 @@ def propagate(self, potential, dt=0.1*u.Myr,
                     flightpmdec = self.orbits[i].pmdec(ts, quantity=True)
                     flightvlos  = self.orbits[i].vlos(ts, quantity=True)
             
-                    flightx  = self.orbits[i].x(ts, quantity=True)
-                    flighty  = self.orbits[i].y(ts,quantity=True)
-                    flightz  = self.orbits[i].z(ts,quantity=True)
-                    flightvx = self.orbits[i].vx(ts,quantity=True)
-                    flightvy = self.orbits[i].vy(ts,quantity=True)
-                    flightvz = self.orbits[i].vz(ts,quantity=True)
-                    flightL  = self.orbits[i].L(ts,quantity=True)
-                    flightE = self.orbits[i].E(ts, quantity=True)
+                    flightx      = self.orbits[i].x(ts, quantity=True)
+                    flighty      = self.orbits[i].y(ts,quantity=True)
+                    flightz      = self.orbits[i].z(ts,quantity=True)
+                    flightvx     = self.orbits[i].vx(ts,quantity=True)
+                    flightvy     = self.orbits[i].vy(ts,quantity=True)
+                    flightvz     = self.orbits[i].vz(ts,quantity=True)
+                    flightL      = self.orbits[i].L(ts,quantity=True)
+                    flightE      = self.orbits[i].E(ts, quantity=True)
 
-                    flightR = np.sqrt(flightx**2 + flighty**2)
-                    flightr = np.sqrt(flightx**2 + flighty**2 + flightz**2)
+                    flightR      = np.sqrt(flightx**2 + flighty**2)
+                    flightr      = np.sqrt(flightR**2 + flightz**2)
 
-                    flightvr = self.orbits[i].vr(ts, quantity=True)
-                    flightvR = self.orbits[i].vR(ts, quantity=True)
+                    flightvr     = self.orbits[i].vr(ts, quantity=True)
+                    flightvR     = self.orbits[i].vR(ts, quantity=True)
 
-                    flightphi = self.orbits[i].phi(ts, quantity=True)
-                    flightvT = self.orbits[i].vT(ts, quantity=True)
+                    flightphi    = self.orbits[i].phi(ts, quantity=True)
+                    flightvT     = self.orbits[i].vT(ts, quantity=True)
 
-                    flighttheta = np.arccos(flightz/np.sqrt(flightx**2 + flighty**2 + flightz**2))
+                    flighttheta  = np.arccos(flightz / np.sqrt(flightx**2 
+                                                + flighty**2 + flightz**2))
                     flightvtheta = self.orbits[i].vtheta(ts, quantity=True)
 
                     flighttauphi = np.zeros(len(ts))
-                    flightdens = np.zeros(len(ts))
-                    flightpot = np.zeros(len(ts))
-                    flightphi2derivs = np.zeros(len(ts))
-                    flightRforces = np.zeros(len(ts))
-                    flightzforces = np.zeros(len(ts))
-                    flightrforces = np.zeros(len(ts))
+                    flightdens   = np.zeros(len(ts))
+                    flightpot    = np.zeros(len(ts))
 
-                    flightax = np.zeros(len(ts))*u.km/(u.s**2)
-                    flightax[1:] = (flightvx[1:] - flightvx[:-1])/(ts[1:] - ts[:-1])
+                    flightax     = np.zeros(len(ts))*u.km/(u.s**2)
+                    flightax[1:] = (flightvx[1:] - flightvx[:-1]) \
+                                        / (ts[1:] - ts[:-1])
 
-                    flightay = np.zeros(len(ts))*u.km/(u.s**2)
-                    flightay[1:] = (flightvy[1:] - flightvy[:-1])/(ts[1:] - ts[:-1])
+                    flightay     = np.zeros(len(ts))*u.km/(u.s**2)
+                    flightay[1:] = (flightvy[1:] - flightvy[:-1]) \
+                                        / (ts[1:] - ts[:-1])
 
-                    flightaz = np.zeros(len(ts))*u.km/(u.s**2)
-                    flightaz[1:] = (flightvz[1:] - flightvz[:-1])/(ts[1:] - ts[:-1])
+                    flightaz     = np.zeros(len(ts))*u.km/(u.s**2)
+                    flightaz[1:] = (flightvz[1:] - flightvz[:-1]) \
+                                        / (ts[1:] - ts[:-1])
 
-                    flightaphi = (flightx*flightay - flighty*flightax) / (flightR) - (flightx*flightvy - flighty*flightvx)*(flightx*flightvx + flighty*flightvy) / (flightR**3)
+                    flightaphi   = (flightx*flightay - flighty*flightax) \
+                                    / (flightR) \
+                                    - (flightx*flightvy - flighty*flightvx) \
+                                    * (flightx*flightvx + flighty*flightvy) \
+                                    / (flightR**3)
 
                     #Writes cartesian orbits to file. Each star gets own file
-                    datalist=[ts, flightx, flighty, flightz, flightvx, flightvy, flightvz, flightL, flightE, flightvr, flightvR,flightvT, flightvtheta, flightphi, flighttheta, flightra, flightdec,  flightdist, 
-                    flightpmra, flightpmdec, flightvlos, flightr, flightR, flightax, flightay, flightaphi, flighttauphi, flightdens, flightpot, flightphi2derivs, flightRforces, flightzforces, flightrforces]
+                    datalist = [ts, flightx, flighty, flightz, flightvx,      
+                                flightvy, flightvz, flightL, flightE,
+                                flightvr, flightvR,flightvT, flightvtheta, 
+                                flightphi, flighttheta, flightra, flightdec,  
+                                flightdist, flightpmra, flightpmdec, 
+                                flightvlos, flightr, flightR, flightax, 
+                                flightay, flightaphi, flighttauphi, 
+                                flightdens, flightpot]
 
                     namelist = ['t', 'x', 'y', 'z', 'v_x', 'v_y', 'v_z', 'L',
-                             'E', 'vr', 'vR', 'vT', 'vtheta', 'phi', 'theta', \
-                                'ra', 'dec', 'dist', 'pm_ra', 'pm_dec', 'vlos', 'r', 'R', 'a_x', 'a_y', 'a_phi', 'tau_phi', 'dens', 'pot', 'phi2derivs', 'Rforces', 'zforces', 'rforces']
+                                    'E', 'vr', 'vR', 'vT', 'vtheta', 'phi', 
+                                    'theta', 'ra', 'dec', 'dist', 'pm_ra', 
+                                    'pm_dec', 'vlos', 'r', 'R', 'a_x', 'a_y', 
+                                    'a_phi', 'tau_phi', 'dens', 'pot']
 
                     data_table = Table(data=datalist, names=namelist)
                     data_table.write(orbit_path+'flight'+str(i)+'.fits', 
@@ -243,28 +268,87 @@ def propagate(self, potential, dt=0.1*u.Myr,
         except TimeoutError:
             print(f"Warning: star {i+1} took too long to integrate. Moving on")
 
-    self.propagated = True
+        of = Orbit(vxvv=vxvv, solarmotion=self.solarmotion, zo=zo, **get_physical(potential))
 
     #Get Galactocentric distance and velocity and Galactic escape velocity
     #as well as final azimuthal and polar coordinates
     #in Galactocentric sherical coordinates
     if(self.size>0):
-        self.get_vesc(potential=potential)
+
+        self.ra     = of.ra(quantity=True).to('deg')
+        self.dec    = of.dec(quantity=True).to('deg')
+        self.pmra   = of.pmra(quantity=True).to('mas yr-1')
+        self.pmdec  = of.pmdec(quantity=True).to('mas yr-1')
+        self.dist   = of.dist(quantity=True).to('kpc')
+        self.par    = u.mas/self.dist.to('kpc').value
+        self.vlos   = of.vlos(quantity=True).to('km s-1')
+
+        self.x      = of.x(quantity=True).to('kpc')
+        self.y      = of.y(quantity=True).to('kpc')
+        self.z      = of.z(quantity=True).to('kpc')
+        self.vx     = of.vx(quantity=True).to('km s-1')
+        self.vy     = of.vy(quantity=True).to('km s-1')
+        self.vz     = of.vz(quantity=True).to('km s-1')
+
+        self.l      = of.ll(quantity=True).to('deg')
+        self.b      = of.bb(quantity=True).to('deg')
+        self.pml    = of.pmll(quantity=True).to('mas yr-1')
+        self.pmb    = of.pmbb(quantity=True).to('mas yr-1')
+
+        self.Lz     = of.Lz(quantity=True).to('kpc km s-1')
+
+        self.vr     = of.vr(quantity=True).to('km s-1')
+        self.vR     = of.vR(quantity=True).to('km s-1')
+        self.vT     = of.vT(quantity=True).to('km s-1')
+        self.vtheta = of.vtheta(quantity=True).to('km s-1')
+
         self.GCdist = np.sqrt(self.x**2. + self.y**2. \
                                 + self.z**2.).to(u.kpc)
-        self.R = np.sqrt(self.x**2. + self.y**2.).to(u.kpc)
-        self.GCv = np.sqrt(self.vx**2. + self.vy**2. + \
+        self.R      = np.sqrt(self.x**2. + self.y**2.).to(u.kpc)
+        self.GCv    = np.sqrt(self.vx**2. + self.vy**2. + \
                                 self.vz**2.).to(u.km/u.s)
         self.thetaf = np.arccos(self.z/self.GCdist)
-        self.phif = np.arctan2(self.y,self.x)
+        self.phif   = np.arctan2(self.y,self.x)
+
+        self.get_vesc(potential=potential)
+
 
     else:
-        self.GCv = []*u.km/u.s 
+        self.ra     = []*u.deg
+        self.dec    = []*u.deg
+        self.pmra   = []*u.mas/u.yr
+        self.pmdec  = []*u.mas/u.yr
+        self.dist   = []*u.kpc
+        self.par    = []*u.mas
+        self.vlos   = []*u.km/u.s
+
+        self.x      = []*u.kpc
+        self.y      = []*u.kpc
+        self.z      = []*u.kpc
+        self.vx     = []*u.km/u.s
+        self.vy     = []*u.km/u.s
+        self.vz     = []*u.km/u.s
+
+        self.l      = []*u.deg
+        self.b      = []*u.deg
+        self.pml    = []*u.mas/u.yr
+        self.pmb    = []*u.mas/u.yr
+
+        self.Lz     = []*u.kpc*u.km/u.s
+
+        self.vr     = []*u.km/u.s
+        self.vR     = []*u.km/u.s
+        self.vT     = []*u.km/u.s
+        self.vtheta = []*u.km/u.s
+
+        self.GCv    = []*u.km/u.s
         self.GCdist = []*u.kpc
-        self.R = []*u.kpc
-        self.Vesc = []*u.km/u.s 
+        self.R      = []*u.kpc
+        self.Vesc   = []*u.km/u.s
         self.thetaf = []*u.rad
-        self.phif = []*u.rad
+        self.phif   = []*u.rad
+
+    self.propagated = True
 
 #@propagate
 def propagate_agama(self, potential, dt=0.1*u.Myr, 
@@ -363,7 +447,7 @@ def propagate_agama(self, potential, dt=0.1*u.Myr,
             # makes multiple close pericentres to the SMBH. 
             # The signal alarm prevents this.
             # Not yet implemented in Windows
-            print(platform.system)
+
             if platform.system!='Windows':
                 signal.signal(signal.SIGALRM, handler)
                 signal.alarm(5)
@@ -380,11 +464,6 @@ def propagate_agama(self, potential, dt=0.1*u.Myr,
 
             self.orbits[i] = zagama.simpleorbit(potential,pos,vel,idealnorbits=2)
             self.orbits[i] = agama.orbit(ic=np.hstack([initpos,initvel]), potential=potential, time=self.tflight[i], dtype=object, accuracy=acc, lyapunov=True)
-            #self.orbits[i] = Orbit(vxvv = [rho[i], vR[i], vT[i], z[i], vz[i], \
-            #                         phi[i]], solarmotion=self.solarmotion, \
-            #                         zo=zo, **get_physical(potential))
-
-            #self.orbits[i].integrate(ts, potential, method='dopr54_c')
 
             # Export the final position
             self.ra[i] = self.orbits[i].ra(ts, quantity=True)[-1]
@@ -505,15 +584,15 @@ def get_vesc(self, potential):
 
         if hasattr(self,'tflight'):
             self.Vesc[i] = np.sqrt(2*(evaluatePotentials(potential, 
-                            1e6*u.kpc, 0*u.kpc, phi=phi[i], 
-                            t=-self.tflight[i],quantity=True) \
-                            
-                            - evaluatePotentials(potential, R[i], z[i], t=-self.tflight[i], phi=phi[i],quantity=True)))
+                                1e6*u.kpc, 0*u.kpc, phi=phi[i], 
+                                t=-self.tflight[i],quantity=True) \
+                                - evaluatePotentials(potential, R[i], z[i], 
+                                t=-self.tflight[i], phi=phi[i],quantity=True)))
         else:
             self.Vesc[i] = np.sqrt(2*(evaluatePotentials(potential, 
-                        1e6*u.kpc, 0*u.kpc, phi=phi[i], quantity=True) \
-                        - evaluatePotentials(potential, R[i], z[i], 
-                        phi=phi[i],quantity=True)))
+                            1e6*u.kpc, 0*u.kpc, phi=phi[i], quantity=True) \
+                            - evaluatePotentials(potential, R[i], z[i], 
+                            phi=phi[i],quantity=True)))
 
 
 def backprop(self, potential, dt=0.1*u.Myr, tint_max = 100*u.Myr, \
@@ -682,7 +761,8 @@ def _R(self, vx, vy, vz, x, y, z, separate=False):
     resultfull = np.full(r.shape, np.nan)
     resultfull[~idx] = 0
 
-    resultfull[idx] = np.exp(-np.power(r[idx], 2.)/2.) * np.exp(-np.power(L[idx], 2.)/2.)
+    resultfull[idx] = np.exp(-np.power(r[idx], 2.)/2.) \
+                                * np.exp(-np.power(L[idx], 2.)/2.)
 
     if separate:
         #Boundaries:
@@ -757,18 +837,18 @@ def likelihood(self, potential, dt=0.005*u.Myr, centralr = 3.*u.pc, \
 
     self.solarmotion = solarmotion       
     self.backwards_orbits = [None] * self.size
-    self.back_dt = dt
-    self.lnlike = np.ones(self.size) * (-np.inf)
-    self.lnlikeL = np.ones(self.size) * (-np.inf)
-    self.lnliker = np.ones(self.size) * (-np.inf)
-    self.minL = np.ones(self.size) * (np.inf)*u.kpc*u.km/u.s
-    self.minr = np.ones(self.size) * (np.inf)*u.kpc
-    self.L0 = np.ones(self.size) * (np.inf)*u.kpc*u.km/u.s
+    self.back_dt  = dt
+    self.lnlike   = np.ones(self.size) * (-np.inf)
+    self.lnlikeL  = np.ones(self.size) * (-np.inf)
+    self.lnliker  = np.ones(self.size) * (-np.inf)
+    self.minL     = np.ones(self.size) * (np.inf)*u.kpc*u.km/u.s
+    self.minr     = np.ones(self.size) * (np.inf)*u.kpc
+    self.L0       = np.ones(self.size) * (np.inf)*u.kpc*u.km/u.s
 
     self.centralr = centralr
-    self.sigmar = sigmar
-    self.sigmaL = sigmaL
-    self.Nsigma = Nsigma
+    self.sigmar   = sigmar
+    self.sigmaL   = sigmaL
+    self.Nsigma   = Nsigma
 
     if(tint_max is None):
         lifetime = t_MS(self.m, xi)
@@ -781,8 +861,7 @@ def likelihood(self, potential, dt=0.005*u.Myr, centralr = 3.*u.pc, \
     nsteps[nsteps<100] = 100
 
     for i in tqdm(range(self.size),desc='Backpropagating...'):
-        
-        #ts = np.linspace(0, 1, nsteps[i])*lifetime[i]
+    
         ts = np.linspace(0, -1, nsteps[i])*lifetime[i]
 
         self.backwards_orbits[i] = Orbit(vxvv = [self.ra[i], self.dec[i], 
@@ -853,32 +932,3 @@ def get_betas(self):
     cross = (self.x*self.vy-self.y*self.vx)
 
     self.beta_phi = np.arctan2(cross,dot)
-
-def get_betas_Boubert(self):
-    '''
-    DEPRECIATED. Calculates HVS deflection angle by solving for polar deflection between GC position and velocity vectors
-        Uses Dot product method: |a||b|cos(phi) = a*b
-    ------
-    Paramters
-        file: string 
-            path to the file 
-        T: bool
-            if Ture, returns only observable HVSs
-    Returns:
-        theta: array
-            angle between the position and velocity vector for HVS sample
-        index: array 
-            1d array of size n corresponding to the number of HVS in the sample
-    '''
-
-    R = np.sqrt(self.x**2+self.y**2)
-    vR = np.sqrt(self.vx**2+self.vy**2)
-
-    phi_pos = np.arctan2(self.y,self.x)
-    phi_vel = np.arctan2(self.vy,self.vx)
-
-    theta_pos = np.arctan2(self.z,R)
-    theta_vel = np.arctan2(self.vz,vR)
-
-    self.beta_theta_boubert = theta_vel - theta_pos
-    self.beta_phi_boubert = phi_vel - phi_pos
